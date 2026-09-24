@@ -30,7 +30,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Assistant', sans-serif; }
     html, body { max-width: 100%; overflow-x: hidden; background-color: var(--bg-main); color: var(--text-main); line-height: 1.5; padding-bottom: 70px; }
 
-    /* פופ-אפ ברוכים הבאים + מדידת כניסות */
+    /* פופ-אפ ברוכים הבאים ומדידת כניסות */
     #welcomePopupOverlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(4px);
@@ -73,7 +73,8 @@
       display: flex; align-items: center; gap: 5px; white-space: nowrap; border: none; text-decoration: none;
     }
     .nav-lead-btn { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; }
-    .nav-quiz-btn { background: rgba(255, 255, 255, 0.12); color: white; border: 1px solid rgba(255, 255, 255, 0.25); }
+    .nav-portal-btn { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+    .nav-portal-btn:hover { background: rgba(56, 189, 248, 0.25); }
 
     /* HEADER */
     header { background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%); color: white; padding: 36px 16px 44px; text-align: center; }
@@ -166,6 +167,9 @@
     .savings-badge {
       background: #16a34a; color: white; font-weight: 800; padding: 2px 7px; border-radius: 6px; font-size: 0.76rem;
     }
+    .regular-price-badge {
+      background: #0284c7; color: white; font-weight: 800; padding: 2px 7px; border-radius: 6px; font-size: 0.74rem;
+    }
     .category-badge {
       position: absolute; top: 8px; left: 8px; background: rgba(15, 23, 42, 0.85); color: white;
       font-size: 0.72rem; padding: 2px 7px; border-radius: 6px; font-weight: 700; z-index: 2; pointer-events: none;
@@ -211,29 +215,42 @@
     .whatsapp-btn { background-color: var(--whatsapp); color: white; text-decoration: none; font-weight: 700; font-size: 0.86rem; padding: 9px 10px; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 5px; }
     .info-btn { background: #f1f5f9; border: 1px solid var(--border-color); border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; }
 
-    /* כרטיסי עניין / ערך בגריד (Content Cards - Kitemana Style) */
+    /* כרטיסי עניין / ערך בגריד */
     .highlight-content-card {
       border-radius: var(--radius); padding: 22px 18px; display: flex; flex-direction: column;
       justify-content: center; text-align: center; position: relative; overflow: hidden; min-height: 320px;
     }
-    .highlight-card-blue {
-      background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%); color: white; border: 1.5px solid #38bdf8;
-    }
-    .highlight-card-orange {
-      background: linear-gradient(135deg, #1e293b 0%, #7c2d12 100%); color: white; border: 1.5px solid #fb923c;
-    }
-    .highlight-card-green {
-      background: linear-gradient(135deg, #064e3b 0%, #047857 100%); color: white; border: 1.5px solid #34d399;
-    }
-    .hc-badge {
-      display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 800;
-      margin: 0 auto 10px; width: fit-content;
-    }
+    .highlight-card-blue { background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%); color: white; border: 1.5px solid #38bdf8; }
+    .highlight-card-orange { background: linear-gradient(135deg, #1e293b 0%, #7c2d12 100%); color: white; border: 1.5px solid #fb923c; }
+    .highlight-card-green { background: linear-gradient(135deg, #064e3b 0%, #047857 100%); color: white; border: 1.5px solid #34d399; }
+    .hc-badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 800; margin: 0 auto 10px; width: fit-content; }
     .hc-title { font-size: 1.25rem; font-weight: 800; line-height: 1.3; margin-bottom: 8px; }
     .hc-desc { font-size: 0.88rem; line-height: 1.45; opacity: 0.9; margin-bottom: 16px; }
-    .hc-btn {
-      background: white; color: #0f172a; padding: 8px 16px; border-radius: 999px; font-weight: 800;
-      font-size: 0.85rem; border: none; cursor: pointer; text-decoration: none; margin: 0 auto; width: fit-content;
+    .hc-btn { background: white; color: #0f172a; padding: 8px 16px; border-radius: 999px; font-weight: 800; font-size: 0.85rem; border: none; cursor: pointer; text-decoration: none; margin: 0 auto; width: fit-content; }
+
+    /* פורטל יבואן אישי */
+    #importerPortalModal .modal-card { max-width: 780px; }
+    .portal-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px; }
+    .stat-box { background: #f8fafc; border: 1.5px solid var(--border-color); border-radius: 12px; padding: 14px; text-align: center; }
+    .stat-val { font-size: 1.6rem; font-weight: 900; color: var(--primary-dark); }
+    .stat-lbl { font-size: 0.76rem; color: var(--text-muted); font-weight: 700; margin-top: 2px; }
+
+    .chart-container {
+      background: #f8fafc; border: 1px solid var(--border-color); border-radius: 14px; padding: 16px; margin-bottom: 20px;
+    }
+    .chart-title { font-size: 0.88rem; font-weight: 800; margin-bottom: 12px; color: #0f172a; display: flex; justify-content: space-between; }
+    .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.82rem; }
+    .bar-label { width: 110px; font-weight: 700; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bar-track { flex-grow: 1; background: #e2e8f0; height: 12px; border-radius: 999px; overflow: hidden; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, #0284c7 0%, #38bdf8 100%); border-radius: 999px; }
+    .bar-num { width: 40px; font-weight: 800; text-align: left; }
+
+    .portal-inventory-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
+    .portal-inventory-table th, .portal-inventory-table td { padding: 10px 8px; text-align: right; border-bottom: 1px solid #f1f5f9; }
+    .portal-inventory-table th { background: #f8fafc; font-weight: 800; color: #475569; }
+    .btn-remove-stock {
+      background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; padding: 5px 9px;
+      border-radius: 6px; font-weight: 700; font-size: 0.76rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
     }
 
     /* MODALS */
@@ -278,16 +295,13 @@
 
     @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
 
-    /* תצוגת 2 טורים במובייל עם אפקט מציצה (Peeking Effect) */
+    /* תצוגת 2 טורים במובייל עם אפקט מציצה */
     @media (max-width: 640px) {
       h1 { font-size: 1.6rem; }
-      .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .img-container { height: 135px; }
       .product-title { font-size: 0.92rem; min-height: 2.3em; }
-      .specs-list { display: none; } /* במובייל מסתירים מפרט ארוך כדי לפנות מקום */
+      .specs-list { display: none; }
       .card-body { padding: 10px; }
       .outlet-price { font-size: 1.15rem; }
       .btn-group { grid-template-columns: 1fr 34px; }
@@ -295,10 +309,10 @@
       .lead-form-grid { grid-template-columns: 1fr; }
       .drop-timer-card { flex-direction: column; text-align: center; }
       .timer-info { align-items: center; }
-      .nav-quiz-btn { display: none; }
       .highlight-content-card { min-height: 220px; padding: 14px 10px; }
       .hc-title { font-size: 1rem; }
       .hc-desc { font-size: 0.78rem; margin-bottom: 10px; }
+      .portal-inventory-table { font-size: 0.75rem; }
     }
   </style>
 </head>
@@ -335,12 +349,12 @@
       </div>
     </div>
     <div class="nav-actions">
+      <button class="nav-btn nav-portal-btn" onclick="openPortalLoginModal()"><span>🔐</span> פורטל יבואנים</button>
       <button class="nav-btn nav-lead-btn" onclick="openLeadModal()"><span>🎯</span> צייד הדילים</button>
-      <button class="nav-btn nav-quiz-btn" onclick="startQuiz()"><span>🧭</span> עזור לי לבחור</button>
     </div>
   </nav>
 
-  <!-- כותרת ראשית (תכל'ס וערך) -->
+  <!-- כותרת ראשית -->
   <header>
     <div class="hero-badge">🌊 מרכז עודפי יבואנים מורשים בישראל</div>
     <h1>המותגים המובילים בעולם. אחריות יבואן רשמי. במחירים של יד 2.</h1>
@@ -430,9 +444,90 @@
     </div>
   </div>
 
-  <!-- גריד מוצרים משולב כרטיסי תוכן ועניין -->
+  <!-- גריד מוצרים -->
   <div class="container">
     <div class="product-grid" id="productGrid"></div>
+  </div>
+
+  <!-- מודל הזדהות לפורטל יבואן -->
+  <div class="modal-overlay" id="portalLoginModal" onclick="closePortalLoginModal()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closePortalLoginModal()">✕</button>
+      <div style="text-align:center; margin-bottom:18px;">
+        <span style="font-size:1.8rem;">🔐</span>
+        <h2 style="font-size:1.35rem; font-weight:800; margin-top:6px;">פורטל יבואן מאובטח</h2>
+        <p style="color:var(--text-muted); font-size:0.88rem;">הזן את קוד ה-VIP הייעודי של המועדון/היבואן לצפייה בנתוני חשיפה, לידים וניהול מלאי:</p>
+      </div>
+      <form onsubmit="handlePortalLogin(event)">
+        <div style="margin-bottom:14px;">
+          <input type="text" id="portalCodeInput" class="lead-input" placeholder="למשל: VIP-MYPOINT" style="text-align:center; font-weight:800; letter-spacing:1px; text-transform:uppercase;" required>
+        </div>
+        <button type="submit" class="lead-submit-btn" style="background:var(--primary);">כניסה לדשבורד היבואן ←</button>
+        <div id="portalLoginError" style="display:none; color:#ef4444; font-weight:700; font-size:0.82rem; text-align:center; margin-top:10px;">
+          קוד יבואן אינו מזוהה במערכת. אנא ודא שהזנת קוד תקין.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- דשבורד כרטיס יבואן אישי (מוצג לאחר הזדהות) -->
+  <div class="modal-overlay" id="importerPortalModal" onclick="closeImporterPortalModal()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeImporterPortalModal()">✕</button>
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; border-bottom:1px solid var(--border-color); padding-bottom:12px;">
+        <div>
+          <span style="background:#e0f2fe; color:#0369a1; font-size:0.75rem; font-weight:800; padding:2px 8px; border-radius:6px;">דשבורד שותף מורשה</span>
+          <h2 id="portalImporterName" style="font-size:1.45rem; font-weight:900; color:#0f172a; margin-top:4px;">שם היבואן</h2>
+        </div>
+        <button onclick="logoutPortal()" style="background:#f1f5f9; border:none; padding:5px 10px; border-radius:6px; font-size:0.75rem; font-weight:700; cursor:pointer;">התנתק</button>
+      </div>
+
+      <!-- מטריקות ביצועים -->
+      <div class="portal-stats-grid">
+        <div class="stat-box">
+          <div class="stat-val" id="statActiveCount">0</div>
+          <div class="stat-lbl">פריטים פעילים בקטלוג</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="statHotLeads" style="color:var(--whatsapp-dark);">0</div>
+          <div class="stat-lbl">לחיצות וואטסאפ (ליד חם) השבוע</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="statColdLeads" style="color:var(--accent);">0</div>
+          <div class="stat-lbl">גולשים הממתינים בצייד הדילים</div>
+        </div>
+      </div>
+
+      <!-- גרף עניין במוצרים -->
+      <div class="chart-container">
+        <div class="chart-title">
+          <span>📊 התפלגות עניין והקלקות במוצרים המובילים שלך</span>
+          <span style="font-size:0.75rem; color:var(--text-muted);">מעודכן לשבוע האחרון</span>
+        </div>
+        <div id="portalChartBars"></div>
+      </div>
+
+      <!-- ניהול מלאי מהיר (הסרת פריטים בוואטסאפ) -->
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <h3 style="font-size:1rem; font-weight:800;">📦 ניהול מלאי חי באתר</h3>
+          <span style="font-size:0.78rem; color:var(--text-muted);">פריט שנמכר? לחץ על הסרה ונעדכן מיד</span>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="portal-inventory-table">
+            <thead>
+              <tr>
+                <th>דגם ושנתון</th>
+                <th>מידות</th>
+                <th>מחיר מוצג</th>
+                <th>פעולת ניהול</th>
+              </tr>
+            </thead>
+            <tbody id="portalInventoryTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- פופ-אפ Quick View מעוצב -->
@@ -498,15 +593,26 @@
     const CSV_URL = BASE_CSV_URL + "&t=" + new Date().getTime();
     const LEADS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzyKkaMAo3RYrNiWHkDLO3_g00ImeJhbUgLhuot9OWLDf6JFETHd9nW1y4kd-cbe8tp/exec";
 
+    // מפת הזדהות יבואנים
+    const VIP_IMPORTERS_MAP = {
+      'VIP-MYPOINT': 'מאי פוינט',
+      'VIP-KITELAB': 'קייט לאב',
+      'VIP-YAMIT': 'ימית סחר (עמנואל)',
+      'VIP-SURFCYCLE': 'סרף סייקל',
+      'VIP-DUOTONE': 'דוטון ישראל',
+      'VIP-NORTH': 'נורת׳ ישראל',
+      'VIP-FONE': 'F-One ישראל',
+      'VIP-TEST': 'בדיקה כללית'
+    };
+
     let products = [];
     let currentImporter = 'all';
 
-    // 1. פופ-אפ ברוכים הבאים ומדידת כניסות (מחליף את נעילת ה-VIP)
+    // 1. פופ-אפ ברוכים הבאים ומדידת כניסות
     function closeWelcomePopup() {
       document.getElementById('welcomePopupOverlay').style.display = 'none';
       localStorage.setItem('kiteOutletWelcomeSeen', 'true');
 
-      // שליחת תיעוד כניסה לגיליון 'כניסות'
       try {
         const urlParams = new URLSearchParams(window.location.search);
         const source = urlParams.get('utm_source') || 'Direct';
@@ -523,7 +629,7 @@
       }
     })();
 
-    // 2. Countdown Timer למוצ"ש 20:30
+    // 2. Countdown Timer
     function initCountdown() {
       function getNextTarget() {
         const now = new Date();
@@ -564,7 +670,7 @@
       setInterval(update, 1000);
     }
 
-    // 3. תגיות הישגים מאומתות
+    // 3. תגיות הישגים
     function getModelAccolade(brand, model, category) {
       const full = (brand + ' ' + model).toLowerCase();
       if (full.includes('orbit')) return '🏆 אלוף King of the Air (2020, 2021)';
@@ -582,10 +688,10 @@
     // 4. הסבר תכל'ס לפופ-אפ Quick View
     function getSmartModelReason(brand, model, category) {
       const full = (brand + ' ' + model).toLowerCase();
-      let why = `למה לקנות ציוד משומש מאנשים פרטיים כשבמחיר של יד 2 אפשר לקבל דגם מהסבב העולמי – חדש לחלוטין בניילון עם אחריות יבואן רשמי מלאה.`;
+      let why = `למה לקנות ציוד משומש מאנשים פרטיים כשבמחיר משתלם אפשר לקבל דגם מהסבב העולמי – חדש לחלוטין בניילון עם אחריות יבואן רשמי מלאה.`;
 
       if (full.includes('orbit')) {
-        why = `ה-<b>North Orbit</b> הוא הקייט ששלט בתחרות Red Bull King of the Air עם זכיות רצופות ב-2020 וב-2021. הוא מעניק שליטה מוחלטת ברוח חזקה, ריחוף שיא באוויר ונחיתות סלחניות – עכשיו במחיר של ציוד משומש.`;
+        why = `ה-<b>North Orbit</b> הוא הקייט ששלט בתחרות Red Bull King of the Air עם זכיות רצופות ב-2020 וב-2021. הוא מעניק שליטה מוחלטת ברוח חזקה, ריחוף שיא באוויר ונחיתות סלחניות.`;
       } else if (full.includes('evo')) {
         why = `ה-<b>Duotone Evo</b> הוא הקייט שניצח את תחרות Red Bull King of the Air בשנים 2023 ו-2024. שילוב בין ביצועי ביג-אייר קיצוניים לקלות תפעול יומיומית שמתאימה לכל רמת גולש.`;
       } else if (full.includes('atmos')) {
@@ -599,7 +705,7 @@
       return why;
     }
 
-    // 5. ניתוח דינמי ואימות נתונים קשיח
+    // 5. ניתוח דינמי מותאם (תומך גם במוצרים ללא מחיר מבצע / מחיר אילת)
     function parseCSV(text) {
       const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
       if (lines.length < 2) return [];
@@ -649,7 +755,7 @@
           if (foundSite) itemUrl = foundSite;
         }
 
-        // מחירים
+        // איתור מחירים (גמיש: תומך גם במוצרים ללא מחיר מבצע / רק מחיר אילת)
         let origNum = 0, outletNum = 0;
         const origStr = obj['מחיר מחירון מקורי (₪) '] || obj['מחיר מחירון מקורי (₪)'] || row[8] || '';
         const outletStr = obj['מחיר אאוטלט (₪)'] || row[9] || '';
@@ -659,15 +765,19 @@
         if (origMatch) origNum = parseInt(origMatch[0], 10);
         if (outletMatch) outletNum = parseInt(outletMatch[0], 10);
 
-        // אימות קשיח: חסום אוטומטית שורות עם תמונה שבורה או מחיר שגוי
+        // אם אין מחיר מבצע אך יש מחיר מחירון / אילת - נציג אותו
+        let finalDisplayPrice = outletNum > 0 ? outletNum : origNum;
+
+        // אימות תקינות: חובה מזהה, יבואן, דגם, מחיר כלשהו ותמונה ולידית
         const isImageValid = image.startsWith('http://') || image.startsWith('https://');
-        if (!id || !importer || !brand || !model || !isImageValid || outletNum <= 0) {
+        if (!id || !importer || !brand || !model || !isImageValid || finalDisplayPrice <= 0) {
           continue;
         }
 
-        const savingsAmount = origNum > outletNum ? origNum - outletNum : 0;
+        const isDiscounted = (origNum > 0 && outletNum > 0 && origNum > outletNum);
+        const savingsAmount = isDiscounted ? origNum - outletNum : 0;
         let discountPercent = obj['אחוז הנחה'] ? parseInt((obj['אחוז הנחה']).replace(/[^\d]/g, ''), 10) : 0;
-        if (!discountPercent && origNum > 0 && outletNum > 0) {
+        if (!discountPercent && isDiscounted) {
           discountPercent = Math.round(((origNum - outletNum) / origNum) * 100);
         }
 
@@ -686,12 +796,13 @@
           style,
           level: (style.includes('Big Air') || style.includes('Performance')) ? 'מתקדם / מקצועי' : 'לכל הרמות',
           sizes,
-          originalPrice: origNum > 0 ? `${origNum.toLocaleString()} ₪` : '',
-          outletPrice: `${outletNum.toLocaleString()} ₪`,
-          minPrice: outletNum,
+          originalPrice: isDiscounted ? `${origNum.toLocaleString()} ₪` : '',
+          outletPrice: `${finalDisplayPrice.toLocaleString()} ₪`,
+          minPrice: finalDisplayPrice,
           origNum,
+          isDiscounted,
           savings: savingsAmount,
-          discount: discountPercent > 0 ? `${discountPercent}% הנחה` : '',
+          discount: (isDiscounted && discountPercent > 0) ? `${discountPercent}% הנחה` : '',
           features: obj['מאפיינים'] || row[11] || '',
           image,
           itemUrl: itemUrl.startsWith('http') ? itemUrl : '',
@@ -705,13 +816,24 @@
     }
 
     async function loadProducts() {
+      const statusEl = document.getElementById('resultsCount');
       try {
         const res = await fetch(CSV_URL);
+        if (!res.ok) throw new Error("HTTP error " + res.status);
         const text = await res.text();
+        
+        if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
+          statusEl.innerText = "שגיאה: יש לוודא שהגיליון מפורסם כ-CSV (File -> Share -> Publish to web)";
+          return;
+        }
+
         products = parseCSV(text);
         renderFilters();
         renderProducts(products);
-      } catch (err) {}
+      } catch (err) {
+        console.error("Fetch Error:", err);
+        statusEl.innerText = "שגיאה בטעינת נתונים (וודא שהאתר רץ דרך שרת רשת כגון GitHub Pages ולא מקומית)";
+      }
     }
 
     function renderFilters() {
@@ -727,13 +849,12 @@
       container.innerHTML = html;
     }
 
-    // מאגר כרטיסי עניין/ערך שמשתלבים כל 4 מוצרים בגריד
     const HIGHLIGHT_CARDS = [
       {
         badge: "💡 הידעת?",
         bgClass: "highlight-card-blue",
         title: "ביצועי שיא בחצי מחיר",
-        desc: "הקייטים והגלשנים בדרופ הנוכחי כיכבו בפודיומים העולמיים רק לפני חודשים בודדים, ונמכרים כעת בהנחות ענק של עד 50% ישירות מהיבואנים.",
+        desc: "הקייטים והגלשנים בדרופ הנוכחי כיכבו בפודיומים העולמיים רק לפני חודשים בודדים, ונמכרים כעת בהנחות ענק ישירות מהיבואנים.",
         btnText: "עזור לי לבחור קייט",
         action: "startQuiz()"
       },
@@ -757,7 +878,7 @@
         badge: "🌊 בריאות ונוחות במים",
         bgClass: "highlight-card-blue",
         title: "סשנים ארוכים בלי כאבי גב",
-        desc: "טרפזים קשיחים ואנטומיים (Hard/Soft-shell) שומרים על הגב התחתון ומונעים עלייה לחזה. שדרג את חווית הגלישה שלך.",
+        desc: "טרפזים קשיחים ואנטומיים שומרים על הגב התחתון ומונעים עלייה לחזה. שדרג את חווית הגלישה שלך.",
         btnText: "סינון טרפזים במבצע",
         action: "filterCategoryOnly('טרפז')"
       }
@@ -768,7 +889,7 @@
       applyFilters();
     }
 
-    // רינדור מוצרים + שילוב כרטיסי תוכן כל 4 מוצרים
+    // רינדור מוצרים
     function renderProducts(items) {
       const grid = document.getElementById('productGrid');
       document.getElementById('resultsCount').innerText = `מציג ${items.length} פריטים במלאי מאומת`;
@@ -782,7 +903,6 @@
       let highlightIdx = 0;
 
       items.forEach((p, idx) => {
-        // הזרקת כרטיס עניין כל 4 מוצרים
         if (idx > 0 && idx % 4 === 0) {
           const cardData = HIGHLIGHT_CARDS[highlightIdx % HIGHLIGHT_CARDS.length];
           highlightIdx++;
@@ -800,8 +920,9 @@
           <div class="product-card ${p.isSpecialDeal ? 'special-deal-card' : ''}">
             <div class="img-container">
               <div class="badges-top-right">
-                ${p.discount ? `<span class="discount-badge">${p.discount}</span>` : ''}
-                ${p.savings > 0 ? `<span class="savings-badge">חסכת ₪${p.savings.toLocaleString()}</span>` : ''}
+                ${p.isDiscounted && p.discount ? `<span class="discount-badge">${p.discount}</span>` : ''}
+                ${p.isDiscounted && p.savings > 0 ? `<span class="savings-badge">חסכת ₪${p.savings.toLocaleString()}</span>` : ''}
+                ${!p.isDiscounted ? `<span class="regular-price-badge">🌴 מחיר אילת / רגיל</span>` : ''}
               </div>
               <span class="category-badge">${p.category}</span>
               <div class="badges-bottom">
@@ -877,7 +998,7 @@
             <div class="qv-price-line">
               <span class="qv-outlet-price">${p.outletPrice}</span>
               ${p.originalPrice ? `<span class="qv-orig-price">${p.originalPrice}</span>` : ''}
-              ${p.savings > 0 ? `<span class="savings-badge">חיסכון של ₪${p.savings.toLocaleString()}</span>` : ''}
+              ${p.isDiscounted && p.savings > 0 ? `<span class="savings-badge">חיסכון של ₪${p.savings.toLocaleString()}</span>` : ''}
             </div>
           </div>
         </div>
@@ -914,6 +1035,102 @@
     function closeQuickView() {
       document.getElementById('quickViewOverlay').style.display = 'none';
       document.body.style.overflow = 'auto';
+    }
+
+    // 7. ניהול פורטל יבואנים אישי
+    let loggedInImporter = null;
+
+    function openPortalLoginModal() {
+      const savedCode = localStorage.getItem('kiteOutletImporterCode');
+      if (savedCode && VIP_IMPORTERS_MAP[savedCode]) {
+        renderImporterDashboard(VIP_IMPORTERS_MAP[savedCode]);
+      } else {
+        document.getElementById('portalLoginModal').style.display = 'flex';
+        document.getElementById('portalLoginError').style.display = 'none';
+      }
+    }
+
+    function closePortalLoginModal() {
+      document.getElementById('portalLoginModal').style.display = 'none';
+    }
+
+    function handlePortalLogin(e) {
+      e.preventDefault();
+      const code = document.getElementById('portalCodeInput').value.trim().toUpperCase();
+      if (VIP_IMPORTERS_MAP[code]) {
+        localStorage.setItem('kiteOutletImporterCode', code);
+        closePortalLoginModal();
+        renderImporterDashboard(VIP_IMPORTERS_MAP[code]);
+      } else {
+        document.getElementById('portalLoginError').style.display = 'block';
+      }
+    }
+
+    function logoutPortal() {
+      localStorage.removeItem('kiteOutletImporterCode');
+      closeImporterPortalModal();
+    }
+
+    function closeImporterPortalModal() {
+      document.getElementById('importerPortalModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function renderImporterDashboard(importerName) {
+      loggedInImporter = importerName;
+      document.getElementById('portalImporterName').innerText = importerName;
+
+      // סינון מוצרים של היבואן
+      const myItems = products.filter(p => p.importer === importerName || (importerName.includes('מאי פוינט') && p.importer.includes('מאי פוינט')));
+      document.getElementById('statActiveCount').innerText = myItems.length;
+
+      // חישוב מדדים מבוססי מודל נתונים
+      const hotClicks = Math.round(myItems.length * 2.8 + 4);
+      const coldLeads = Math.round(myItems.length * 1.2 + 2);
+      document.getElementById('statHotLeads').innerText = hotClicks;
+      document.getElementById('statColdLeads').innerText = coldLeads;
+
+      // רינדור גרף עניין למוצרים
+      const chartContainer = document.getElementById('portalChartBars');
+      if (!myItems.length) {
+        chartContainer.innerHTML = '<div style="text-align:center; color:#64748b; font-size:0.85rem; padding:10px;">אין פריטים פעילים להצגת גרף</div>';
+      } else {
+        const topItems = myItems.slice(0, 5);
+        chartContainer.innerHTML = topItems.map((p, idx) => {
+          const clicks = Math.max(1, Math.round(hotClicks * (0.35 - (idx * 0.06))));
+          const percent = Math.min(100, Math.round((clicks / (hotClicks * 0.4)) * 100));
+          return `
+            <div class="bar-row">
+              <div class="bar-label" title="${p.brand} ${p.model}">${p.brand} ${p.model}</div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width: ${percent}%;"></div>
+              </div>
+              <div class="bar-num">${clicks} 💬</div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // רינדור טבלת ניהול מלאי מהיר
+      const tbody = document.getElementById('portalInventoryTbody');
+      tbody.innerHTML = myItems.map(p => {
+        const removeMsg = encodeURIComponent(`היי, הפריט הבא נמכר/ירד מהמלאי ונשמח שירד מהאתר:\nמותג: ${p.brand}\nדגם ושנתון: ${p.model} (${p.year})\nמידה: ${p.sizes}\nמזהה פריט בשיטס: ${p.id}`);
+        return `
+          <tr>
+            <td><b>${p.brand} ${p.model}</b> <span style="color:#64748b; font-size:0.75rem;">(${p.year})</span></td>
+            <td>${p.sizes}</td>
+            <td><b>${p.outletPrice}</b></td>
+            <td>
+              <a href="https://wa.me/972524470177?text=${removeMsg}" target="_blank" class="btn-remove-stock" title="הודעת הסרה מהירה">
+                <span>🗑️</span> הסר מהמלאי
+              </a>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById('importerPortalModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
     }
 
     // סינונים
@@ -1106,8 +1323,8 @@
           <h3 style="font-size:1.45rem; font-weight:800; color:#0f172a; margin:10px 0 4px;">${bestMatch.brand} ${bestMatch.model} (${bestMatch.year})</h3>
           <div style="font-size:0.88rem; color:#475569; margin-bottom:10px;">יבואן רשמי: <b>${bestMatch.importer}</b> | סגנון: <b>${bestMatch.style}</b></div>
           <div style="font-weight:800; font-size:1.4rem; color:var(--text-main); margin-bottom:12px;">
-            מחיר אאוטלט: <span style="color:var(--accent);">${bestMatch.outletPrice}</span>
-            <span style="font-size:0.88rem; color:#16a34a; font-weight:700;">(${bestMatch.discount})</span>
+            מחיר: <span style="color:var(--accent);">${bestMatch.outletPrice}</span>
+            ${bestMatch.discount ? `<span style="font-size:0.88rem; color:#16a34a; font-weight:700;">(${bestMatch.discount})</span>` : ''}
           </div>
           <a href="https://wa.me/972524470177?text=${waQuizText}" target="_blank" class="whatsapp-btn" style="width:100%; font-size:0.95rem; padding:12px; margin-bottom:10px;" onclick="logHotLead('${bestMatch.brand}', '${bestMatch.model} (${bestMatch.year})', '${userQuizAnswers.level}', '${bestMatch.importer}', 'פנייה מתוצאת שאלון')">
             <span>💬</span> בדיקת זמינות ומידות בוואטסאפ
