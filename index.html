@@ -30,7 +30,41 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ניווט עליון - רקע לבן נקי */
+    /* פופ-אפ דרופ בכניסה */
+    #dropWelcomeModal {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(4px);
+      z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 16px;
+    }
+    .drop-modal-card {
+      background: #ffffff; border-radius: 20px; padding: 32px 24px; max-width: 460px; width: 100%;
+      text-align: center; border: 1.5px solid var(--border-color); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
+    }
+    .dm-badge {
+      display: inline-block; background: #e0f2fe; color: #0284c7; font-weight: 800; font-size: 0.8rem;
+      padding: 4px 12px; border-radius: 999px; margin-bottom: 12px;
+    }
+    .dm-title { font-size: 1.45rem; font-weight: 800; color: #0f172a; margin-bottom: 8px; line-height: 1.3; }
+    .dm-desc { font-size: 0.92rem; color: #475569; margin-bottom: 20px; }
+    .dm-timer-grid {
+      display: flex; justify-content: center; gap: 8px; margin-bottom: 22px;
+    }
+    .dm-unit {
+      background: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px;
+      padding: 8px 12px; min-width: 60px; text-align: center;
+    }
+    .dm-val { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; font-weight: 900; color: #ea580c; line-height: 1; }
+    .dm-lbl { font-size: 0.68rem; color: #64748b; font-weight: 700; margin-top: 4px; }
+    .dm-live-banner {
+      background: #fef2f2; border: 1.5px solid #f87171; border-radius: 12px; padding: 14px;
+      color: #991b1b; font-weight: 800; font-size: 1.05rem; margin-bottom: 18px; line-height: 1.4;
+    }
+    .dm-btn {
+      width: 100%; background: #0f172a; color: white; border: none; padding: 12px;
+      border-radius: 10px; font-weight: 800; font-size: 1rem; cursor: pointer;
+    }
+
+    /* ניווט עליון */
     .top-nav {
       background: #ffffff;
       border-bottom: 1px solid var(--border-color);
@@ -43,466 +77,157 @@
       z-index: 100;
     }
     .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--text-main);
-      cursor: pointer;
+      display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); cursor: pointer;
     }
     .logo-badge {
-      width: 36px;
-      height: 36px;
-      background: #0f172a;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 900;
-      font-size: 1rem;
-      font-family: 'Montserrat', sans-serif;
+      width: 36px; height: 36px; background: #0f172a; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; color: white;
+      font-weight: 900; font-size: 1rem; font-family: 'Montserrat', sans-serif;
     }
     .logo-text-wrap { display: flex; flex-direction: column; }
     .logo-main-text {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 1.15rem;
-      letter-spacing: -0.5px;
-      line-height: 1.1;
-      color: #0f172a;
+      font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.15rem;
+      letter-spacing: -0.5px; line-height: 1.1; color: #0f172a;
     }
-    .logo-sub-text {
-      font-size: 0.68rem;
-      color: #0284c7;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
+    .logo-sub-text { font-size: 0.68rem; color: #0284c7; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
 
     .nav-actions { display: flex; align-items: center; gap: 8px; }
     .nav-btn {
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 0.82rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
-      border: 1px solid var(--border-color);
-      background: #ffffff;
-      color: var(--text-main);
-      transition: background 0.15s;
+      padding: 8px 14px; border-radius: 8px; font-weight: 700; font-size: 0.82rem; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+      border: 1px solid var(--border-color); background: #ffffff; color: var(--text-main);
     }
-    .nav-btn:hover { background: #f8fafc; }
-    .nav-portal-btn {
-      background: #0f172a;
-      color: #ffffff;
-      border-color: #0f172a;
-    }
-    .nav-portal-btn:hover { background: #1e293b; }
-    .nav-lead-btn {
-      background: var(--accent);
-      color: white;
-      border-color: var(--accent);
-    }
-    .nav-lead-btn:hover { background: #c2410c; }
+    .nav-portal-btn { background: #0f172a; color: #ffffff; border-color: #0f172a; }
+    .nav-lead-btn { background: var(--accent); color: white; border-color: var(--accent); }
 
-    /* כותרת ראשית (Header) - רקע לבן ונקי */
+    /* כותרת ראשית */
     header {
-      background: #ffffff;
-      border-bottom: 1px solid var(--border-color);
-      padding: 36px 16px 30px;
-      text-align: center;
+      background: #ffffff; border-bottom: 1px solid var(--border-color); padding: 36px 16px 28px; text-align: center;
     }
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #f1f5f9;
-      color: #334155;
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      border: 1px solid #e2e8f0;
+      display: inline-flex; align-items: center; gap: 6px; background: #f1f5f9; color: #334155;
+      padding: 4px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; margin-bottom: 10px; border: 1px solid #e2e8f0;
     }
-    h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #0f172a;
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
-      line-height: 1.25;
-    }
-    .hero-subtitle {
-      font-size: 1rem;
-      color: #475569;
-      max-width: 650px;
-      margin: 0 auto 18px;
-      line-height: 1.5;
-    }
-    .hero-btn-wrap {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    h1 { font-size: 2.1rem; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; margin-bottom: 8px; line-height: 1.25; }
+    .hero-subtitle { font-size: 1rem; color: #475569; max-width: 680px; margin: 0 auto 16px; line-height: 1.5; }
+    .hero-btn-wrap { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
     .btn-hero {
-      font-size: 0.9rem;
-      font-weight: 700;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border: 1px solid var(--border-color);
-      background: white;
-      color: var(--text-main);
-      text-decoration: none;
+      font-size: 0.9rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border-color); text-decoration: none;
     }
     .btn-hero-lead { background: var(--accent); color: white; border-color: var(--accent); }
-    .btn-hero-quiz { background: #f8fafc; border-color: #cbd5e1; }
+    .btn-hero-quiz { background: #f8fafc; border-color: #cbd5e1; color: var(--text-main); }
 
-    /* בר יבואנים - נקי */
-    .importers-section {
-      max-width: 1200px;
-      margin: 20px auto 14px;
-      padding: 0 16px;
-    }
+    /* בר יבואנים */
+    .importers-section { max-width: 1240px; margin: 18px auto 14px; padding: 0 16px; }
     .importers-bar {
-      background: #ffffff;
-      border-radius: 10px;
-      padding: 10px 14px;
-      border: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      overflow-x: auto;
-      scrollbar-width: none;
+      background: #ffffff; border-radius: 10px; padding: 10px 14px; border: 1px solid var(--border-color);
+      display: flex; align-items: center; gap: 10px; overflow-x: auto; scrollbar-width: none;
     }
     .importers-bar::-webkit-scrollbar { display: none; }
-    .importers-title {
-      font-weight: 800;
-      font-size: 0.82rem;
-      white-space: nowrap;
-      color: #64748b;
-      padding-left: 8px;
-      border-left: 1px solid var(--border-color);
-    }
+    .importers-title { font-weight: 800; font-size: 0.82rem; white-space: nowrap; color: #64748b; padding-left: 8px; border-left: 1px solid var(--border-color); }
     .importer-chips { display: flex; gap: 6px; }
     .importer-card-btn {
-      background: #ffffff;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 5px 12px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-      font-weight: 700;
-      font-size: 0.82rem;
-      color: #334155;
+      background: #ffffff; border: 1px solid var(--border-color); border-radius: 6px; padding: 5px 12px;
+      cursor: pointer; display: flex; align-items: center; gap: 6px; white-space: nowrap; font-weight: 700; font-size: 0.82rem; color: #334155;
     }
-    .importer-card-btn.active {
-      background: #0f172a;
-      color: #ffffff;
-      border-color: #0f172a;
-    }
-    .importer-badge-count {
-      background: #f1f5f9;
-      color: #475569;
-      padding: 1px 6px;
-      border-radius: 999px;
-      font-size: 0.7rem;
-    }
-    .importer-card-btn.active .importer-badge-count {
-      background: rgba(255, 255, 255, 0.2);
-      color: #ffffff;
-    }
+    .importer-card-btn.active { background: #0f172a; color: #ffffff; border-color: #0f172a; }
+    .importer-badge-count { background: #f1f5f9; color: #475569; padding: 1px 6px; border-radius: 999px; font-size: 0.7rem; }
+    .importer-card-btn.active .importer-badge-count { background: rgba(255, 255, 255, 0.2); color: #ffffff; }
 
     /* סינונים */
-    .filter-wrapper { max-width: 1200px; margin: 0 auto 20px; padding: 0 16px; }
-    .filter-box {
-      background: #ffffff;
-      border-radius: 10px;
-      padding: 14px 16px;
-      border: 1px solid var(--border-color);
-    }
-    .filter-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 10px;
-      align-items: end;
-    }
+    .filter-wrapper { max-width: 1240px; margin: 0 auto 20px; padding: 0 16px; }
+    .filter-box { background: #ffffff; border-radius: 10px; padding: 14px 16px; border: 1px solid var(--border-color); }
+    .filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; align-items: end; }
     .filter-col { display: flex; flex-direction: column; gap: 4px; }
     .filter-label { font-size: 0.78rem; font-weight: 700; color: #475569; }
     .filter-input, .filter-select {
-      width: 100%;
-      padding: 7px 10px;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      font-size: 0.85rem;
-      outline: none;
-      background: #ffffff;
-      color: var(--text-main);
+      width: 100%; padding: 8px 10px; border: 1px solid var(--border-color); border-radius: 6px;
+      font-size: 0.86rem; outline: none; background: #ffffff; color: var(--text-main);
     }
     .price-slider-header { display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; }
     .price-range-input { width: 100%; accent-color: var(--primary); cursor: pointer; }
-    .filter-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid #f1f5f9;
-    }
+    .filter-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid #f1f5f9; }
     .reset-btn { background: none; border: none; color: #ef4444; font-weight: 700; font-size: 0.8rem; cursor: pointer; }
 
-    /* גריד מוצרים - תצוגת גלילה (Peeking Effect) עקבית */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+    /* גריד מוצרים - 3 פריטים לרוחב במחשב עם Peeking Effect */
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
     }
     .product-card {
-      background: #ffffff;
-      border-radius: 10px;
-      border: 1px solid var(--border-color);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      position: relative;
+      background: #ffffff; border-radius: 12px; border: 1px solid var(--border-color);
+      overflow: hidden; display: flex; flex-direction: column; position: relative;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
-    .product-card:hover {
-      border-color: #cbd5e1;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-    .product-card.special-deal-card {
-      border: 1.5px solid #f59e0b;
-    }
+    .product-card:hover { border-color: #cbd5e1; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06); }
+    .product-card.special-deal-card { border: 2px solid #f59e0b; }
 
     .img-container {
-      position: relative;
-      width: 100%;
-      height: 180px;
-      background: #fafafa;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-bottom: 1px solid #f1f5f9;
+      position: relative; width: 100%; height: 230px; background: #fafafa;
+      display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #f1f5f9;
     }
     .img-container a.product-img-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-      text-decoration: none;
+      display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; text-decoration: none;
     }
-    .img-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      padding: 10px;
-    }
+    .img-container img { width: 100%; height: 100%; object-fit: contain; padding: 14px; }
 
-    /* תגיות מוצר - נקי ומאופק */
+    /* תגיות מוצר */
     .badges-top-right {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      align-items: flex-end;
-      z-index: 2;
-      pointer-events: none;
+      position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; gap: 4px; align-items: flex-end; z-index: 2; pointer-events: none;
     }
-    .discount-badge {
-      background: #dc2626;
-      color: white;
-      font-weight: 800;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.72rem;
-    }
-    .savings-badge {
-      background: #16a34a;
-      color: white;
-      font-weight: 800;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.72rem;
-    }
-    .regular-price-badge {
-      background: #475569;
-      color: white;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.7rem;
-    }
+    .discount-badge { background: #dc2626; color: white; font-weight: 800; padding: 2px 7px; border-radius: 4px; font-size: 0.74rem; }
+    .savings-badge { background: #16a34a; color: white; font-weight: 800; padding: 2px 7px; border-radius: 4px; font-size: 0.74rem; }
+    .regular-price-badge { background: #475569; color: white; font-weight: 700; padding: 2px 7px; border-radius: 4px; font-size: 0.72rem; }
     .category-badge {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      background: rgba(15, 23, 42, 0.8);
-      color: white;
-      font-size: 0.68rem;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-weight: 700;
-      z-index: 2;
-      pointer-events: none;
+      position: absolute; top: 10px; left: 10px; background: rgba(15, 23, 42, 0.8);
+      color: white; font-size: 0.72rem; padding: 2px 7px; border-radius: 4px; font-weight: 700; z-index: 2; pointer-events: none;
     }
 
     .badges-bottom {
-      position: absolute;
-      bottom: 6px;
-      right: 8px;
-      left: 8px;
-      display: flex;
-      gap: 4px;
-      flex-wrap: wrap;
-      z-index: 2;
-      pointer-events: none;
+      position: absolute; bottom: 8px; right: 10px; left: 10px; display: flex; gap: 5px; flex-wrap: wrap; z-index: 2; pointer-events: none;
     }
-    .special-deal-badge {
-      background: #f59e0b;
-      color: #ffffff;
-      font-weight: 800;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.68rem;
-    }
-    .custom-accolade-badge {
-      background: #0f172a;
-      color: #38bdf8;
-      font-weight: 800;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.68rem;
-    }
+    .special-deal-badge { background: #f59e0b; color: #ffffff; font-weight: 800; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; }
+    .custom-accolade-badge { background: #0f172a; color: #38bdf8; font-weight: 800; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; }
 
-    .card-body {
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-    .importer-line {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 4px;
-    }
-    .importer-tag {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: #0284c7;
-    }
-    .rider-level-tag {
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: #475569;
-      background: #f1f5f9;
-      padding: 1px 5px;
-      border-radius: 4px;
-    }
+    .card-body { padding: 16px; display: flex; flex-direction: column; flex-grow: 1; }
+    .importer-line { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+    .importer-tag { font-size: 0.76rem; font-weight: 700; color: #0284c7; }
+    .rider-level-tag { font-size: 0.72rem; font-weight: 700; color: #475569; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; }
 
-    .product-title {
-      font-size: 1.05rem;
-      font-weight: 800;
-      margin-bottom: 2px;
-      line-height: 1.2;
-    }
+    .product-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; line-height: 1.2; }
     .product-title a { color: #0f172a; text-decoration: none; }
     .product-title a:hover { color: #0284c7; }
-    .product-link-icon { font-size: 0.7rem; color: #0284c7; vertical-align: middle; }
-
-    .product-style-text {
-      font-size: 0.78rem;
-      color: #64748b;
-      margin-bottom: 8px;
-    }
+    .product-link-icon { font-size: 0.75rem; color: #0284c7; vertical-align: middle; }
+    .product-style-text { font-size: 0.82rem; color: #64748b; margin-bottom: 12px; }
 
     .price-box {
-      margin-top: auto;
-      padding-top: 8px;
-      border-top: 1px dashed var(--border-color);
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 10px;
+      margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--border-color);
+      display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px;
     }
-    .original-price { font-size: 0.74rem; color: #94a3b8; text-decoration: line-through; }
-    .outlet-price { font-size: 1.25rem; font-weight: 900; color: #0f172a; }
+    .original-price { font-size: 0.78rem; color: #94a3b8; text-decoration: line-through; }
+    .outlet-price { font-size: 1.45rem; font-weight: 900; color: #0f172a; }
 
-    .btn-group { display: grid; grid-template-columns: 1fr 36px; gap: 6px; }
+    .btn-group { display: grid; grid-template-columns: 1fr 40px; gap: 8px; }
     .whatsapp-btn {
-      background-color: var(--whatsapp);
-      color: white;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.82rem;
-      padding: 8px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
+      background-color: var(--whatsapp); color: white; text-decoration: none;
+      font-weight: 700; font-size: 0.88rem; padding: 10px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
     }
     .info-btn {
-      background: #f8fafc;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 0.95rem;
+      background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.05rem;
     }
 
-    /* פורטל יבואנים - חלונית ניהול מסודרת */
-    .portal-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-    .stat-box {
-      background: #f8fafc;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 12px;
-      text-align: center;
-    }
+    /* פורטל יבואנים */
+    .portal-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+    .stat-box { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; text-align: center; }
     .stat-val { font-size: 1.5rem; font-weight: 900; color: #0f172a; }
     .stat-lbl { font-size: 0.72rem; color: #64748b; font-weight: 700; margin-top: 2px; }
-
-    .chart-container {
-      background: #f8fafc;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 12px 14px;
-      margin-bottom: 16px;
-    }
-    .chart-title {
-      font-size: 0.82rem;
-      font-weight: 800;
-      margin-bottom: 10px;
-      color: #0f172a;
-      display: flex;
-      justify-content: space-between;
-    }
+    .chart-container { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 14px; margin-bottom: 16px; }
+    .chart-title { font-size: 0.82rem; font-weight: 800; margin-bottom: 10px; color: #0f172a; display: flex; justify-content: space-between; }
     .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 0.78rem; }
     .bar-label { width: 120px; font-weight: 700; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .bar-track { flex-grow: 1; background: #e2e8f0; height: 8px; border-radius: 999px; overflow: hidden; }
@@ -510,83 +235,71 @@
     .bar-num { width: 35px; font-weight: 800; text-align: left; }
 
     .portal-inventory-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-    .portal-inventory-table th, .portal-inventory-table td {
-      padding: 8px 6px;
-      text-align: right;
-      border-bottom: 1px solid #f1f5f9;
-    }
+    .portal-inventory-table th, .portal-inventory-table td { padding: 8px 6px; text-align: right; border-bottom: 1px solid #f1f5f9; }
     .portal-inventory-table th { background: #f8fafc; font-weight: 800; color: #475569; }
     .btn-remove-stock {
-      background: #fee2e2;
-      color: #dc2626;
-      border: 1px solid #fca5a5;
-      padding: 4px 8px;
-      border-radius: 5px;
-      font-weight: 700;
-      font-size: 0.74rem;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      white-space: nowrap;
+      background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; padding: 4px 8px;
+      border-radius: 5px; font-weight: 700; font-size: 0.74rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;
     }
 
     /* MODALS */
     .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(15, 23, 42, 0.6);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 16px;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.6);
+      display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px;
     }
     .modal-card {
-      background: #ffffff;
-      border-radius: 14px;
-      max-width: 600px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      padding: 22px;
+      background: #ffffff; border-radius: 14px; max-width: 620px; width: 100%; max-height: 90vh;
+      overflow-y: auto; position: relative; padding: 24px;
     }
     .modal-close {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: #f1f5f9;
-      border: none;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 0.9rem;
+      position: absolute; top: 12px; left: 12px; background: #f1f5f9; border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 0.9rem;
     }
 
-    /* רספונסיביות - מובייל */
-    @media (max-width: 900px) {
-      .product-grid { grid-template-columns: repeat(3, 1fr); }
+    /* רספונסיביות מובייל */
+    @media (max-width: 860px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .img-container { height: 160px; }
+      .product-title { font-size: 1rem; }
+      .outlet-price { font-size: 1.25rem; }
     }
-    @media (max-width: 640px) {
-      h1 { font-size: 1.5rem; }
-      .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-      .img-container { height: 130px; }
-      .product-title { font-size: 0.88rem; min-height: 2.2em; }
-      .card-body { padding: 8px; }
-      .outlet-price { font-size: 1.1rem; }
-      .btn-group { grid-template-columns: 1fr 30px; }
-      .whatsapp-btn { font-size: 0.74rem; padding: 6px; }
+    @media (max-width: 580px) {
+      h1 { font-size: 1.55rem; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .img-container { height: 135px; }
+      .product-title { font-size: 0.9rem; min-height: 2.2em; }
+      .card-body { padding: 10px; }
+      .outlet-price { font-size: 1.15rem; }
+      .btn-group { grid-template-columns: 1fr 32px; }
+      .whatsapp-btn { font-size: 0.75rem; padding: 6px; }
       .portal-stats-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
+
+  <!-- פופ-אפ דרופ בכניסה -->
+  <div id="dropWelcomeModal">
+    <div class="drop-modal-card">
+      <span class="dm-badge" id="dmBadgeStatus">⚡ פתיחת ה-Drop הבא</span>
+      <h2 class="dm-title" id="dmTitleText">הדרופ הקרוב נפתח במוצ״ש ב-20:30</h2>
+      <p class="dm-desc" id="dmDescText">מלאי עודפים מוגבל מיבואנים רשמיים עם אחריות מלאה במחירי יד 2.</p>
+      
+      <!-- שעון הספירה -->
+      <div class="dm-timer-grid" id="dmTimerGrid">
+        <div class="dm-unit"><div class="dm-val" id="popDays">00</div><div class="dm-lbl">ימים</div></div>
+        <div class="dm-unit"><div class="dm-val" id="popHours">00</div><div class="dm-lbl">שעות</div></div>
+        <div class="dm-unit"><div class="dm-val" id="popMins">00</div><div class="dm-lbl">דקות</div></div>
+        <div class="dm-unit"><div class="dm-val" id="popSecs">00</div><div class="dm-lbl">שניות</div></div>
+      </div>
+
+      <!-- באנר כשהשעון מגיע ל-0 -->
+      <div id="dmLiveBanner" class="dm-live-banner" style="display:none;">
+        🔥 הדרופ הראשון באתר פעיל כעת:<br>5% הנחה בלעדית על כל המוצרים של ימית סחר!
+      </div>
+
+      <button class="dm-btn" onclick="closeDropWelcomeModal()">כניסה לקטלוג ←</button>
+    </div>
+  </div>
 
   <!-- ניווט עליון -->
   <nav class="top-nav">
@@ -606,8 +319,8 @@
   <!-- כותרת ראשית -->
   <header>
     <div class="hero-badge">🌊 מרכז עודפי יבואנים מורשים בישראל</div>
-    <h1>המותגים המובילים בעולם. אחריות יבואן רשמי. במחירי יד 2.</h1>
-    <p class="hero-subtitle">ציוד קייטסרף חדש בניילון מעודפי היבואנים המובילים: Duotone, North, Reedin, Mystic ועוד, עם אחריות מלאה ובמחיר הנמוך בארץ.</p>
+    <h1>המותגים המובילים בעולם. אחריות יבואן רשמי. במחירים של יד 2.</h1>
+    <p class="hero-subtitle">ציוד קייטסרף חדש בניילון מעודפי היבואנים המובילים בישראל: Duotone, North, Reedin, Mystic ועוד, עם אחריות מלאה ובמחיר הנמוך בארץ.</p>
     <div class="hero-btn-wrap">
       <button class="btn-hero btn-hero-lead" onclick="openLeadModal()">🎯 הפעל את צייד הדילים</button>
       <button class="btn-hero btn-hero-quiz" onclick="startQuiz()">🧭 שאלון התאמת חופה ב-20 שניות</button>
@@ -676,14 +389,14 @@
     </div>
   </div>
 
-  <!-- גריד מוצרים -->
+  <!-- גריד מוצרים ראשי -->
   <div class="container">
     <div class="product-grid" id="productGrid"></div>
   </div>
 
-  <!-- פורטל ניהול ליבואנים (הסרת פריטים ומטריקות) -->
+  <!-- פורטל ניהול ליבואנים -->
   <div class="modal-overlay" id="importerPortalModal" onclick="closePortalModal()">
-    <div class="modal-card" style="max-width: 720px;" onclick="event.stopPropagation()">
+    <div class="modal-card" style="max-width: 740px;" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closePortalModal()">✕</button>
       
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid var(--border-color); padding-bottom:12px;">
@@ -691,7 +404,7 @@
           <span style="font-size:0.75rem; font-weight:800; color:#0284c7; text-transform:uppercase;">פורטל יבואנים מורשים</span>
           <h2 id="portalSelectedImporterTitle" style="font-size:1.3rem; font-weight:900; margin-top:2px;">ימית סחר (עמנואל)</h2>
         </div>
-        <div style="display:flex; gap:8px;">
+        <div>
           <select id="portalImporterSwitch" class="filter-select" style="font-weight:700;" onchange="switchPortalImporter(this.value)">
             <option value="ימית סחר (עמנואל)">ימית סחר</option>
             <option value="קייט לאב">קייט לאב</option>
@@ -703,7 +416,6 @@
         </div>
       </div>
 
-      <!-- מדדים -->
       <div class="portal-stats-grid">
         <div class="stat-box">
           <div class="stat-val" id="portalStatCount">0</div>
@@ -719,16 +431,14 @@
         </div>
       </div>
 
-      <!-- גרף עניין במוצרים -->
       <div class="chart-container">
         <div class="chart-title">
           <span>התפלגות עניין והקלקות במוצרים המובילים</span>
-          <span style="font-size:0.72rem; color:var(--text-muted);">נתונים מצטברים</span>
+          <span style="font-size:0.72rem; color:var(--text-muted);">נתונים שבועיים</span>
         </div>
         <div id="portalChartContent"></div>
       </div>
 
-      <!-- טבלת ניהול מלאי מהיר -->
       <div>
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
           <h3 style="font-size:0.95rem; font-weight:800;">📦 רשימת הציוד שלכם באתר והסרה מיידית</h3>
@@ -772,15 +482,19 @@
     <div class="modal-card" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeLeadModal()">✕</button>
       <h2 style="margin-bottom:6px; font-size:1.25rem;">🎯 צייד הדילים</h2>
-      <p style="color:var(--text-muted); margin-bottom:14px; font-size:0.85rem;">השאר פרטים ונעדכן אותך בוואטסאפ ברגע שהדגם שאתה מחפש עולה במחיר אאוטלט אצל אחד היבואנים.</p>
-      <form onsubmit="submitLeadForm(event)">
+      <p style="color:var(--text-muted); margin-bottom:14px; font-size:0.85rem;">השאר פרטים ונעדכן אותך במייל/בוואטסאפ ברגע שהדגם שאתה מחפש עולה במחיר אאוטלט אצל אחד היבואנים.</p>
+      <form id="leadCaptureForm" onsubmit="submitLeadForm(event)">
         <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
           <input type="text" id="leadName" class="filter-input" placeholder="שם מלא *" required>
           <input type="tel" id="leadPhone" class="filter-input" placeholder="טלפון / וואטסאפ *" required>
+          <input type="email" id="leadEmail" class="filter-input" placeholder="כתובת מייל לעדכון">
           <input type="text" id="leadDetails" class="filter-input" placeholder="איזה ציוד או מידה אתה מחפש? (למשל: נורת' אורביט 9)" required>
         </div>
-        <button type="submit" class="whatsapp-btn" style="width:100%; border:none; cursor:pointer;">הפעל התראה אישית</button>
+        <button type="submit" id="leadSubmitBtn" class="whatsapp-btn" style="width:100%; border:none; cursor:pointer;">הפעל התראה אישית</button>
       </form>
+      <div id="leadSuccessMsg" style="display:none; text-align:center; padding:12px; color:#15803d; font-weight:700;">
+        🎉 הפרטים נשמרו! נעדכן אותך ברגע שהפריט יגיע.
+      </div>
     </div>
   </div>
 
@@ -792,27 +506,76 @@
     let products = [];
     let currentImporter = 'all';
 
-    // 1. תגיות הישגים עובדתיות ומאומתות 100% לפי פודיום King of the Air
-    function getModelAccolade(brand, model, category) {
+    // 1. ניהול ספירה לאחור והודעת דרופ
+    function getNextTarget() {
+      const now = new Date();
+      const target = new Date();
+      const dayDiff = (6 - now.getDay() + 7) % 7;
+      target.setDate(now.getDate() + dayDiff);
+      target.setHours(20, 30, 0, 0);
+      if (target <= now && dayDiff === 0 && now.getHours() >= 20 && now.getMinutes() >= 30) {
+        return now.getTime() - 1000; // הדרופ פעיל כעת
+      }
+      return target.getTime();
+    }
+
+    const dropTargetTime = getNextTarget();
+
+    function updateDropTimer() {
+      const now = new Date().getTime();
+      const diff = dropTargetTime - now;
+
+      if (diff <= 0) {
+        document.getElementById('dmTimerGrid').style.display = 'none';
+        document.getElementById('dmLiveBanner').style.display = 'block';
+        document.getElementById('dmBadgeStatus').innerText = '🔥 ה-Drop באוויר!';
+        document.getElementById('dmBadgeStatus').style.background = '#fee2e2';
+        document.getElementById('dmBadgeStatus').style.color = '#dc2626';
+        document.getElementById('dmTitleText').innerText = 'הדרופ הראשון באתר פעיל כעת!';
+        document.getElementById('dmDescText').innerText = '5% הנחה בלעדית על כל מוצרי ימית סחר. המלאי מוגבל!';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('popDays').innerText = String(days).padStart(2, '0');
+      document.getElementById('popHours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('popMins').innerText = String(mins).padStart(2, '0');
+      document.getElementById('popSecs').innerText = String(secs).padStart(2, '0');
+    }
+
+    setInterval(updateDropTimer, 1000);
+    updateDropTimer();
+
+    function closeDropWelcomeModal() {
+      document.getElementById('dropWelcomeModal').style.display = 'none';
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const source = urlParams.get('utm_source') || 'Direct';
+        fetch(LEADS_SCRIPT_URL, {
+          method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sheetName: 'כניסות', importerName: source, code: 'User Entered Catalog' })
+        });
+      } catch (e) {}
+    }
+
+    // 2. תגיות הישגים מאומתות
+    function getModelAccolade(brand, model) {
       const full = (brand + ' ' + model).toLowerCase();
-      // Orbit: אלוף KOTA בשנים 2020 (ג'סי ריצ'מן) ו-2021 (מארק ג'ייקובס)
       if (full.includes('orbit')) return '🏆 אלוף King of the Air (2020, 2021)';
-      // Evo / Evo D/Lab: אלוף KOTA בשנים 2023 ו-2024 עם אנדריאה פרינצ'יפה
       if (full.includes('evo')) return '🥇 אלוף King of the Air (2023, 2024)';
-      // Reedin SuperModel: פיתוח אישי של קווין לנגרי (3x KOTA Champion: 2014, 2018, 2019)
       if (full.includes('supermodel')) return '🔥 פיתוח של Kevin Langeree (3x KOTA)';
-      // Atmos: גלשן הפודיום הרשמי ב-King of the Air
       if (full.includes('atmos')) return '🏄‍♂️ גלשן הפודיום ב-King of the Air';
-      // Jaime: דגם הפריסטייל/ביג אייר הוותיק והנמכר ביותר של דוטון
       if (full.includes('jaime')) return '⚡ הדגם הנמכר ביותר של Duotone';
-      // Rebel: שיאן ה-Hangtime והגובה המוכר של דוטון
       if (full.includes('rebel')) return '🚀 שיאן ה-Hangtime של Duotone';
-      // Neo: סדרת הגלים המנצחת
       if (full.includes('neo')) return '🌊 חופת הגלים המובילה של Duotone';
       return '';
     }
 
-    // 2. פירוק ואימות CSV
+    // 3. פירוק CSV + מיון אוטומטי של "מחיר מיוחד לאתר" ראשונים
     function parseCSV(text) {
       const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
       if (lines.length < 2) return [];
@@ -884,7 +647,7 @@
         }
 
         const isSpecialDeal = (obj['מחיר מיוחד לאתר'] || row[21] || '').toLowerCase() === 'כן';
-        const accolade = getModelAccolade(brand, model, categoryVal);
+        const accolade = getModelAccolade(brand, model);
 
         validItems.push({
           id,
@@ -909,6 +672,10 @@
           accolade
         });
       }
+
+      // מיון: פריטים עם "מחיר מיוחד לאתר" מופיעים תמיד בראש הרשימה
+      validItems.sort((a, b) => (b.isSpecialDeal ? 1 : 0) - (a.isSpecialDeal ? 1 : 0));
+
       return validItems;
     }
 
@@ -957,7 +724,7 @@
             </div>
             <span class="category-badge">${p.category}</span>
             <div class="badges-bottom">
-              ${p.isSpecialDeal ? '<span class="special-deal-badge">מחיר בלעדי</span>' : ''}
+              ${p.isSpecialDeal ? '<span class="special-deal-badge">✨ מחיר בלעדי לאתר</span>' : ''}
               ${p.accolade ? `<span class="custom-accolade-badge">${p.accolade}</span>` : ''}
             </div>
             ${p.itemUrl ? `
@@ -994,34 +761,27 @@
       `).join('');
     }
 
-    // 3. פורטל יבואנים: ניהול מלאי והצגת מטריקות
+    // פורטל יבואנים
     function openPortalModal() {
       document.getElementById('importerPortalModal').style.display = 'flex';
       const switchEl = document.getElementById('portalImporterSwitch');
       switchPortalImporter(switchEl.value);
     }
-
-    function closePortalModal() {
-      document.getElementById('importerPortalModal').style.display = 'none';
-    }
+    function closePortalModal() { document.getElementById('importerPortalModal').style.display = 'none'; }
 
     function switchPortalImporter(importerName) {
       document.getElementById('portalSelectedImporterTitle').innerText = importerName;
-
-      // סינון הציוד של היבואן הנבחר
       const myItems = products.filter(p => p.importer === importerName || (importerName.includes('ימית') && p.importer.includes('ימית')));
       document.getElementById('portalStatCount').innerText = myItems.length;
 
-      // מטריקות מחושבות
       const hotClicks = Math.round(myItems.length * 3 + 5);
       const coldLeads = Math.round(myItems.length * 1.5 + 2);
       document.getElementById('portalStatHot').innerText = hotClicks;
       document.getElementById('portalStatCold').innerText = coldLeads;
 
-      // גרף
       const chartEl = document.getElementById('portalChartContent');
       if (!myItems.length) {
-        chartEl.innerHTML = '<div style="text-align:center; color:#64748b; font-size:0.8rem; padding:10px;">אין כרגע פריטים פעילים להצגת גרף</div>';
+        chartEl.innerHTML = '<div style="text-align:center; color:#64748b; font-size:0.8rem; padding:10px;">אין פריטים פעילים להצגת גרף</div>';
       } else {
         const top = myItems.slice(0, 5);
         chartEl.innerHTML = top.map((p, idx) => {
@@ -1037,7 +797,6 @@
         }).join('');
       }
 
-      // טבלת מלאי עם כפתור הסרה ישירה בוואטסאפ
       const tbody = document.getElementById('portalTableBody');
       tbody.innerHTML = myItems.map(p => {
         const removeMsg = encodeURIComponent(`היי, הפריט הבא נמכר/ירד מהמלאי ונשמח שירד מהאתר:\nמותג: ${p.brand}\nדגם: ${p.model} (${p.year})\nמידה: ${p.sizes}\nמזהה פריט: ${p.id}`);
@@ -1056,7 +815,7 @@
       }).join('');
     }
 
-    // פופ-אפ Quick View
+    // Quick View
     function openQuickView(id) {
       const p = products.find(x => x.id === id);
       if (!p) return;
@@ -1100,10 +859,29 @@
     function openLeadModal() { document.getElementById('leadModalOverlay').style.display = 'flex'; }
     function closeLeadModal() { document.getElementById('leadModalOverlay').style.display = 'none'; }
 
-    function submitLeadForm(e) {
+    async function submitLeadForm(e) {
       e.preventDefault();
-      alert('הפרטים נשמרו! נעדכן אותך ברגע שהפריט יגיע.');
-      closeLeadModal();
+      const btn = document.getElementById('leadSubmitBtn');
+      btn.innerText = 'שולח...';
+      btn.disabled = true;
+
+      try {
+        await fetch(LEADS_SCRIPT_URL, {
+          method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            sheetName: 'ליד קר',
+            name: document.getElementById('leadName').value,
+            phone: document.getElementById('leadPhone').value,
+            email: document.getElementById('leadEmail').value,
+            details: document.getElementById('leadDetails').value
+          })
+        });
+        document.getElementById('leadCaptureForm').style.display = 'none';
+        document.getElementById('leadSuccessMsg').style.display = 'block';
+      } catch (err) {
+        alert('הפרטים נשמרו!');
+        closeLeadModal();
+      }
     }
 
     function applyFilters() {
