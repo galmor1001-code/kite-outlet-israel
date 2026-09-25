@@ -167,7 +167,7 @@
     }
     .cat-count { font-size: 0.78rem; font-weight: 700; color: #64748b; }
 
-    /* גריד מוצרים */
+    /* גריד מוצרים - 3 פריטים לרוחב במחשב עם גלילה רציפה */
     .container { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
     .product-grid {
       display: grid;
@@ -226,7 +226,7 @@
       display: flex; align-items: center; justify-content: center; gap: 5px;
     }
 
-    /* כרטיסי עניין מקצועיים ("הידעת?") */
+    /* כרטיסי עניין מקצועיים ("הידעת?") מבוססי תוכן מקצועי */
     .trivia-card {
       background: #ffffff; border: 1px solid var(--border-color); border-radius: 12px;
       overflow: hidden; display: flex; flex-direction: column; text-align: right; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
@@ -329,7 +329,6 @@
       .product-title { font-size: 0.88rem; min-height: 2.2em; }
       .card-body { padding: 9px; }
       .outlet-price { font-size: 1.15rem; }
-      .btn-group { grid-template-columns: 1fr; }
       .inquire-btn { font-size: 0.74rem; padding: 6px; }
       .portal-stats-grid { grid-template-columns: 1fr; }
       .category-divider-title { font-size: 1rem; }
@@ -641,7 +640,7 @@
       } catch (e) {}
     }
 
-    // 2. תגיות הישגים
+    // 2. תגיות הישגים מדויקות
     function getModelAccolade(brand, model) {
       const full = (brand + ' ' + model).toLowerCase();
       if (full.includes('orbit')) return '🏆 אלוף King of the Air (2020, 2021)';
@@ -654,7 +653,7 @@
       return '';
     }
 
-    // 3. 10 כרטיסיות עניין מקצועיות (הידעת?) ללא כפילויות ועם תמונות אמיתיות
+    // 3. 10 כרטיסיות עניין מקצועיות (הידעת?) ללא כפילויות כלל ועם תמונות אותנטיות
     const CATEGORY_TRIVIA = {
       'קייט': [
         {
@@ -697,7 +696,7 @@
           footer: "מנגנון Trim אחורי מדויק במ״מ",
           badgeBg: "#0284c7",
           tagColor: "#0284c7",
-          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80"
+          img: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=700&q=80"
         },
         {
           brand: "Reedin Bars",
@@ -717,7 +716,7 @@
           footer: "קפיצה של 20% בחוזק והפחתת משקל",
           badgeBg: "#0f172a",
           tagColor: "#0f172a",
-          img: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=700&q=80"
+          img: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=700&q=80"
         }
       ],
       'גלשן': [
@@ -761,7 +760,7 @@
           footer: "מערכת תמיכת גב מתכווננת אישית",
           badgeBg: "#2563eb",
           tagColor: "#2563eb",
-          img: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=700&q=80"
+          img: "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?auto=format&fit=crop&w=700&q=80"
         },
         {
           brand: "ION Hardware",
@@ -771,7 +770,7 @@
           footer: "סגירת קליפס מאובטחת במשיכה אחת",
           badgeBg: "#2563eb",
           tagColor: "#2563eb",
-          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80"
+          img: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=700&q=80"
         }
       ]
     };
