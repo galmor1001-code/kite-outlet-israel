@@ -226,21 +226,35 @@
       display: flex; align-items: center; justify-content: center; gap: 5px;
     }
 
-    /* כרטיסי עניין ("הידעת?") מותאמים אישית */
+    /* כרטיסי עניין מקצועיים ("הידעת?") מבוססי תוכן היצרנים */
     .trivia-card {
-      background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 12px;
-      padding: 22px 18px; display: flex; flex-direction: column; justify-content: center;
-      text-align: right; position: relative; min-height: 290px;
+      background: #ffffff; border: 1px solid var(--border-color); border-radius: 12px;
+      overflow: hidden; display: flex; flex-direction: column; text-align: right; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     }
-    .trivia-badge {
-      display: inline-flex; align-items: center; gap: 4px; background: #e0f2fe; color: #0369a1;
-      font-size: 0.75rem; font-weight: 800; padding: 3px 8px; border-radius: 999px; margin-bottom: 10px; width: fit-content;
+    .trivia-img-container {
+      position: relative; width: 100%; height: 140px; overflow: hidden; background: #f1f5f9;
     }
-    .trivia-title { font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 6px; line-height: 1.3; }
-    .trivia-desc { font-size: 0.86rem; color: #475569; line-height: 1.45; margin-bottom: 14px; }
-    .trivia-action-btn {
-      background: #0f172a; color: white; border: none; padding: 7px 14px; border-radius: 6px;
-      font-weight: 700; font-size: 0.8rem; cursor: pointer; width: fit-content; text-decoration: none;
+    .trivia-img-container img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .trivia-brand-badge {
+      position: absolute; top: 10px; right: 10px; background: rgba(15, 23, 42, 0.85); color: white;
+      font-size: 0.7rem; font-weight: 800; padding: 2px 8px; border-radius: 4px;
+    }
+    .trivia-body {
+      padding: 14px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;
+    }
+    .trivia-tag {
+      font-size: 0.74rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.3px;
+    }
+    .trivia-title {
+      font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 3px 0 6px; line-height: 1.3;
+    }
+    .trivia-desc {
+      font-size: 0.82rem; color: #475569; line-height: 1.45; margin-bottom: 12px;
+    }
+    .trivia-footer {
+      padding-top: 8px; border-top: 1px solid #f1f5f9; font-size: 0.72rem; color: #94a3b8; font-weight: 600;
     }
 
     /* באנר הזמנת יבואנים בין הקטגוריות */
@@ -315,7 +329,6 @@
       .product-title { font-size: 0.88rem; min-height: 2.2em; }
       .card-body { padding: 9px; }
       .outlet-price { font-size: 1.15rem; }
-      .btn-group { grid-template-columns: 1fr; }
       .inquire-btn { font-size: 0.74rem; padding: 6px; }
       .portal-stats-grid { grid-template-columns: 1fr; }
       .category-divider-title { font-size: 1rem; }
@@ -627,7 +640,7 @@
       } catch (e) {}
     }
 
-    // 2. תגיות הישגים מדויקות
+    // 2. תגיות הישגים
     function getModelAccolade(brand, model) {
       const full = (brand + ' ' + model).toLowerCase();
       if (full.includes('orbit')) return '🏆 אלוף King of the Air (2020, 2021)';
@@ -640,61 +653,105 @@
       return '';
     }
 
-    // 3. כרטיסי עניין ("הידעת?") מותאמים במדויק לקטגוריות
+    // 3. כרטיסיות עניין מקצועיות (הידעת?) מותאמות בדיוק לקטגוריות
     const CATEGORY_TRIVIA = {
       'קייט': [
         {
-          badge: "💡 טכנולוגיית בד • Aluula",
-          title: "מה היתרון של בד Aluula (אלוולה)?",
-          desc: "בד ה-Aluula קל פי 2 מבד דקרון רגיל ועמיד ממנו פי 5. בקייטים ייעודיים לגלים (כמו ה-Neo D/LAB) הוא מאפשר לקייט להישאר באוויר ברוח אפסית ולבצע דריפט חופשי כשהגולש רוכב במורד הגל.",
-          btnText: "שאלון התאמת חופה",
-          action: "startQuiz()"
+          brand: "Duotone",
+          tag: "חומרים ושלדות קייט",
+          title: "Penta TX ו-Aluula Gold",
+          desc: "<strong>הידעת?</strong> בדגמי ה-SLS וה-D/LAB של דוטון, שילוב ה-Penta TX יחד עם Aluula מפחית עד 30% ממשקל השלד ומעניק תגובת סיבוב מהירה וטווח רוחות רחב בהרבה.",
+          footer: "עונות 2024–2025 • טכנולוגיית D/LAB & SLS",
+          img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=700&q=80"
         },
         {
-          badge: "⚡ עובדה מקצועית • 3 מול 5 בידונים",
-          title: "למה רוב חופות ה-Big Air עוברות ל-3 בידונים?",
-          desc: "בעוד שחופות 5 בידונים (כמו Rebel) מספקות יציבות וריחוף ארוך, חופות 3 בידונים מודרניות (כמו Orbit ו-Evo) מסתובבות מהר פי כמה ומאפשרות קיטלופים קיצוניים שתופסים אותך בזמן לפני הנחיתה.",
-          btnText: "צפה בחופות Big Air",
-          action: "applyStyleFilter('Big Air')"
-        }
-      ],
-      'גלשן': [
+          brand: "Reedin",
+          tag: "שלדות היברידיות",
+          title: "Hybrid Torsion Frame 2 (HTF)",
+          desc: "<strong>הידעת?</strong> ב-SuperModel HTF רידין משלבת מקטעי דקרון גמישים (Flexlite) בקצוות הכנף, מה שמאפשר פיתול פרוגרסיבי וזמני סיבוב מהירים גם כשהקייט אינו מתוח לחלוטין.",
+          footer: "תכנון ע״י Damien Girardin",
+          img: "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=700&q=80"
+        },
         {
-          badge: "🌊 תנאי הים התיכון • ספיגת צ'ופ",
-          title: "איך שומרים על הברכיים בצ'ופ הישראלי?",
-          desc: "הצ'ופ של הים התיכון מייצר עומס אדיר על המפרקים. גלשנים המשלבים שדרת סיבי בזלת/פשתן (כמו דגמי Concept Blue) וקצוות Space Flex סופגים את הזעזועים ומאפשרים נחיתות רכות במיוחד.",
-          btnText: "צפה בגלשני עודפים",
-          action: "filterCategoryOnly('גלשן')"
+          brand: "North",
+          tag: "בדי סיבים אלכסוניים",
+          title: "N-Weave45 ו-Matrix Pro",
+          desc: "<strong>הידעת?</strong> בדגמי ה-Pro של נורת' (כגון Orbit Pro), בד ה-N-Weave45 ארוג בסיבים בזווית של 45 מעלות כדי לנטרל עיוותים תחת עומסי Big Air קיצוניים.",
+          footer: "עמידות פיתול כפולה מדקרון רגיל",
+          img: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=700&q=80"
         }
       ],
       'בר': [
         {
-          badge: "🕹️ מערכות שליטה • אורך חוטים",
-          title: "מתי עדיף חוטים של 22 מטר ומתי 24 מטר?",
-          desc: "חוטים קצרים (22 מטר) מגיבים מהר יותר ומעולים ללופים חדים וגלישת גלים. חוטים ארוכים (24 מטר) מייצרים חלון רוח גדול יותר, כוח התחלתי חזק יותר ו-Hangtime ארוך יותר בקפיצות.",
-          btnText: "לכל הברים במלאי",
-          action: "filterCategoryOnly('בר')"
+          brand: "Duotone Bars",
+          tag: "מערכות היגוי ובטיחות",
+          title: "Click Bar עם Iron Heart VI",
+          desc: "<strong>הידעת?</strong> ה-Click Bar שודרג עם מיסב קרמי חדש במערכת ה-Iron Heart VI לשחרור פיתולים אוטומטי של החוטים (Auto-Untwist) וחוטי FLITE99 קשיחים לדיוק מקסימלי.",
+          footer: "מנגנון Trim אחורי מדויק במ״מ",
+          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80"
+        },
+        {
+          brand: "Reedin Bars",
+          tag: "מינימליזם והיגוי קל",
+          title: "DreamStick X V2.5",
+          desc: "<strong>הידעת?</strong> הבר של רידין כולל ציר שחרור פיתולים מובנה בצינור ה-PU הכפול, יחד עם קוטר אחיזה דק במיוחד של 21 מ\"מ וחוטי SK99 עמידים לשחיקה.",
+          footer: "קוטר האחיזה הדק והקל בקטגוריה",
+          img: "https://images.unsplash.com/photo-1520116468418-095984ab174a?auto=format&fit=crop&w=700&q=80"
+        },
+        {
+          brand: "North Bars",
+          tag: "שליטה מודולרית מתקדמת",
+          title: "Navigator Pro",
+          desc: "<strong>הידעת?</strong> ה-Navigator Pro תוכנן מחדש ב-70% מרכיביו, וכולל מנגנון שחרור פיתולים אוטומטי מלא של חוטי הכוח ונעילה מודולרית ללא כלים (Toolless InterLoop).",
+          footer: "קפיצה של 20% בחוזק והפחתת משקל",
+          img: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=700&q=80"
+        }
+      ],
+      'גלשן': [
+        {
+          brand: "Boards Tech",
+          tag: "ספיגת צ'ופ ועומסים",
+          title: "שדרות סיבים וקצוות גמישים",
+          desc: "<strong>הידעת?</strong> בגלשני הפרירייד המובילים (כמו סדרות ה-Concept Blue ו-Double Diffusor), שילוב סיבי פשתן ובזלת עם תעלות Space Flex חותך את הצ'ופ הצפוף של הים התיכון ומפחית עומסים מהברכיים.",
+          footer: "נחיתות רכות ושליטה מלאה במהירות",
+          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80"
         }
       ],
       'טרפז': [
         {
-          badge: "🛡️ בריאות הגב • Hard Shell",
-          title: "למה כדאי לעבור לטרפז עם שלדה קשיחה?",
-          desc: "טרפזים רכים ישנים נוטים להתקפל וללחוץ על הצלעות, מה שגורם לעליית הטרפז לחזה ולכאבי גב תחתון בסשנים ארוכים. שלדת Hard Shell אנטומית מפזרת את עומס הקייט באופן אחיד על האגן.",
-          btnText: "צפה בטרפזים",
-          action: "filterCategoryOnly('טרפז')"
+          brand: "Mystic",
+          tag: "טרפז הארדשל קרבון",
+          title: "Bionic Core Frame וקצף Dry Tech",
+          desc: "<strong>הידעת?</strong> טרפז המיסטיק Stealth משלב סיבי קרבון קשיחים אופקית וגמישים אנכית, לצד ריפוד שאינו סופג אפילו גרם אחד של מים במהלך הגלישה.",
+          footer: "משקל נטו אפס תוספת במים",
+          img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=700&q=80"
+        },
+        {
+          brand: "Mystic Hardware",
+          tag: "ספרדר בר וסגירה",
+          title: "Stealth Bar & Lever Lock",
+          desc: "<strong>הידעת?</strong> סגר ה-Lever Lock של מיסטיק כולל כנפיים ארגונומיות שנכנסות עמוק לתוך דפנות הטרפז ומבטלות לחלוטין את עליית הבר לכיוון הצלעות בזמן משיכה חזקה.",
+          footer: "מבנה מרוכב Fiber-Fusion דק",
+          img: "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=700&q=80"
+        },
+        {
+          brand: "ION",
+          tag: "חומרים תרמופלסטיים",
+          title: "Curv Composite & Ergo_Pad",
+          desc: "<strong>הידעת?</strong> טרפזי ION Riot ו-Sol מיוצרים מחומר Curv שאינו שביר כלל, ומשלבים פדים מתחלפים להתאמה מדויקת של קשת הגב התחתון (Ergonomic Spine).",
+          footer: "מערכת תמיכת גב מתכווננת אישית",
+          img: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=700&q=80"
+        },
+        {
+          brand: "ION Hardware",
+          tag: "ספרדר בר היברידי",
+          title: "Spectre Bar 2.0 עם Curv Flaps",
+          desc: "<strong>הידעת?</strong> ה-Spectre Bar 2.0 מוריד עשרות גרמים הודות לשלדת קרבון דחוסה, ומאפשר החלפה מהירה בין וו פלדה רגיל לחבל גלישה (Rope Slider) תוך שניות.",
+          footer: "סגירת קליפס מאובטחת במשיכה אחת",
+          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80"
         }
       ]
     };
-
-    function filterCategoryOnly(cat) {
-      document.getElementById('categorySelect').value = cat;
-      applyFilters();
-    }
-    function applyStyleFilter(st) {
-      document.getElementById('styleSelect').value = st;
-      applyFilters();
-    }
 
     // 4. פירוק CSV + מיון
     function parseCSV(text) {
@@ -827,7 +884,7 @@
       container.innerHTML = html;
     }
 
-    // יצירת כרטיס מוצר - כל הכרטיס פותח מודל מוגדל בלחיצה
+    // יצירת כרטיס מוצר - כל הכרטיס פותח מודל מוגדל
     function createProductCardHTML(p) {
       const mailSubject = encodeURIComponent(`התעניינות ב-${p.brand} ${p.model} (${p.outletPrice})`);
       const mailBody = encodeURIComponent(`שלום,\nאני מעוניין לבדוק זמינות עבור הפריט הבא מקטלוג Kite Outlet:\n\nדגם: ${p.brand} ${p.model} (${p.year})\nמידות מבוקשות: ${p.sizes}\nמחיר באתר: ${p.outletPrice}\nיבואן: ${p.importer}\n\nנא לחזור אלי, תודה!`);
@@ -872,7 +929,27 @@
       `;
     }
 
-    // רינדור קטגוריאלי עם כרטיסי הידעת מותאמים ובאנר יבואן ביניהם
+    // יצירת כרטיסיית עניין מקצועית ("הידעת?")
+    function createTriviaCardHTML(trivia) {
+      return `
+        <div class="trivia-card">
+          <div class="trivia-img-container">
+            <img src="${trivia.img}" alt="${trivia.title}">
+            <span class="trivia-brand-badge">${trivia.brand}</span>
+          </div>
+          <div class="trivia-body">
+            <div>
+              <div class="trivia-tag">${trivia.tag}</div>
+              <h4 class="trivia-title">${trivia.title}</h4>
+              <p class="trivia-desc">${trivia.desc}</p>
+            </div>
+            <div class="trivia-footer">${trivia.footer}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    // רינדור קטגוריאלי
     function renderCategorizedProducts(items) {
       const container = document.getElementById('categorizedContainer');
       document.getElementById('resultsCount').innerText = `מציג ${items.length} פריטים במלאי`;
@@ -915,18 +992,11 @@
           let triviaPointer = 0;
 
           catItems.forEach((p, idx) => {
-            // הזרקת כרטיס הידעת מותאם אישית לקטגוריה כל 4 פריטים
+            // הזרקת כרטיסיית הידעת כל 4 פריטים בדיוק
             if (idx > 0 && idx % 4 === 0 && triviaPool.length > 0) {
               const trivia = triviaPool[triviaPointer % triviaPool.length];
               triviaPointer++;
-              fullHTML += `
-                <div class="trivia-card">
-                  <div class="trivia-badge">${trivia.badge}</div>
-                  <div class="trivia-title">${trivia.title}</div>
-                  <div class="trivia-desc">${trivia.desc}</div>
-                  <button class="trivia-action-btn" onclick="${trivia.action}">${trivia.btnText} ←</button>
-                </div>
-              `;
+              fullHTML += createTriviaCardHTML(trivia);
             }
 
             fullHTML += createProductCardHTML(p);
@@ -934,7 +1004,7 @@
 
           fullHTML += `</div>`;
 
-          // הזרקת באנר הצטרפות יבואנים בחלקים "מתים" בין הקטגוריות
+          // באנר יבואן בחלקים מתים בין הקטגוריות
           if (catIdx === 0 || catIdx === 1) {
             fullHTML += `
               <div class="importer-invite-banner">
