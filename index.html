@@ -167,7 +167,7 @@
     }
     .cat-count { font-size: 0.78rem; font-weight: 700; color: #64748b; }
 
-    /* גריד מוצרים - 3 פריטים לרוחב במחשב עם גלילה רציפה */
+    /* גריד מוצרים - 3 פריטים לרוחב במחשב */
     .container { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
     .product-grid {
       display: grid;
@@ -226,35 +226,29 @@
       display: flex; align-items: center; justify-content: center; gap: 5px;
     }
 
-    /* כרטיסי עניין מקצועיים ("הידעת?") מבוססי תוכן מקצועי */
+    /* כרטיסי עניין מקצועיים ("הידעת?") נקיים ללא תמונות */
     .trivia-card {
-      background: #ffffff; border: 1px solid var(--border-color); border-radius: 12px;
-      overflow: hidden; display: flex; flex-direction: column; text-align: right; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 12px;
+      padding: 20px 18px; display: flex; flex-direction: column; justify-content: space-between;
+      text-align: right; box-shadow: 0 2px 8px rgba(0,0,0,0.02); min-height: 240px;
     }
-    .trivia-img-container {
-      position: relative; width: 100%; height: 160px; overflow: hidden; background: #0f172a;
-    }
-    .trivia-img-container img {
-      width: 100%; height: 100%; object-fit: cover;
+    .trivia-header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;
     }
     .trivia-brand-badge {
-      position: absolute; top: 10px; right: 10px; color: white;
-      font-size: 0.72rem; font-weight: 800; padding: 3px 8px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-    .trivia-body {
-      padding: 14px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;
+      color: white; font-size: 0.72rem; font-weight: 800; padding: 3px 8px; border-radius: 5px;
     }
     .trivia-tag {
-      font-size: 0.74rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px;
+      font-size: 0.74rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.3px;
     }
     .trivia-title {
-      font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-bottom: 6px; line-height: 1.3;
+      font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 8px; line-height: 1.3;
     }
     .trivia-desc {
-      font-size: 0.82rem; color: #475569; line-height: 1.45; margin-bottom: 12px;
+      font-size: 0.88rem; color: #334155; line-height: 1.5; margin-bottom: 16px;
     }
     .trivia-footer {
-      padding-top: 8px; border-top: 1px solid #f1f5f9; font-size: 0.72rem; color: #94a3b8; font-weight: 600;
+      padding-top: 10px; border-top: 1px solid #e2e8f0; font-size: 0.74rem; color: #64748b; font-weight: 700;
     }
 
     /* באנר הזמנת יבואנים בין הקטגוריות */
@@ -654,7 +648,7 @@
       return '';
     }
 
-    // 3. 10 כרטיסיות עניין מקצועיות (הידעת?) ללא כפילויות ועם תמונות קייטסרף ייעודיות
+    // 3. 10 כרטיסיות עניין מקצועיות (הידעת?) נקיות לחלוטין ללא תמונות
     const CATEGORY_TRIVIA = {
       'קייט': [
         {
@@ -664,8 +658,7 @@
           desc: "<strong>הידעת?</strong> בדגמי ה-SLS וה-D/LAB של דוטון לשנים 2024–2025, שילוב ה-Penta TX יחד עם Aluula מפחית עד 30% ממשקל השלד ומעניק תגובת סיבוב מהירה וטווח רוחות רחב בהרבה.",
           footer: "עונות 2024–2025 • טכנולוגיית D/LAB & SLS",
           badgeBg: "#0284c7",
-          tagColor: "#0284c7",
-          img: "https://images.unsplash.com/photo-1508873696983-2df5293cb395?auto=format&fit=crop&w=700&q=80"
+          tagColor: "#0284c7"
         },
         {
           brand: "Reedin",
@@ -674,8 +667,7 @@
           desc: "<strong>הידעת?</strong> ב-SuperModel HTF 2024/2025 רידין משלבת מקטעי דקרון גמישים (Flexlite) בקצוות הכנף, מה שמאפשר פיתול פרוגרסיבי וזמני סיבוב מהירים גם כשהקייט אינו מתוח לחלוטין.",
           footer: "תכנון ע״י Damien Girardin",
           badgeBg: "#ea580c",
-          tagColor: "#ea580c",
-          img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=700&q=80"
+          tagColor: "#ea580c"
         },
         {
           brand: "North",
@@ -684,8 +676,7 @@
           desc: "<strong>הידעת?</strong> בדגמי ה-Pro של נורת' (כגון Orbit Pro 2024/2025), בד ה-N-Weave45 ארוג בסיבים בזווית של 45 מעלות כדי לנטרל עיוותים תחת עומסי Big Air קיצוניים.",
           footer: "עמידות פיתול כפולה מדקרון רגיל",
           badgeBg: "#0f172a",
-          tagColor: "#0f172a",
-          img: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=700&q=80"
+          tagColor: "#0f172a"
         }
       ],
       'בר': [
@@ -696,8 +687,7 @@
           desc: "<strong>הידעת?</strong> ה-Click Bar 2025 שודרג עם מיסב קרמי חדש במערכת ה-Iron Heart VI לשחרור פיתולים אוטומטי של החוטים (Auto-Untwist) וחוטי FLITE99 קשיחים לדיוק מקסימלי.",
           footer: "מנגנון Trim אחורי מדויק במ״מ",
           badgeBg: "#0284c7",
-          tagColor: "#0284c7",
-          img: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=700&q=80"
+          tagColor: "#0284c7"
         },
         {
           brand: "Reedin Bars",
@@ -706,8 +696,7 @@
           desc: "<strong>הידעת?</strong> הבר של רידין לשנת 2025 כולל ציר שחרור פיתולים מובנה בצינור ה-PU הכפול, יחד עם קוטר אחיזה דק במיוחד של 21 מ\"מ וחוטי SK99 עמידים לשחיקה.",
           footer: "קוטר האחיזה הדק והקל בקטגוריה",
           badgeBg: "#ea580c",
-          tagColor: "#ea580c",
-          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80"
+          tagColor: "#ea580c"
         },
         {
           brand: "North Bars",
@@ -716,8 +705,7 @@
           desc: "<strong>הידעת?</strong> ה-Navigator Pro החדש תוכנן מחדש ב-70% מרכיביו, וכולל מנגנון שחרור פיתולים אוטומטי מלא של חוטי הכוח ונעילה מודולרית ללא כלים (Toolless InterLoop).",
           footer: "קפיצה של 20% בחוזק והפחתת משקל",
           badgeBg: "#0f172a",
-          tagColor: "#0f172a",
-          img: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=700&q=80"
+          tagColor: "#0f172a"
         }
       ],
       'גלשן': [
@@ -728,8 +716,7 @@
           desc: "<strong>הידעת?</strong> בגלשני הפרירייד המובילים (כמו סדרות ה-Concept Blue ו-Double Diffusor), שילוב סיבי פשתן ובזלת עם תעלות Space Flex חותך את הצ'ופ הצפוף של הים התיכון ומפחית עומסים מהברכיים.",
           footer: "נחיתות רכות ושליטה מלאה במהירות",
           badgeBg: "#0284c7",
-          tagColor: "#0284c7",
-          img: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=700&q=80"
+          tagColor: "#0284c7"
         }
       ],
       'טרפז': [
@@ -740,8 +727,7 @@
           desc: "<strong>הידעת?</strong> טרפז המיסטיק Stealth 2024/2025 משלב סיבי קרבון קשיחים אופקית וגמישים אנכית, לצד ריפוד שאינו סופג אפילו גרם אחד של מים במהלך הגלישה.",
           footer: "משקל נטו אפס תוספת במים",
           badgeBg: "#18181b",
-          tagColor: "#18181b",
-          img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=700&q=80"
+          tagColor: "#18181b"
         },
         {
           brand: "Mystic Hardware",
@@ -750,8 +736,7 @@
           desc: "<strong>הידעת?</strong> סגר ה-Lever Lock המשודרג של מיסטיק כולל כנפיים ארגונומיות שנכנסות עמוק לתוך דפנות הטרפז ומבטלות ב-100% את עליית הבר לכיוון הצלעות בזמן משיכה חזקה.",
           footer: "מבנה מרוכב Fiber-Fusion דק",
           badgeBg: "#18181b",
-          tagColor: "#18181b",
-          img: "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=700&q=80"
+          tagColor: "#18181b"
         },
         {
           brand: "ION",
@@ -760,8 +745,7 @@
           desc: "<strong>הידעת?</strong> טרפזי ION Riot ו-Sol לשנים 2024–2025 מיוצרים מחומר Curv שאינו שביר כלל, ומשלבים פדים מתחלפים להתאמה מדויקת של קשת הגב התחתון (Ergonomic Spine).",
           footer: "מערכת תמיכת גב מתכווננת אישית",
           badgeBg: "#2563eb",
-          tagColor: "#2563eb",
-          img: "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?auto=format&fit=crop&w=700&q=80"
+          tagColor: "#2563eb"
         },
         {
           brand: "ION Hardware",
@@ -770,8 +754,7 @@
           desc: "<strong>הידעת?</strong> ה-Spectre Bar 2.0 מוריד עשרות גרמים הודות לשלדת קרבון דחוסה, ומאפשר החלפה מהירה בין וו פלדה רגיל לחבל גלישה (Rope Slider) תוך שניות בודדות.",
           footer: "סגירת קליפס מאובטחת במשיכה אחת",
           badgeBg: "#2563eb",
-          tagColor: "#2563eb",
-          img: "https://images.unsplash.com/photo-1520116468418-095984ab174a?auto=format&fit=crop&w=700&q=80"
+          tagColor: "#2563eb"
         }
       ]
     };
@@ -952,22 +935,19 @@
       `;
     }
 
-    // יצירת כרטיסיית עניין מקצועית ("הידעת?")
+    // יצירת כרטיסיית עניין מקצועית ("הידעת?") נטולת תמונות לחלוטין
     function createTriviaCardHTML(trivia) {
       return `
         <div class="trivia-card">
-          <div class="trivia-img-container">
-            <img src="${trivia.img}" alt="${trivia.title}">
-            <span class="trivia-brand-badge" style="background:${trivia.badgeBg};">${trivia.brand}</span>
-          </div>
-          <div class="trivia-body">
-            <div>
-              <div class="trivia-tag" style="color:${trivia.tagColor};">${trivia.tag}</div>
-              <h4 class="trivia-title">${trivia.title}</h4>
-              <p class="trivia-desc">${trivia.desc}</p>
+          <div>
+            <div class="trivia-header">
+              <span class="trivia-tag" style="color:${trivia.tagColor};">${trivia.tag}</span>
+              <span class="trivia-brand-badge" style="background:${trivia.badgeBg};">${trivia.brand}</span>
             </div>
-            <div class="trivia-footer">${trivia.footer}</div>
+            <h4 class="trivia-title">${trivia.title}</h4>
+            <p class="trivia-desc">${trivia.desc}</p>
           </div>
+          <div class="trivia-footer">📌 ${trivia.footer}</div>
         </div>
       `;
     }
