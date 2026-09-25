@@ -329,6 +329,7 @@
       .product-title { font-size: 0.88rem; min-height: 2.2em; }
       .card-body { padding: 9px; }
       .outlet-price { font-size: 1.15rem; }
+      .btn-group { grid-template-columns: 1fr; }
       .inquire-btn { font-size: 0.74rem; padding: 6px; }
       .portal-stats-grid { grid-template-columns: 1fr; }
       .category-divider-title { font-size: 1rem; }
@@ -640,7 +641,7 @@
       } catch (e) {}
     }
 
-    // 2. תגיות הישגים מדויקות
+    // 2. תגיות הישגים
     function getModelAccolade(brand, model) {
       const full = (brand + ' ' + model).toLowerCase();
       if (full.includes('orbit')) return '🏆 אלוף King of the Air (2020, 2021)';
@@ -653,7 +654,7 @@
       return '';
     }
 
-    // 3. 10 כרטיסיות עניין מקצועיות (הידעת?) ללא כפילויות כלל ועם תמונות אותנטיות
+    // 3. 10 כרטיסיות עניין מקצועיות (הידעת?) ללא כפילויות ועם תמונות קייטסרף ייעודיות
     const CATEGORY_TRIVIA = {
       'קייט': [
         {
@@ -664,7 +665,7 @@
           footer: "עונות 2024–2025 • טכנולוגיית D/LAB & SLS",
           badgeBg: "#0284c7",
           tagColor: "#0284c7",
-          img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=700&q=80"
+          img: "https://images.unsplash.com/photo-1508873696983-2df5293cb395?auto=format&fit=crop&w=700&q=80"
         },
         {
           brand: "Reedin",
@@ -674,7 +675,7 @@
           footer: "תכנון ע״י Damien Girardin",
           badgeBg: "#ea580c",
           tagColor: "#ea580c",
-          img: "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=700&q=80"
+          img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=700&q=80"
         },
         {
           brand: "North",
@@ -706,7 +707,7 @@
           footer: "קוטר האחיזה הדק והקל בקטגוריה",
           badgeBg: "#ea580c",
           tagColor: "#ea580c",
-          img: "https://images.unsplash.com/photo-1520116468418-095984ab174a?auto=format&fit=crop&w=700&q=80"
+          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80"
         },
         {
           brand: "North Bars",
@@ -728,7 +729,7 @@
           footer: "נחיתות רכות ושליטה מלאה במהירות",
           badgeBg: "#0284c7",
           tagColor: "#0284c7",
-          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80"
+          img: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=700&q=80"
         }
       ],
       'טרפז': [
@@ -770,7 +771,7 @@
           footer: "סגירת קליפס מאובטחת במשיכה אחת",
           badgeBg: "#2563eb",
           tagColor: "#2563eb",
-          img: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=700&q=80"
+          img: "https://images.unsplash.com/photo-1520116468418-095984ab174a?auto=format&fit=crop&w=700&q=80"
         }
       ]
     };
