@@ -432,14 +432,7 @@
       <p>גולשים מקומיים בסשנים בחופי הארץ עם ציוד שנרכש מהיבואנים המורשים</p>
     </div>
     <div class="gallery-grid" id="communityGalleryGrid">
-      <!-- כרטיס הזמנה לשליחת תמונה -->
-      <div class="gallery-item gallery-empty-card">
-        <h4>רוצים להופיע אצלנו באתר?</h4>
-        <p>שלחו לנו תמונה שלכם מהסשן האחרון במייל ונצרף אתכם לגלריה הרשמית!</p>
-        <a href="mailto:kiteoutletisrael@gmail.com?subject=תמונה לגלריית הגולשים ב-Kite Outlet&body=היי,%20מצרף%20תמונה%20שלי%20מגלישה%20עם%20ציוד%20קייט.%20שם%20לקרדיט:%20" class="btn-submit-photo">
-          <span>📷</span> שליחת תמונה במייל
-        </a>
-      </div>
+      <!-- כאן נטענות התמונות ישירות מלשונית "תמונות לגלריה" בשיטס -->
     </div>
   </div>
 
@@ -555,8 +548,10 @@
   </div>
 
   <script>
-    const BASE_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSAncp2nNLO6jIwFT07bDpVDjYerLk6DLW6FOKnf_GHMPGRWKaDclMTYs_AJcNU-kTJXhHdgZ8ikyUj/pub?output=csv";
+    const SPREADSHEET_ID = "2PACX-1vSAncp2nNLO6jIwFT07bDpVDjYerLk6DLW6FOKnf_GHMPGRWKaDclMTYs_AJcNU-kTJXhHdgZ8ikyUj";
+    const BASE_CSV_URL = `https://docs.google.com/spreadsheets/d/e/${SPREADSHEET_ID}/pub?output=csv`;
     const CSV_URL = BASE_CSV_URL + "&t=" + new Date().getTime();
+    const GALLERY_CSV_URL = `https://docs.google.com/spreadsheets/d/e/${SPREADSHEET_ID}/pub?gid=תמונות_לגלריה&output=csv&t=` + new Date().getTime();
     const LEADS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzyKkaMAo3RYrNiWHkDLO3_g00ImeJhbUgLhuot9OWLDf6JFETHd9nW1y4kd-cbe8tp/exec";
     const DEFAULT_EMAIL = "kiteoutletisrael@gmail.com";
 
@@ -572,7 +567,7 @@
       const day = now.getDay();
       let diff = (6 - day + 7) % 7;
       if (diff === 0 && (now.getHours() > 20 || (now.getHours() === 20 && now.getMinutes() >= 30))) {
-        diff = 7; // אם מוצ"ש הנוכחי כבר עבר, מעבירים למוצ"ש הבא
+        diff = 7;
       }
       target.setDate(now.getDate() + diff);
       target.setHours(20, 30, 0, 0);
@@ -609,13 +604,13 @@
 
     function closeDropWelcomeModal() { document.getElementById('dropWelcomeModal').style.display = 'none'; }
 
-    // 2. תגיות הישגים
+    // 2. תגיות הישגים מעודכנות (ללא אזכור KOTA לנורת')
     function getModelAccolade(brand, model) {
       const full = (brand + ' ' + model).toLowerCase();
-      if (full.includes('orbit')) return '🏆 אלוף King of the Air (2020, 2021)';
+      if (full.includes('orbit')) return '🚀 ביצועי קצה שעוד לא הכרתם';
+      if (full.includes('atmos')) return '🚀 ביצועי קצה שעוד לא הכרתם';
       if (full.includes('evo')) return '🥇 אלוף King of the Air (2023, 2024)';
       if (full.includes('supermodel')) return '🔥 פיתוח של Kevin Langeree (3x KOTA)';
-      if (full.includes('atmos')) return '🏄‍♂️ גלשן הפודיום ב-King of the Air';
       if (full.includes('jaime')) return '⚡ הדגם הנמכר ביותר של Duotone';
       if (full.includes('rebel')) return '🚀 שיאן ה-Hangtime של Duotone';
       if (full.includes('neo')) return '🌊 חופת הגלים המובילה של Duotone';
@@ -689,6 +684,12 @@
           if (foundUrl) image = foundUrl;
         }
 
+        let itemUrl = obj['קישור למפרט היצרן'] || obj['קישור לאתר היבואן'] || obj['קישור למוצר'] || row[18] || '';
+        if (!itemUrl.startsWith('http')) {
+          const foundSite = row.find(val => typeof val === 'string' && val.startsWith('http') && !val.includes('wa.me') && !val.includes('wixstatic') && !val.includes('.jpg') && !val.includes('.png') && !val.includes('.webp'));
+          if (foundSite) itemUrl = foundSite;
+        }
+
         let origNum = 0, outletNum = 0;
         const origStr = obj['מחיר מחירון מקורי (₪) '] || obj['מחיר מחירון מקורי (₪)'] || row[8] || '';
         const outletStr = obj['מחיר אאוטלט (₪)'] || row[9] || '';
@@ -744,34 +745,55 @@
       }
     }
 
-    // טעינת גלריית תמונות גולשים מהשיטס
+    // משיכת תמונות ישירות מגיליון "תמונות לגלריה"
     async function loadCommunityGallery() {
+      const galleryGrid = document.getElementById('communityGalleryGrid');
+      let photos = [];
+
       try {
-        // מנסה למשוך את לשונית "תמונות לגלריה" אם פורסמה, אחרת מציג תמונות ברירת מחדל
-        const galleryGrid = document.getElementById('communityGalleryGrid');
-        const defaultPhotos = [
+        // ניסיון קריאה של לשונית הגלריה מתוך ה-CSV של Google Sheets
+        const res = await fetch(GALLERY_CSV_URL);
+        if (res.ok) {
+          const text = await res.text();
+          const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+          for (let i = 0; i < lines.length; i++) {
+            const matches = lines[i].match(/https?:\/\/[^\s,"]+/g);
+            if (matches) {
+              matches.forEach(url => {
+                if (url.includes('.jpg') || url.includes('.png') || url.includes('.webp') || url.includes('wixstatic') || url.includes('unsplash') || url.includes('cdn')) {
+                  photos.push(url.replace(/["']/g, '').trim());
+                }
+              });
+            }
+          }
+        }
+      } catch (e) {}
+
+      // אם הלשונית עדיין לא פורסמה כ-CSV נפרד, משתמשים בתמונות ברירת מחדל אותנטיות
+      if (photos.length === 0) {
+        photos = [
           "https://images.unsplash.com/photo-1508873696983-2df5293cb395?auto=format&fit=crop&w=600&q=80",
           "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
           "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=600&q=80"
         ];
+      }
 
-        let html = '';
-        defaultPhotos.forEach(src => {
-          html += `<div class="gallery-item"><img src="${src}" alt="גולש קהילה"></div>`;
-        });
+      let html = '';
+      photos.slice(0, 7).forEach(src => {
+        html += `<div class="gallery-item"><img src="${src}" alt="גולש קהילת Kite Outlet" onerror="this.parentElement.style.display='none';"></div>`;
+      });
 
-        // הוספת הכרטיס הריק והבולט בסוף
-        html += `
-          <div class="gallery-item gallery-empty-card">
-            <h4>רוצים להופיע אצלנו באתר?</h4>
-            <p>שלחו לנו תמונה שלכם מהסשן האחרון במייל ונצרף אתכם לגלריה הרשמית!</p>
-            <a href="mailto:kiteoutletisrael@gmail.com?subject=תמונה לגלריית הגולשים ב-Kite Outlet&body=היי,%20מצרף%20תמונה%20שלי%20מגלישה%20עם%20ציוד%20קייט.%20שם%20לקרדיט:%20" class="btn-submit-photo">
-              <span>📷</span> שליחת תמונה במייל
-            </a>
-          </div>
-        `;
-        galleryGrid.innerHTML = html;
-      } catch(e) {}
+      // כרטיס ריק לשליחת תמונה במייל
+      html += `
+        <div class="gallery-item gallery-empty-card">
+          <h4>רוצים להופיע אצלנו באתר?</h4>
+          <p>שלחו לנו תמונה שלכם מהסשן האחרון במייל ונצרף אתכם לגלריה הרשמית!</p>
+          <a href="mailto:kiteoutletisrael@gmail.com?subject=תמונה לגלריית הגולשים ב-Kite Outlet&body=היי,%20מצרף%20תמונה%20שלי%20מגלישה%20עם%20ציוד%20קייט.%20שם%20לקרדיט:%20" class="btn-submit-photo">
+            <span>📷</span> לחצו כאן לשליחת תמונה
+          </a>
+        </div>
+      `;
+      galleryGrid.innerHTML = html;
     }
 
     function renderFilters() {
@@ -787,7 +809,7 @@
       container.innerHTML = html;
     }
 
-    // יצירת כרטיס מוצר + כפתור לב למועדפים
+    // יצירת כרטיס מוצר + לב למועדפים
     function createProductCardHTML(p) {
       const mailSubject = encodeURIComponent(`התעניינות ב-${p.brand} ${p.model} (${p.outletPrice})`);
       const mailBody = encodeURIComponent(`שלום,\nאני מעוניין לבדוק זמינות עבור הפריט הבא מקטלוג Kite Outlet:\n\nדגם: ${p.brand} ${p.model} (${p.year})\nמידות מבוקשות: ${p.sizes}\nמחיר באתר: ${p.outletPrice}\nיבואן: ${p.importer}\n\nנא לחזור אלי, תודה!`);
@@ -803,7 +825,6 @@
             </div>
             <div class="corner-bubble-tl">
               <span class="bubble-badge bubble-cat">${p.category}</span>
-              <!-- כפתור לב לשמירה ועדכון מחיר -->
               <button class="btn-wishlist ${isFav ? 'active' : ''}" title="שמור פריט לקבלת עדכוני מחיר ומלאי" onclick="toggleWishlist(event, '${p.id}', '${p.brand} ${p.model}')">
                 ${isFav ? '❤️' : '🤍'}
               </button>
