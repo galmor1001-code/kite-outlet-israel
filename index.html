@@ -551,7 +551,52 @@
     const SPREADSHEET_ID = "2PACX-1vSAncp2nNLO6jIwFT07bDpVDjYerLk6DLW6FOKnf_GHMPGRWKaDclMTYs_AJcNU-kTJXhHdgZ8ikyUj";
     const BASE_CSV_URL = `https://docs.google.com/spreadsheets/d/e/${SPREADSHEET_ID}/pub?output=csv`;
     const CSV_URL = BASE_CSV_URL + "&t=" + new Date().getTime();
-    const GALLERY_CSV_URL = `https://docs.google.com/spreadsheets/d/e/${SPREADSHEET_ID}/pub?gid=תמונות_לגלריה&output=csv&t=` + new Date().getTime();
+  const GALLERY_CSV_URL = "https://docs.google.com/spreadsheets/d/1-6zw6Asok9Rk9bj5hhiy2PMawFs9pmOORq-ELxa9xCU/export?format=csv&gid=1197925606&t=" + new Date().getTime();
+
+    // משיכת תמונות ישירות מלשונית הגלריה בגיליון
+    async function loadCommunityGallery() {
+      const galleryGrid = document.getElementById('communityGalleryGrid');
+      let photos = [];
+
+      try {
+        const res = await fetch(GALLERY_CSV_URL);
+        if (res.ok) {
+          const text = await res.text();
+          const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+          for (let i = 0; i < lines.length; i++) {
+            const matches = lines[i].match(/https?:\/\/[^\s,"]+/g);
+            if (matches) {
+              matches.forEach(url => {
+                const clean = url.replace(/["']/g, '').trim();
+                if (clean.startsWith('http')) {
+                  photos.push(clean);
+                }
+              });
+            }
+          }
+        }
+      } catch (e) {
+        console.error("שגיאה במשיכת גלריה:", e);
+      }
+
+      // רינדור התמונות שנמשכו מהשיטס
+      let html = '';
+      photos.forEach(src => {
+        html += `<div class="gallery-item"><img src="${src}" alt="גולש קהילת Kite Outlet" onerror="this.parentElement.style.display='none';"></div>`;
+      });
+
+      // כרטיס ריק לשליחת תמונה במייל בסוף הגלריה
+      html += `
+        <div class="gallery-item gallery-empty-card">
+          <h4>רוצים להופיע אצלנו באתר?</h4>
+          <p>שלחו לנו תמונה שלכם מהסשן האחרון במייל ונצרף אתכם לגלריה הרשמית!</p>
+          <a href="mailto:kiteoutletisrael@gmail.com?subject=תמונה לגלריית הגולשים ב-Kite Outlet&body=היי,%20מצרף%20תמונה%20שלי%20מגלישה%20עם%20ציוד%20קייט.%20שם%20לקרדיט:%20" class="btn-submit-photo">
+            <span>📷</span> לחצו כאן לשליחת תמונה
+          </a>
+        </div>
+      `;
+      galleryGrid.innerHTML = html;
+    }
     const LEADS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzyKkaMAo3RYrNiWHkDLO3_g00ImeJhbUgLhuot9OWLDf6JFETHd9nW1y4kd-cbe8tp/exec";
     const DEFAULT_EMAIL = "kiteoutletisrael@gmail.com";
 
