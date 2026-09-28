@@ -288,7 +288,7 @@
       position: absolute; top: 12px; left: 12px; background: #f1f5f9; border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 0.9rem;
     }
 
-    /* פוטר תחתון */
+    /* פוטר תחתון נקי */
     footer {
       max-width: 1240px; margin: 40px auto 10px; padding: 24px 16px; border-top: 1px solid var(--border-color);
       display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
@@ -446,7 +446,7 @@
     <div class="gallery-grid" id="communityGalleryGrid"></div>
   </div>
 
-  <!-- פוטר תחתון -->
+  <!-- פוטר תחתון נקי -->
   <footer>
     <div>
       <div style="font-weight:800; font-size:0.95rem; color:#0f172a;">Kite Outlet Israel</div>
@@ -454,9 +454,8 @@
     </div>
     <div class="footer-links">
       <a href="mailto:kiteoutletisrael@gmail.com?subject=פנייה להצטרפות יבואן ל-Kite Outlet Israel&body=היי,%20אני%20יבואן/משווק%20של%20מותג%20...%20ואשמח%20להצטרף%20ולפרסם%20עודפי%20יבואן%20באתר." class="nav-btn nav-join-btn">
-        <span>🤝</span> הצטרפות יבואן נוסף
+        <span>🤝</span> הצטרפות יבואן
       </a>
-      <button class="nav-btn nav-portal-btn" onclick="openPortalAuthModal()">ניהול מלאי יבואן</button>
     </div>
   </footer>
 
@@ -468,11 +467,11 @@
       <h3 style="font-size:1.25rem; font-weight:800; margin:8px 0 4px;">כניסת יבואן מורשה</h3>
       <p style="font-size:0.85rem; color:#64748b; margin-bottom:14px;">הזן את קוד הגישה האישי שלך לניהול המלאי הבלעדי.</p>
       <form onsubmit="handlePortalLogin(event)">
-        <input type="text" id="portalAccessCode" class="filter-input" placeholder="קוד גישה (VIPYAMIT / VIPMYPOINT...)" required style="text-align:center; font-weight:800; letter-spacing:1px; margin-bottom:10px;">
+        <input type="password" id="portalAccessCode" class="filter-input" placeholder="הזן קוד גישה אישי..." required style="text-align:center; font-weight:800; letter-spacing:2px; margin-bottom:10px;">
         <button type="submit" class="inquire-btn" style="width:100%; border:none; cursor:pointer;">כניסה לפורטל</button>
       </form>
       <div id="portalAuthError" style="display:none; color:#dc2626; font-size:0.8rem; font-weight:700; margin-top:8px;">
-        קוד גישה שגוי. אנא ודא את הקוד או פנה למנהל האתר.
+        קוד גישה שגוי. אנא פנה למנהל האתר.
       </div>
     </div>
   </div>
@@ -718,7 +717,7 @@
 
     function closeDropWelcomeModal() { document.getElementById('dropWelcomeModal').style.display = 'none'; }
 
-    // 2. תגיות הישגים מדויקות - ללא אזכור KOTA לנורת'[cite: 3]
+    // 2. תגיות הישגים מדויקות - ללא אזכור KOTA לנורת'
     function getModelAccolade(brand, model) {
       const full = (brand + ' ' + model).toLowerCase();
       if (full.includes('orbit')) return '🚀 ביצועי קצה שעוד לא הכרתם';
@@ -864,7 +863,7 @@
       }
     }
 
-    // משיכת תמונות ישירות מהלשונית בשיטס[cite: 2]
+    // משיכת תמונות ישירות מהלשונית בשיטס
     async function loadCommunityGallery() {
       const galleryGrid = document.getElementById('communityGalleryGrid');
       let photos = [];
@@ -1090,7 +1089,6 @@
 
     function handlePortalLogin(e) {
       e.preventDefault();
-      // נרמול קוד כניסה (הסרת רווחים, הפיכה לאותיות גדולות)
       const rawCode = document.getElementById('portalAccessCode').value;
       const cleanCode = rawCode.replace(/\s+/g, '').toUpperCase();
 
@@ -1114,7 +1112,6 @@
       document.getElementById('portalSelectedImporterTitle').innerText = importerName;
       document.getElementById('importerPortalModal').style.display = 'flex';
 
-      // סינון אך ורק לפריטים של היבואן המחובר[cite: 2]
       const myItems = products.filter(p => p.importer === importerName || (importerName.includes('ימית') && p.importer.includes('ימית')));
       document.getElementById('portalStatCount').innerText = myItems.length;
 
@@ -1188,18 +1185,15 @@
       const itemUrl = document.getElementById('addItemUrl').value.trim();
       const features = document.getElementById('addFeatures').value.trim();
 
-      // חישוב הנחה
       let discountCalc = '';
       if (origPrice && outletPrice && Number(origPrice) > Number(outletPrice)) {
         discountCalc = Math.round(((origPrice - outletPrice) / origPrice) * 100) + '%';
       }
 
-      // מזהה מוצר ייחודי מוצע
       const cleanBrand = brand.toLowerCase().replace(/[^a-z0-9]/g, '');
       const cleanModel = model.toLowerCase().replace(/[^a-z0-9]/g, '');
       const autoId = `${cleanBrand}-${cleanModel}-${year}`;
 
-      // שורת גיליון מופרדת בלשוניות (טאב) - מוכנה להדבקה מלאה בלחיצה אחת
       const tsvRow = `${autoId}\t${importer}\t${brand}\t${model}\t${category}\t${year}\t${style}\t${sizes}\t${origPrice} ₪\t${outletPrice} ₪\t${discountCalc}\t${features}\t\t\t\t\t\t${image}\t${itemUrl}`;
 
       const emailSubject = `הוספת פריט חדש למלאי: ${importer} - ${brand} ${model}`;
@@ -1229,11 +1223,9 @@ ${tsvRow}
 
 נא לאשר ולהדביק בגיליון המלאי.`;
 
-      // שליחה למייל האתר
       const mailtoLink = `mailto:${DEFAULT_EMAIL}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
       window.location.href = mailtoLink;
 
-      // דיווח שקט גם לסקריפט הלידים לגיבוי
       try {
         fetch(LEADS_SCRIPT_URL, {
           method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
