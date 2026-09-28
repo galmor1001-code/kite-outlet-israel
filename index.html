@@ -28,6 +28,9 @@
       line-height: 1.5;
       padding-bottom: 20px;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100vw;
     }
 
     /* פופ-אפ דרופ בכניסה */
@@ -62,27 +65,28 @@
       border-radius: 10px; font-weight: 800; font-size: 1rem; cursor: pointer;
     }
 
-    /* ניווט עליון ולוגו וקטורי */
+    /* ניווט עליון ולוגו תואם */
     .top-nav {
-      background: #ffffff; border-bottom: 1px solid var(--border-color); padding: 10px 24px;
+      background: #ffffff; border-bottom: 1px solid var(--border-color); padding: 8px 16px;
       display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100;
+      width: 100%; box-sizing: border-box;
     }
     .brand-logo-custom {
-      display: flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer;
+      display: flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer; flex-shrink: 0;
     }
     .logo-svg-wrap {
-      width: 46px; height: 46px; display: flex; align-items: center; justify-content: center;
+      width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
     }
     .logo-titles-wrap {
-      display: flex; flex-direction: column;
+      display: flex; flex-direction: column; text-align: left;
     }
     .brand-name-main {
       font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.18rem;
-      letter-spacing: 0.5px; line-height: 1.1; color: #0f172a; text-transform: uppercase;
+      letter-spacing: 0.5px; line-height: 1; color: #0f172a; text-transform: uppercase;
     }
     .brand-name-sub {
-      font-family: 'Montserrat', sans-serif; font-size: 0.72rem; color: #0284c7;
-      font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif; font-size: 0.68rem; color: #0284c7;
+      font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px;
     }
 
     .nav-actions { display: flex; align-items: center; gap: 8px; }
@@ -98,12 +102,23 @@
 
     /* כותרת ראשית */
     header { background: #ffffff; border-bottom: 1px solid var(--border-color); padding: 34px 16px 26px; text-align: center; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 6px; background: #f1f5f9; color: #334155;
-      padding: 4px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; margin-bottom: 10px; border: 1px solid #e2e8f0;
+    
+    /* באנר דרופ 1 מודגש בצבע מבצע */
+    .hero-deal-banner {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+      color: #9a3412; border: 1.5px solid #f97316;
+      padding: 7px 18px; border-radius: 999px; font-size: 0.95rem; font-weight: 900;
+      margin-bottom: 16px; box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);
+      animation: pulse 2s infinite ease-in-out;
     }
-    h1 { font-size: 2.1rem; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; margin-bottom: 8px; line-height: 1.25; }
-    .hero-subtitle { font-size: 1rem; color: #475569; max-width: 680px; margin: 0 auto 16px; line-height: 1.5; }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    h1 { font-size: 2.05rem; font-weight: 900; color: #0f172a; letter-spacing: -0.5px; margin-bottom: 14px; line-height: 1.35; max-width: 900px; margin-left: auto; margin-right: auto; }
+    .hero-subtitle { font-size: 1rem; color: #475569; max-width: 780px; margin: 0 auto 20px; line-height: 1.6; }
     .hero-btn-wrap { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
     .btn-hero {
       font-size: 0.9rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; cursor: pointer;
@@ -144,7 +159,7 @@
     .filter-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid #f1f5f9; }
     .reset-btn { background: none; border: none; color: #ef4444; font-weight: 700; font-size: 0.8rem; cursor: pointer; }
 
-    /* כותרות קטגוריה */
+    /* כותרות קטגוריה וציטוטי גולשים */
     .category-divider-wrap { margin: 36px 0 16px; display: flex; align-items: center; gap: 12px; }
     .category-divider-line { flex-grow: 1; height: 1px; background: #e2e8f0; }
     .category-divider-title {
@@ -153,6 +168,14 @@
       padding: 5px 16px; border-radius: 999px;
     }
     .cat-count { font-size: 0.78rem; font-weight: 700; color: #64748b; }
+
+    /* סגנון ציטוטי גולשים אותנטיים */
+    .community-quote-banner {
+      background: #f8fafc; border-right: 4px solid var(--primary);
+      border-radius: 8px; padding: 14px 18px; margin: 24px 0 10px;
+      font-size: 0.95rem; font-weight: 700; color: #334155; line-height: 1.5;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
 
     /* גריד מוצרים */
     .container { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
@@ -326,6 +349,7 @@
       .gallery-grid { grid-template-columns: 1fr; }
       .brand-name-main { font-size: 1rem; }
       .brand-name-sub { font-size: 0.65rem; }
+      .hero-deal-banner { font-size: 0.82rem; padding: 6px 12px; }
     }
   </style>
 </head>
@@ -357,31 +381,36 @@
   <nav class="top-nav">
     <div class="brand-logo-custom" onclick="resetAllFilters()">
       <div class="logo-svg-wrap">
-        <!-- SVG מקצועי שקוף ללא רקע[cite: 1] -->
-        <svg viewBox="0 0 100 100" width="46" height="46" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- מסגרת מעגלית טכנולוגית עדינה[cite: 1] -->
-          <circle cx="50" cy="46" r="38" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="190 25" />
-          <circle cx="50" cy="8" r="2.5" fill="#38bdf8" />
-          <circle cx="21" cy="71" r="2.5" fill="#38bdf8" />
-          <circle cx="79" cy="71" r="2.5" fill="#38bdf8" />
-          
-          <!-- חופת קייט מעוגלת למעלה[cite: 1] -->
-          <path d="M52 24 C57 14, 76 14, 82 25 C85 31, 80 43, 67 43 C64 36, 60 29, 52 24 Z" fill="#38bdf8" stroke="#0284c7" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M59 28 C64 21, 74 21, 78 28" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-          
-          <!-- חוטי קייט[cite: 1] -->
-          <line x1="45" y1="45" x2="54" y2="25" stroke="#38bdf8" stroke-width="1.5" />
-          <line x1="47" y1="46" x2="66" y2="28" stroke="#38bdf8" stroke-width="1.5" />
-          <line x1="49" y1="47" x2="78" y2="35" stroke="#38bdf8" stroke-width="1.5" />
-          
-          <!-- גולש קייטסרף[cite: 1] -->
-          <circle cx="44" cy="43" r="3.2" fill="#0f172a" />
-          <path d="M43 47 L47 52 L52 50 L56 52" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M45 52 L43 59 L49 61 L54 58 L57 59" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          
-          <!-- גלשן וגל[cite: 1] -->
-          <path d="M40 64 C47 62, 57 59, 64 57 C58 64, 48 67, 40 64 Z" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>
-          <path d="M30 67 C40 63, 56 61, 70 66 C77 62, 75 51, 68 51 C63 51, 60 56, 66 60 C60 58, 45 61, 30 67 Z" fill="#e0f2fe" stroke="#38bdf8" stroke-width="2" stroke-linejoin="round"/>
+        <svg viewBox="0 0 200 200" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- מעגל מסגרת עליון טכנולוגי עם פינים[cite: 1] -->
+          <path d="M 68 115 A 64 64 0 1 1 138 115" stroke="#38bdf8" stroke-width="4.5" stroke-linecap="round"/>
+          <circle cx="98" cy="38" r="4.5" fill="#38bdf8" />
+          <circle cx="71" cy="88" r="4" fill="#38bdf8" />
+          <circle cx="138" cy="85" r="4" fill="#38bdf8" />
+
+          <!-- חופת קייט מעוגלת[cite: 1] -->
+          <path d="M 103 48 C 114 26 148 24 163 46 C 172 58 158 78 142 80 C 137 68 126 56 103 48 Z" fill="#0284c7" stroke="#38bdf8" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M 115 51 C 124 38 144 38 152 50" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+
+          <!-- חוטי היגוי אל הגולש[cite: 1] -->
+          <line x1="97" y1="84" x2="108" y2="52" stroke="#38bdf8" stroke-width="2.5" />
+          <line x1="99" y1="85" x2="128" y2="58" stroke="#38bdf8" stroke-width="2.5" />
+          <line x1="101" y1="86" x2="148" y2="69" stroke="#38bdf8" stroke-width="2.5" />
+
+          <!-- ראש וגוף הגולש[cite: 1] -->
+          <circle cx="83" cy="78" r="5" fill="#0f172a" />
+          <path d="M 83 83 L 88 92 L 98 87" stroke="#0f172a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 88 92 L 83 103 L 94 105 L 105 100 L 110 102" stroke="#0f172a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <!-- גלשן[cite: 1] -->
+          <path d="M 76 112 C 92 108 114 102 126 97 C 116 110 94 116 76 112 Z" fill="#38bdf8" stroke="#0284c7" stroke-width="3"/>
+
+          <!-- גל מים מתגלגל[cite: 1] -->
+          <path d="M 60 118 C 80 111 108 108 132 116 C 144 110 142 93 129 93 C 120 93 115 101 126 108 C 114 105 88 109 60 118 Z" fill="#e0f2fe" stroke="#38bdf8" stroke-width="3.5" stroke-linejoin="round"/>
+
+          <!-- קשת מסגרת תחתונה עם פין מיקום[cite: 1] -->
+          <path d="M 73 140 C 80 156 118 156 128 144" stroke="#38bdf8" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="132" cy="142" r="3.5" stroke="#38bdf8" stroke-width="2.5" fill="#ffffff" />
         </svg>
       </div>
       <div class="logo-titles-wrap">
@@ -399,11 +428,19 @@
     </div>
   </nav>
 
-  <!-- כותרת ראשית -->
+  <!-- כותרת ראשית מעודכנת -->
   <header>
-    <div class="hero-badge">🌊 מרכז עודפי יבואנים מורשים בישראל</div>
-    <h1>המותגים המובילים בעולם. אחריות יבואן רשמי. במחירי יד 2.</h1>
-    <p class="hero-subtitle">ציוד קייטסרף חדש בניילון מעודפי היבואנים המובילים בישראל: Duotone, North, Reedin, Mystic ועוד, עם אחריות מלאה ובמחיר הנמוך בארץ.</p>
+    <!-- באנר המבצע הבולט -->
+    <div class="hero-deal-banner">
+      <span>🔥</span> הדרופ ה-#1: מגוון מוצרים של Duotone בהנחות בלעדיות של מאות שקלים!!
+    </div>
+    
+    <!-- הכותרת הראשית הרשמית -->
+    <h1>הדרך החדשה לקנות את הציוד שאתם הכי רוצים!<br><span style="color:var(--primary);">אצלנו תמצאו את המותגים המובילים בעולם, תקבלו את השירות והאחריות מהיבואן הרשמי בארץ, במחירים הנמוכים ביותר!!</span></h1>
+    
+    <!-- כותרת המשנה -->
+    <p class="hero-subtitle">בשנים האחרונות יש מהפכות ענקיות בעולם הקייטסרף, הטכנולוגיה והביצועים של המותגים המובילים הגיעו לרמת דיוק שקשה מאוד להתעלות עליה – בואו ליהנות מהגישה הנוחה והמשתלמת ביותר למלאי העודפים של היבואנים ותמצאו מחירים שאין בשום מקום אחר.</p>
+    
     <div class="hero-btn-wrap">
       <button class="btn-hero btn-hero-lead" onclick="openLeadModal()">🎯 הפעל את צייד הדילים</button>
       <button class="btn-hero btn-hero-quiz" onclick="startQuiz()">🧭 שאלון התאמת חופה (3 שאלות)</button>
@@ -472,7 +509,7 @@
     </div>
   </div>
 
-  <!-- קונטיינר מוצרים ראשי -->
+  <!-- קונטיינר מוצרים ראשי עם ציטוטים משולבים -->
   <div class="container" id="categorizedContainer"></div>
 
   <!-- גלריית תמונות גולשים -->
@@ -484,7 +521,7 @@
     <div class="gallery-grid" id="communityGalleryGrid"></div>
   </div>
 
-  <!-- פוטר תחתון נקי (ללא כפתור ניהול מלאי) -->
+  <!-- פוטר תחתון נקי -->
   <footer>
     <div>
       <div style="font-weight:800; font-size:0.95rem; color:#0f172a;">Kite Outlet Israel</div>
@@ -505,7 +542,6 @@
       <h3 style="font-size:1.25rem; font-weight:800; margin:8px 0 4px;">כניסת יבואן מורשה</h3>
       <p style="font-size:0.85rem; color:#64748b; margin-bottom:14px;">הזן את קוד הגישה האישי שלך לניהול המלאי הבלעדי.</p>
       <form onsubmit="handlePortalLogin(event)">
-        <!-- שדה סיסמה מאובטח ללא דוגמאות כלל -->
         <input type="password" id="portalAccessCode" class="filter-input" placeholder="••••••••" required style="text-align:center; font-weight:800; letter-spacing:4px; font-size:1.2rem; margin-bottom:12px;">
         <button type="submit" class="inquire-btn" style="width:100%; border:none; cursor:pointer;">כניסה לפורטל</button>
       </form>
@@ -712,7 +748,7 @@
     let savedWishlist = JSON.parse(localStorage.getItem('ko_wishlist') || '[]');
     let currentWishlistItem = null;
 
-    // 1. ספירה לאחור של דרופ 2 למוצאי שבת הקרוב ב-20:30
+    // ספירה לאחור של דרופ 2 למוצאי שבת ב-20:30
     function getNextSaturdayDrop() {
       const now = new Date();
       const target = new Date();
@@ -756,7 +792,7 @@
 
     function closeDropWelcomeModal() { document.getElementById('dropWelcomeModal').style.display = 'none'; }
 
-    // 2. תגיות הישגים מדויקות - ללא אזכור KOTA לנורת'
+    // תגיות הישגים
     function getModelAccolade(brand, model) {
       const full = (brand + ' ' + model).toLowerCase();
       if (full.includes('orbit')) return '🚀 ביצועי קצה שעוד לא הכרתם';
@@ -769,7 +805,7 @@
       return '';
     }
 
-    // 3. 10 כרטיסיות עניין מקצועיות (הידעת?) נקיות ללא תמונות
+    // כרטיסיות עניין
     const CATEGORY_TRIVIA = {
       'קייט': [
         { brand: "Duotone", tag: "חומרים ושלדות קייט", title: "Penta TX ו-Aluula Gold", desc: "<strong>הידעת?</strong> בדגמי ה-SLS וה-D/LAB של דוטון, שילוב ה-Penta TX יחד עם Aluula מפחית עד 30% ממשקל השלד ומעניק תגובת סיבוב מהירה וטווח רוחות רחב בהרבה.", footer: "עונות 2024–2025 • טכנולוגיית D/LAB & SLS", badgeBg: "#0284c7", tagColor: "#0284c7" },
@@ -792,7 +828,6 @@
       ]
     };
 
-    // 4. פירוק CSV + הסבה אוטומטית של ימית ל-"ימית" בלבד
     function parseCSV(text) {
       const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
       if (lines.length < 2) return [];
@@ -822,7 +857,6 @@
         const id = obj['מזהה מוצר'] || row[0] || '';
         let importer = obj['מועדון/ יבואן'] || obj['יבואן'] || row[1] || '';
         
-        // נרמול שמות יבואנים: ימית תמיד רק "ימית"
         if (importer.includes('ימית')) importer = 'ימית';
         if (importer.includes('מאיפוניט') || importer.includes('מאי פוינט')) importer = 'מאי פוינט';
 
@@ -905,7 +939,6 @@
       }
     }
 
-    // משיכת תמונות ישירות מהלשונית בשיטס
     async function loadCommunityGallery() {
       const galleryGrid = document.getElementById('communityGalleryGrid');
       let photos = [];
@@ -1064,6 +1097,7 @@
       `;
     }
 
+    // רינדור קטגוריות + ציטוטי גולשים אמיתיים
     function renderCategorizedProducts(items) {
       const container = document.getElementById('categorizedContainer');
       document.getElementById('resultsCount').innerText = `מציג ${items.length} פריטים במלאי`;
@@ -1091,6 +1125,15 @@
         }
 
         if (catItems.length > 0) {
+          // שילוב ציטוט לפני גלשנים
+          if (cat.key === 'גלשן') {
+            fullHTML += `
+              <div class="community-quote-banner">
+                💬 <strong>גולש מספר:</strong> "לא האמנתי שמצאתי את הקייט 8 שחיפשתי לסערות של החורף במחיר כל כך נמוך ועוד חדש לגמרי!"
+              </div>
+            `;
+          }
+
           fullHTML += `
             <div class="category-divider-wrap">
               <div class="category-divider-title"><span>${cat.title}</span><span class="cat-count">${catItems.length} פריטים</span></div>
@@ -1111,6 +1154,15 @@
           });
 
           fullHTML += `</div>`;
+
+          // שילוב ציטוט מתחת לגלשנים
+          if (cat.key === 'גלשן') {
+            fullHTML += `
+              <div class="community-quote-banner" style="border-right-color: var(--accent);">
+                💬 <strong>גולש מספר:</strong> "היה לי תקציב נמוך וראיתי תחזית עם רוח וגלים בסופ״ש, באתר עלה גלשן בדיוק במידה שחיפשתי ובמחיר בדיחה שהזמנתי באותו רגע ובשישי כבר שחטתי איתו."
+              </div>
+            `;
+          }
         }
       });
 
@@ -1154,7 +1206,6 @@
       document.getElementById('portalSelectedImporterTitle').innerText = importerName;
       document.getElementById('importerPortalModal').style.display = 'flex';
 
-      // סינון מלאי עבור היבואן המחובר בלבד
       const myItems = products.filter(p => p.importer === importerName);
       document.getElementById('portalStatCount').innerText = myItems.length;
 
@@ -1200,7 +1251,6 @@
       }).join('');
     }
 
-    // מודל הוספת פריט חדש בפורטל
     function openAddItemModal() {
       if (!authenticatedImporter) return;
       document.getElementById('addImporterName').value = authenticatedImporter;
@@ -1280,7 +1330,7 @@ ${tsvRow}
       closeAddItemModal();
     }
 
-    // שאלון התאמה מלא (3 שאלות)
+    // שאלון התאמה
     let quizState = { level: '', style: '', budget: 0 };
 
     function startQuiz() {
@@ -1350,7 +1400,6 @@ ${tsvRow}
 
     function closeQuiz() { document.getElementById('quizOverlay').style.display = 'none'; }
 
-    // Quick View
     function openQuickView(id) {
       const p = products.find(x => x.id === id);
       if (!p) return;
