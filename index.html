@@ -30,7 +30,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* פופ-אפ דרופ 2 בכניסה */
+    /* פופ-אפ דרופ בכניסה */
     #dropWelcomeModal {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(4px);
@@ -62,20 +62,28 @@
       border-radius: 10px; font-weight: 800; font-size: 1rem; cursor: pointer;
     }
 
-    /* ניווט עליון */
+    /* ניווט עליון ולוגו וקטורי */
     .top-nav {
-      background: #ffffff; border-bottom: 1px solid var(--border-color); padding: 12px 24px;
+      background: #ffffff; border-bottom: 1px solid var(--border-color); padding: 10px 24px;
       display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100;
     }
-    .brand-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); cursor: pointer; }
-    .logo-badge {
-      width: 36px; height: 36px; background: #0f172a; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center; color: white;
-      font-weight: 900; font-size: 1rem; font-family: 'Montserrat', sans-serif;
+    .brand-logo-custom {
+      display: flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer;
     }
-    .logo-text-wrap { display: flex; flex-direction: column; }
-    .logo-main-text { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.15rem; letter-spacing: -0.5px; line-height: 1.1; color: #0f172a; }
-    .logo-sub-text { font-size: 0.68rem; color: #0284c7; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+    .logo-svg-wrap {
+      width: 46px; height: 46px; display: flex; align-items: center; justify-content: center;
+    }
+    .logo-titles-wrap {
+      display: flex; flex-direction: column;
+    }
+    .brand-name-main {
+      font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.18rem;
+      letter-spacing: 0.5px; line-height: 1.1; color: #0f172a; text-transform: uppercase;
+    }
+    .brand-name-sub {
+      font-family: 'Montserrat', sans-serif; font-size: 0.72rem; color: #0284c7;
+      font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+    }
 
     .nav-actions { display: flex; align-items: center; gap: 8px; }
     .nav-btn {
@@ -316,15 +324,17 @@
       .btn-group { grid-template-columns: 1fr; }
       .inquire-btn { font-size: 0.74rem; padding: 6px; }
       .gallery-grid { grid-template-columns: 1fr; }
+      .brand-name-main { font-size: 1rem; }
+      .brand-name-sub { font-size: 0.65rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- פופ-אפ דרופ 2 בכניסה -->
+  <!-- פופ-אפ דרופ בכניסה -->
   <div id="dropWelcomeModal">
     <div class="drop-modal-card">
-      <span class="dm-badge" id="dmBadgeStatus">⚡ פתיחת הדרופ הבא (Drop 2)</span>
+      <span class="dm-badge" id="dmBadgeStatus">⚡ פתיחת ה-Drop הבא</span>
       <h2 class="dm-title" id="dmTitleText">הדרופ השני נפתח במוצ״ש הקרוב ב-20:30</h2>
       <p class="dm-desc" id="dmDescText">מלאי עודפים מוגבל מיבואנים רשמיים עם אחריות מלאה במחירי יד 2.</p>
       
@@ -336,22 +346,50 @@
       </div>
 
       <div id="dmLiveBanner" class="dm-live-banner" style="display:none;">
-        🔥 דרופ 2 פעיל כעת באתר! מלאי עודפים מוגבל.
+        🔥 ה-Drop באוויר! מלאי עודפים מוגבל.
       </div>
 
       <button class="dm-btn" onclick="closeDropWelcomeModal()">כניסה לקטלוג ←</button>
     </div>
   </div>
 
-  <!-- ניווט עליון -->
+  <!-- ניווט עליון עם הלוגו המעוצב התואם לתמונה -->
   <nav class="top-nav">
-    <div class="brand-logo" onclick="resetAllFilters()">
-      <div class="logo-badge">KO</div>
-      <div class="logo-text-wrap">
-        <div class="logo-main-text">Kite Outlet</div>
-        <div class="logo-sub-text">Israel Official Gear</div>
+    <div class="brand-logo-custom" onclick="resetAllFilters()">
+      <div class="logo-svg-wrap">
+        <!-- SVG מקצועי שקוף ללא רקע[cite: 1] -->
+        <svg viewBox="0 0 100 100" width="46" height="46" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- מסגרת מעגלית טכנולוגית עדינה[cite: 1] -->
+          <circle cx="50" cy="46" r="38" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="190 25" />
+          <circle cx="50" cy="8" r="2.5" fill="#38bdf8" />
+          <circle cx="21" cy="71" r="2.5" fill="#38bdf8" />
+          <circle cx="79" cy="71" r="2.5" fill="#38bdf8" />
+          
+          <!-- חופת קייט מעוגלת למעלה[cite: 1] -->
+          <path d="M52 24 C57 14, 76 14, 82 25 C85 31, 80 43, 67 43 C64 36, 60 29, 52 24 Z" fill="#38bdf8" stroke="#0284c7" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M59 28 C64 21, 74 21, 78 28" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+          
+          <!-- חוטי קייט[cite: 1] -->
+          <line x1="45" y1="45" x2="54" y2="25" stroke="#38bdf8" stroke-width="1.5" />
+          <line x1="47" y1="46" x2="66" y2="28" stroke="#38bdf8" stroke-width="1.5" />
+          <line x1="49" y1="47" x2="78" y2="35" stroke="#38bdf8" stroke-width="1.5" />
+          
+          <!-- גולש קייטסרף[cite: 1] -->
+          <circle cx="44" cy="43" r="3.2" fill="#0f172a" />
+          <path d="M43 47 L47 52 L52 50 L56 52" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M45 52 L43 59 L49 61 L54 58 L57 59" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          
+          <!-- גלשן וגל[cite: 1] -->
+          <path d="M40 64 C47 62, 57 59, 64 57 C58 64, 48 67, 40 64 Z" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>
+          <path d="M30 67 C40 63, 56 61, 70 66 C77 62, 75 51, 68 51 C63 51, 60 56, 66 60 C60 58, 45 61, 30 67 Z" fill="#e0f2fe" stroke="#38bdf8" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="logo-titles-wrap">
+        <span class="brand-name-main">Kite Outlet</span>
+        <span class="brand-name-sub">Israel</span>
       </div>
     </div>
+    
     <div class="nav-actions">
       <a href="mailto:kiteoutletisrael@gmail.com?subject=פנייה להצטרפות יבואן ל-Kite Outlet Israel&body=היי,%20אני%20יבואן/משווק%20של%20מותג%20...%20ואשמח%20להצטרף%20ולפרסם%20עודפי%20יבואן%20באתר." class="nav-btn nav-join-btn">
         <span>🤝</span> הצטרפות יבואן
@@ -446,7 +484,7 @@
     <div class="gallery-grid" id="communityGalleryGrid"></div>
   </div>
 
-  <!-- פוטר תחתון נקי -->
+  <!-- פוטר תחתון נקי (ללא כפתור ניהול מלאי) -->
   <footer>
     <div>
       <div style="font-weight:800; font-size:0.95rem; color:#0f172a;">Kite Outlet Israel</div>
@@ -459,7 +497,7 @@
     </div>
   </footer>
 
-  <!-- מודל כניסה מאובטחת לפורטל יבואנים -->
+  <!-- מודל כניסה מאובטחת לפורטל יבואנים (שדה חסוי ודיסקרטי לחלוטין) -->
   <div class="modal-overlay" id="portalAuthModal" onclick="closePortalAuthModal()">
     <div class="modal-card" style="max-width: 400px; text-align:center;" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closePortalAuthModal()">✕</button>
@@ -467,7 +505,8 @@
       <h3 style="font-size:1.25rem; font-weight:800; margin:8px 0 4px;">כניסת יבואן מורשה</h3>
       <p style="font-size:0.85rem; color:#64748b; margin-bottom:14px;">הזן את קוד הגישה האישי שלך לניהול המלאי הבלעדי.</p>
       <form onsubmit="handlePortalLogin(event)">
-        <input type="password" id="portalAccessCode" class="filter-input" placeholder="הזן קוד גישה אישי..." required style="text-align:center; font-weight:800; letter-spacing:2px; margin-bottom:10px;">
+        <!-- שדה סיסמה מאובטח ללא דוגמאות כלל -->
+        <input type="password" id="portalAccessCode" class="filter-input" placeholder="••••••••" required style="text-align:center; font-weight:800; letter-spacing:4px; font-size:1.2rem; margin-bottom:12px;">
         <button type="submit" class="inquire-btn" style="width:100%; border:none; cursor:pointer;">כניסה לפורטל</button>
       </form>
       <div id="portalAuthError" style="display:none; color:#dc2626; font-size:0.8rem; font-weight:700; margin-top:8px;">
@@ -660,9 +699,9 @@
     const LEADS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzyKkaMAo3RYrNiWHkDLO3_g00ImeJhbUgLhuot9OWLDf6JFETHd9nW1y4kd-cbe8tp/exec";
     const DEFAULT_EMAIL = "kiteoutletisrael@gmail.com";
 
-    // מיפוי קודי כניסה מורשים (מנקה רווחים, תומך באותיות קטנות/גדולות)
+    // מיפוי קודי כניסה מורשים (שם "ימית" בלבד)
     const IMPORTER_ACCESS_CODES = {
-      "VIPYAMIT": "ימית סחר (עמנואל)",
+      "VIPYAMIT": "ימית",
       "VIPMYPOINT": "מאי פוינט",
       "VIPKITELAB": "קייט לאב"
     };
@@ -696,7 +735,7 @@
       if (diff <= 0) {
         document.getElementById('dmTimerGrid').style.display = 'none';
         document.getElementById('dmLiveBanner').style.display = 'block';
-        document.getElementById('dmBadgeStatus').innerText = '🔥 Drop 2 באוויר!';
+        document.getElementById('dmBadgeStatus').innerText = '🔥 ה-Drop באוויר!';
         document.getElementById('dmTitleText').innerText = 'דרופ 2 פעיל כעת באתר!';
         return;
       }
@@ -753,7 +792,7 @@
       ]
     };
 
-    // 4. פירוק CSV + דריסת טקסט ישן על נורת'
+    // 4. פירוק CSV + הסבה אוטומטית של ימית ל-"ימית" בלבד
     function parseCSV(text) {
       const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
       if (lines.length < 2) return [];
@@ -782,6 +821,9 @@
 
         const id = obj['מזהה מוצר'] || row[0] || '';
         let importer = obj['מועדון/ יבואן'] || obj['יבואן'] || row[1] || '';
+        
+        // נרמול שמות יבואנים: ימית תמיד רק "ימית"
+        if (importer.includes('ימית')) importer = 'ימית';
         if (importer.includes('מאיפוניט') || importer.includes('מאי פוינט')) importer = 'מאי פוינט';
 
         const brand = obj['מותג'] || row[2] || '';
@@ -1075,7 +1117,7 @@
       container.innerHTML = fullHTML;
     }
 
-    // ניהול הרשאות וכניסה מאובטחת לפורטל יבואנים
+    // כניסה מאובטחת לפורטל יבואנים
     function openPortalAuthModal() {
       if (authenticatedImporter) {
         openPortalDashboard(authenticatedImporter);
@@ -1112,7 +1154,8 @@
       document.getElementById('portalSelectedImporterTitle').innerText = importerName;
       document.getElementById('importerPortalModal').style.display = 'flex';
 
-      const myItems = products.filter(p => p.importer === importerName || (importerName.includes('ימית') && p.importer.includes('ימית')));
+      // סינון מלאי עבור היבואן המחובר בלבד
+      const myItems = products.filter(p => p.importer === importerName);
       document.getElementById('portalStatCount').innerText = myItems.length;
 
       const hotClicks = Math.round(myItems.length * 3 + 5);
