@@ -65,7 +65,7 @@
       border-radius: 10px; font-weight: 800; font-size: 1rem; cursor: pointer;
     }
 
-    /* ניווט עליון מסודר ללא הסתרות */
+    /* ניווט עליון מסודר ורספונסיבי */
     .top-nav {
       background: #ffffff; border-bottom: 1px solid var(--border-color); padding: 8px 16px;
       display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100;
@@ -99,7 +99,7 @@
     .nav-join-btn:hover { background: #dcfce7; }
     .nav-portal-btn { background: #0f172a; color: #ffffff; border-color: #0f172a; }
 
-    /* כותרת ראשית מינימליסטית */
+    /* כותרת ראשית */
     header { background: #ffffff; border-bottom: 1px solid var(--border-color); padding: 22px 16px 18px; text-align: center; }
     
     .hero-deal-banner {
@@ -112,10 +112,8 @@
 
     h1 { font-size: 1.85rem; font-weight: 900; color: #0f172a; letter-spacing: -0.5px; margin-bottom: 14px; line-height: 1.25; }
 
-    /* בלוק מבצעים מתחלף כל 3 שניות (ימית בלעדי) */
-    .promo-slider-wrap {
-      max-width: 600px; margin: 0 auto 16px; padding: 0 16px;
-    }
+    /* בלוק מבצעים מתחלף כל 3 שניות (ימית) */
+    .promo-slider-wrap { max-width: 600px; margin: 0 auto 16px; padding: 0 16px; }
     .promo-slider-card {
       background: #f8fafc; border: 2px solid #f59e0b; border-radius: 14px;
       padding: 10px 14px; display: flex; align-items: center; justify-content: space-between;
@@ -252,9 +250,9 @@
 
     .btn-group { display: grid; grid-template-columns: 1fr; gap: 6px; }
     .inquire-btn {
-      background-color: var(--action-color); color: white; text-decoration: none;
+      background-color: var(--action-color); color: white; border: none;
       font-weight: 700; font-size: 0.82rem; padding: 8px; border-radius: 6px;
-      display: flex; align-items: center; justify-content: center; gap: 4px;
+      display: flex; align-items: center; justify-content: center; gap: 5px; cursor: pointer;
     }
 
     /* כרטיסי הידעת */
@@ -270,10 +268,8 @@
     .trivia-desc { font-size: 0.84rem; color: #334155; line-height: 1.45; margin-bottom: 12px; }
     .trivia-footer { padding-top: 8px; border-top: 1px solid #e2e8f0; font-size: 0.72rem; color: #64748b; font-weight: 700; }
 
-    /* בלוק המידע והיתרונות המלא - הועבר למטה */
-    .about-outlet-section {
-      max-width: 1240px; margin: 44px auto 14px; padding: 0 16px;
-    }
+    /* בלוק המידע והיתרונות המלא - לפני הגלריה */
+    .about-outlet-section { max-width: 1240px; margin: 44px auto 14px; padding: 0 16px; }
     .about-outlet-card {
       background: #f8fafc; border: 1.5px solid var(--border-color); border-radius: 14px;
       padding: 24px 20px; text-align: right;
@@ -308,7 +304,7 @@
       border-radius: 6px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
     }
 
-    /* פורטל יבואנים מאובטח */
+    /* פורטל יבואנים */
     .portal-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
     .stat-box { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; text-align: center; }
     .stat-val { font-size: 1.4rem; font-weight: 900; color: #0f172a; }
@@ -356,7 +352,6 @@
     }
     .footer-links { display: flex; gap: 10px; align-items: center; }
 
-    /* התאמה למובייל */
     @media (max-width: 860px) {
       .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .img-container { height: 155px; }
@@ -586,6 +581,102 @@
     </div>
   </footer>
 
+  <!-- מודל בדיקת זמינות ורכישה (מתויג כ-ליד חם ישירות לשיטס) -->
+  <div class="modal-overlay" id="hotLeadModal" onclick="closeHotLeadModal()">
+    <div class="modal-card" style="max-width: 440px;" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeHotLeadModal()">✕</button>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px; border-bottom:1px solid var(--border-color); padding-bottom:10px;">
+        <div style="width:50px; height:50px; background:#f8fafc; border-radius:8px; border:1px solid #e2e8f0; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+          <img id="hotLeadItemImg" src="" style="max-width:100%; max-height:100%; object-fit:contain;">
+        </div>
+        <div style="text-align:right;">
+          <h3 id="hotLeadItemTitle" style="font-size:1.05rem; font-weight:900; margin:0; color:#0f172a;">דגם</h3>
+          <div id="hotLeadItemPrice" style="font-size:0.88rem; font-weight:800; color:var(--accent);">מחיר</div>
+        </div>
+      </div>
+      <p style="font-size:0.82rem; color:#64748b; margin-bottom:12px; text-align:right;">השאר פרטים ונבדוק זמינות מיידית במחסן היבואן ללא כל התחייבות:</p>
+      
+      <form id="hotLeadForm" onsubmit="submitHotLeadForm(event)">
+        <input type="hidden" id="hotLeadItemId">
+        <input type="hidden" id="hotLeadItemName">
+        <input type="hidden" id="hotLeadItemImporter">
+        <input type="hidden" id="hotLeadItemPriceVal">
+
+        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px; text-align:right;">
+          <input type="text" id="hotLeadCustomerName" class="filter-input" placeholder="שם מלא *" required>
+          <input type="tel" id="hotLeadCustomerPhone" class="filter-input" placeholder="מספר טלפון לחזרה *" required>
+          <input type="text" id="hotLeadRequestedSize" class="filter-input" placeholder="מידה מבוקשת (למשל: 9 / 10 / 138)">
+          <input type="email" id="hotLeadCustomerEmail" class="filter-input" placeholder="מייל לקבלת אישור (אופציונלי)">
+        </div>
+
+        <button type="submit" id="hotLeadSubmitBtn" class="inquire-btn" style="width:100%; font-size:0.9rem; padding:10px; background:var(--action-color);">
+          <span>🚀</span> שלח בדיקת זמינות במחסן
+        </button>
+      </form>
+
+      <div id="hotLeadSuccessMsg" style="display:none; text-align:center; padding:14px; color:#15803d; font-weight:800; font-size:0.95rem;">
+        🎉 הפנייה נקלטה בהצלחה!<br>
+        <span style="font-size:0.82rem; font-weight:600; color:#334155;">נציג יבדוק זמינות במחסן היבואן ויחזור אליך בהקדם.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- מודל צייד הדילים (מתויג כ-ליד פנייה קר) -->
+  <div class="modal-overlay" id="leadModalOverlay" onclick="closeLeadModal()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeLeadModal()">✕</button>
+      <h2 style="margin-bottom:4px; font-size:1.2rem;">🎯 צייד הדילים</h2>
+      <p style="color:var(--text-muted); margin-bottom:12px; font-size:0.82rem;">השאר פרטים ונעדכן אותך ברגע שהדגם והמידה שאתה מחפש עולים במחיר עודפים.</p>
+      <form id="leadCaptureForm" onsubmit="submitColdLeadForm(event)">
+        <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:10px;">
+          <input type="text" id="leadName" class="filter-input" placeholder="שם מלא *" required>
+          <input type="tel" id="leadPhone" class="filter-input" placeholder="טלפון *" required>
+          <input type="email" id="leadEmail" class="filter-input" placeholder="כתובת מייל לעדכון *" required>
+          <input type="text" id="leadDetails" class="filter-input" placeholder="איזה ציוד או מידה אתה מחפש? (למשל: דוטון איוו 9)" required>
+        </div>
+        <button type="submit" id="leadSubmitBtn" class="inquire-btn" style="width:100%; border:none; cursor:pointer;">הפעל התראה אישית</button>
+      </form>
+      <div id="leadSuccessMsg" style="display:none; text-align:center; padding:10px; color:#15803d; font-weight:700;">
+        🎉 הפרטים נשמרו! נעדכן אותך ברגע שהפריט יגיע למלאי.
+      </div>
+    </div>
+  </div>
+
+  <!-- מודל שמירת פריט למועדפים -->
+  <div class="modal-overlay" id="wishlistModal" onclick="closeWishlistModal()">
+    <div class="modal-card" style="max-width: 400px;" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeWishlistModal()">✕</button>
+      <div style="text-align:center; padding:8px 0;">
+        <span style="font-size:2rem;">❤️</span>
+        <h3 id="wishlistModalTitle" style="font-size:1.2rem; font-weight:800; margin:6px 0 2px;">שמור פריט לקבלת עדכונים</h3>
+        <p style="font-size:0.82rem; color:#64748b; margin-bottom:12px;">הזן את המייל ונעדכן אותך מיד אם המחיר יורד או שהמלאי מסתיים.</p>
+        <form onsubmit="submitWishlistAlert(event)">
+          <input type="email" id="wishlistEmail" class="filter-input" placeholder="כתובת מייל לעדכון *" required style="margin-bottom:8px;">
+          <button type="submit" id="wishlistSubmitBtn" class="inquire-btn" style="width:100%; border:none; cursor:pointer;">שמור פריט והפעל התראה</button>
+        </form>
+        <div id="wishlistSuccessMsg" style="display:none; color:#15803d; font-weight:700; font-size:0.85rem; margin-top:8px;">
+          🎉 הפריט נשמר בהצלחה!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- שאלון התאמה (3 שאלות, ללא מעקב בשיטס) -->
+  <div class="modal-overlay" id="quizOverlay" onclick="closeQuiz()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeQuiz()">✕</button>
+      <div id="quizContent"></div>
+    </div>
+  </div>
+
+  <!-- Quick View Modal -->
+  <div class="modal-overlay" id="quickViewOverlay" onclick="closeQuickView()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeQuickView()">✕</button>
+      <div id="quickViewContent"></div>
+    </div>
+  </div>
+
   <!-- מודל כניסה מאובטחת לפורטל יבואנים -->
   <div class="modal-overlay" id="portalAuthModal" onclick="closePortalAuthModal()">
     <div class="modal-card" style="max-width: 380px; text-align:center;" onclick="event.stopPropagation()">
@@ -722,62 +813,6 @@
     </div>
   </div>
 
-  <!-- מודל שמירת פריט למועדפים -->
-  <div class="modal-overlay" id="wishlistModal" onclick="closeWishlistModal()">
-    <div class="modal-card" style="max-width: 400px;" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeWishlistModal()">✕</button>
-      <div style="text-align:center; padding:8px 0;">
-        <span style="font-size:2rem;">❤️</span>
-        <h3 id="wishlistModalTitle" style="font-size:1.2rem; font-weight:800; margin:6px 0 2px;">שמור פריט לקבלת עדכונים</h3>
-        <p style="font-size:0.82rem; color:#64748b; margin-bottom:12px;">הזן את המייל ונעדכן אותך מיד אם המחיר יורד או שהמלאי מסתיים.</p>
-        <form onsubmit="submitWishlistAlert(event)">
-          <input type="email" id="wishlistEmail" class="filter-input" placeholder="כתובת מייל לעדכון *" required style="margin-bottom:8px;">
-          <button type="submit" id="wishlistSubmitBtn" class="inquire-btn" style="width:100%; border:none; cursor:pointer;">שמור פריט והפעל התראה</button>
-        </form>
-        <div id="wishlistSuccessMsg" style="display:none; color:#15803d; font-weight:700; font-size:0.85rem; margin-top:8px;">
-          🎉 הפריט נשמר בהצלחה!
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- שאלון התאמה מלא (3 שאלות) -->
-  <div class="modal-overlay" id="quizOverlay" onclick="closeQuiz()">
-    <div class="modal-card" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeQuiz()">✕</button>
-      <div id="quizContent"></div>
-    </div>
-  </div>
-
-  <!-- Quick View Modal -->
-  <div class="modal-overlay" id="quickViewOverlay" onclick="closeQuickView()">
-    <div class="modal-card" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeQuickView()">✕</button>
-      <div id="quickViewContent"></div>
-    </div>
-  </div>
-
-  <!-- Lead Modal -->
-  <div class="modal-overlay" id="leadModalOverlay" onclick="closeLeadModal()">
-    <div class="modal-card" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeLeadModal()">✕</button>
-      <h2 style="margin-bottom:4px; font-size:1.2rem;">🎯 צייד הדילים</h2>
-      <p style="color:var(--text-muted); margin-bottom:12px; font-size:0.82rem;">השאר פרטים ונעדכן אותך ברגע שהדגם והמידה שאתה מחפש עולים במחיר עודפים.</p>
-      <form id="leadCaptureForm" onsubmit="submitLeadForm(event)">
-        <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:10px;">
-          <input type="text" id="leadName" class="filter-input" placeholder="שם מלא *" required>
-          <input type="tel" id="leadPhone" class="filter-input" placeholder="טלפון *" required>
-          <input type="email" id="leadEmail" class="filter-input" placeholder="כתובת מייל לעדכון *" required>
-          <input type="text" id="leadDetails" class="filter-input" placeholder="איזה ציוד או מידה אתה מחפש? (למשל: דוטון איוו 9)" required>
-        </div>
-        <button type="submit" id="leadSubmitBtn" class="inquire-btn" style="width:100%; border:none; cursor:pointer;">הפעל התראה אישית</button>
-      </form>
-      <div id="leadSuccessMsg" style="display:none; text-align:center; padding:10px; color:#15803d; font-weight:700;">
-        🎉 הפרטים נשמרו! נעדכן אותך במייל ברגע שהפריט יגיע.
-      </div>
-    </div>
-  </div>
-
   <script>
     const SPREADSHEET_ID = "2PACX-1vSAncp2nNLO6jIwFT07bDpVDjYerLk6DLW6FOKnf_GHMPGRWKaDclMTYs_AJcNU-kTJXhHdgZ8ikyUj";
     const BASE_CSV_URL = `https://docs.google.com/spreadsheets/d/e/${SPREADSHEET_ID}/pub?output=csv`;
@@ -786,7 +821,6 @@
     const LEADS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzyKkaMAo3RYrNiWHkDLO3_g00ImeJhbUgLhuot9OWLDf6JFETHd9nW1y4kd-cbe8tp/exec";
     const DEFAULT_EMAIL = "kiteoutletisrael@gmail.com";
 
-    // קודי כניסה מורשים
     const IMPORTER_ACCESS_CODES = {
       "VIPYAMIT": "ימית",
       "VIPMYPOINT": "מאי פוינט",
@@ -801,7 +835,6 @@
     let savedWishlist = JSON.parse(localStorage.getItem('ko_wishlist') || '[]');
     let currentWishlistItem = null;
 
-    // ספירה לאחור של דרופ למוצאי שבת ב-20:30
     function getNextSaturdayDrop() {
       const now = new Date();
       const target = new Date();
@@ -983,7 +1016,6 @@
         const text = await res.text();
         products = parseCSV(text);
         
-        // סינון מוצרי ימית בעלי מחיר בלעדי לאתר עבור הבאנר המתחלף
         yamitSpecialDeals = products.filter(p => p.importer === 'ימית' && p.isSpecialDeal);
         if (yamitSpecialDeals.length === 0) {
           yamitSpecialDeals = products.filter(p => p.importer === 'ימית');
@@ -998,7 +1030,6 @@
       }
     }
 
-    // ניהול באנר מתחלף כל 3 שניות
     function initPromoSlider() {
       if (!yamitSpecialDeals.length) {
         document.getElementById('yamitSpecialBanner').style.display = 'none';
@@ -1086,9 +1117,6 @@
     }
 
     function createProductCardHTML(p) {
-      const mailSubject = encodeURIComponent(`התעניינות ב-${p.brand} ${p.model} (${p.outletPrice})`);
-      const mailBody = encodeURIComponent(`שלום,\nאני מעוניין לבדוק זמינות עבור הפריט הבא מקטלוג Kite Outlet:\n\nדגם: ${p.brand} ${p.model} (${p.year})\nמידות מבוקשות: ${p.sizes}\nמחיר באתר: ${p.outletPrice}\nיבואן: ${p.importer}\n\nנא לחזור אלי, תודה!`);
-      const mailLink = `mailto:${DEFAULT_EMAIL}?subject=${mailSubject}&body=${mailBody}`;
       const isFav = savedWishlist.includes(p.id);
 
       return `
@@ -1124,13 +1152,100 @@
               </div>
             </div>
             <div class="btn-group" onclick="event.stopPropagation()">
-              <a href="${mailLink}" class="inquire-btn">
-                <span>✉️</span> בדיקת זמינות ורכישה
-              </a>
+              <button onclick="openHotLeadModal('${p.id}')" class="inquire-btn">
+                <span>⚡</span> בדיקת זמינות ורכישה
+              </button>
             </div>
           </div>
         </div>
       `;
+    }
+
+    /* פתיחת טופס ליד חם ישירות מהאתר */
+    function openHotLeadModal(id) {
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+      document.getElementById('hotLeadItemId').value = p.id;
+      document.getElementById('hotLeadItemName').value = `${p.brand} ${p.model} (${p.year})`;
+      document.getElementById('hotLeadItemImporter').value = p.importer;
+      document.getElementById('hotLeadItemPriceVal').value = p.outletPrice;
+
+      document.getElementById('hotLeadItemTitle').innerText = `${p.brand} ${p.model} (${p.year})`;
+      document.getElementById('hotLeadItemPrice').innerText = `${p.outletPrice} • יבואן: ${p.importer}`;
+      document.getElementById('hotLeadItemImg').src = p.image;
+      
+      document.getElementById('hotLeadCustomerName').value = '';
+      document.getElementById('hotLeadCustomerPhone').value = '';
+      document.getElementById('hotLeadRequestedSize').value = p.sizes ? p.sizes.split(',')[0].trim() : '';
+      document.getElementById('hotLeadCustomerEmail').value = '';
+
+      document.getElementById('hotLeadForm').style.display = 'block';
+      document.getElementById('hotLeadSuccessMsg').style.display = 'none';
+      document.getElementById('hotLeadSubmitBtn').innerText = '🚀 שלח בדיקת זמינות במחסן';
+      document.getElementById('hotLeadSubmitBtn').disabled = false;
+
+      document.getElementById('hotLeadModal').style.display = 'flex';
+    }
+
+    function closeHotLeadModal() {
+      document.getElementById('hotLeadModal').style.display = 'none';
+    }
+
+    /* שליחת ליד חם ישירות ללשונית ליד חם בשיטס */
+    async function submitHotLeadForm(e) {
+      e.preventDefault();
+      const btn = document.getElementById('hotLeadSubmitBtn');
+      btn.innerText = 'בודק ושולח...';
+      btn.disabled = true;
+
+      const payload = {
+        sheetName: 'ליד חם',
+        name: document.getElementById('hotLeadCustomerName').value,
+        phone: document.getElementById('hotLeadCustomerPhone').value,
+        email: document.getElementById('hotLeadCustomerEmail').value || 'ללא מייל',
+        product: document.getElementById('hotLeadItemName').value,
+        importer: document.getElementById('hotLeadItemImporter').value,
+        price: document.getElementById('hotLeadItemPriceVal').value,
+        size: document.getElementById('hotLeadRequestedSize').value || 'לא צוינה',
+        details: `ליד חם ישיר מהאתר: ${document.getElementById('hotLeadItemName').value} (${document.getElementById('hotLeadItemPriceVal').value}) מידה: ${document.getElementById('hotLeadRequestedSize').value}`
+      };
+
+      try {
+        await fetch(LEADS_SCRIPT_URL, {
+          method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {}
+
+      document.getElementById('hotLeadForm').style.display = 'none';
+      document.getElementById('hotLeadSuccessMsg').style.display = 'block';
+      setTimeout(() => { closeHotLeadModal(); }, 2200);
+    }
+
+    /* שליחת צייד הדילים כ-ליד פנייה קר לשיטס */
+    async function submitColdLeadForm(e) {
+      e.preventDefault();
+      const btn = document.getElementById('leadSubmitBtn');
+      btn.innerText = 'שומר...';
+      btn.disabled = true;
+
+      try {
+        await fetch(LEADS_SCRIPT_URL, {
+          method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            sheetName: 'ליד פנייה קר',
+            name: document.getElementById('leadName').value,
+            phone: document.getElementById('leadPhone').value,
+            email: document.getElementById('leadEmail').value,
+            details: document.getElementById('leadDetails').value
+          })
+        });
+        document.getElementById('leadCaptureForm').style.display = 'none';
+        document.getElementById('leadSuccessMsg').style.display = 'block';
+      } catch (err) {
+        alert('הפרטים נשמרו!');
+        closeLeadModal();
+      }
     }
 
     function toggleWishlist(e, id, name) {
@@ -1160,7 +1275,7 @@
       try {
         await fetch(LEADS_SCRIPT_URL, {
           method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sheetName: 'ליד קר', name: 'התראת ירידת מחיר/מלאי', email: email, details: `מעקב פריט: ${currentWishlistItem.name} (ID: ${currentWishlistItem.id})` })
+          body: JSON.stringify({ sheetName: 'ליד פנייה קר', name: 'התראת ירידת מחיר/מלאי', email: email, details: `מעקב פריט: ${currentWishlistItem.name} (ID: ${currentWishlistItem.id})` })
         });
       } catch(err) {}
 
@@ -1405,7 +1520,7 @@ ${tsvRow}
       try {
         fetch(LEADS_SCRIPT_URL, {
           method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sheetName: 'ליד קר', name: `הוספת פריט: ${importer}`, email: importer, details: `${brand} ${model} | ${sizes} | ${outletPrice} ₪` })
+          body: JSON.stringify({ sheetName: 'ליד פנייה קר', name: `הוספת פריט: ${importer}`, email: importer, details: `${brand} ${model} | ${sizes} | ${outletPrice} ₪` })
         });
       } catch(err) {}
 
@@ -1413,6 +1528,7 @@ ${tsvRow}
       closeAddItemModal();
     }
 
+    /* שאלון התאמה נקי ללא שליחת מעקב לשיטס */
     let quizState = { level: '', style: '', budget: 0 };
 
     function startQuiz() {
@@ -1471,13 +1587,6 @@ ${tsvRow}
       document.getElementById('priceDisplay').innerText = `₪${budget.toLocaleString()}`;
       applyFilters();
       closeQuiz();
-
-      try {
-        fetch(LEADS_SCRIPT_URL, {
-          method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sheetName: 'שאלון', userLevel: quizState.level, style: quizState.style, budget: budget })
-        });
-      } catch(e) {}
     }
 
     function closeQuiz() { document.getElementById('quizOverlay').style.display = 'none'; }
@@ -1485,9 +1594,6 @@ ${tsvRow}
     function openQuickView(id) {
       const p = products.find(x => x.id === id);
       if (!p) return;
-      const mailSubject = encodeURIComponent(`התעניינות ב-${p.brand} ${p.model} (${p.outletPrice})`);
-      const mailBody = encodeURIComponent(`שלום,\nאני מעוניין בפריט הבא מקטלוג Kite Outlet:\nדגם: ${p.brand} ${p.model} (${p.year})\nמידה: ${p.sizes}\nמחיר: ${p.outletPrice}\nיבואן: ${p.importer}\n\nנא לחזור אלי, תודה!`);
-      const mailLink = `mailto:${DEFAULT_EMAIL}?subject=${mailSubject}&body=${mailBody}`;
 
       document.getElementById('quickViewContent').innerHTML = `
         <div style="display:flex; gap:14px; margin-bottom:14px; flex-wrap:wrap;">
@@ -1512,9 +1618,9 @@ ${tsvRow}
           <p style="font-size:0.82rem; color:#334155; line-height:1.45; margin-bottom:6px;">${p.features || 'חומרים מתקדמים מעודפי יבואן רשמי.'}</p>
           <div style="font-size:0.78rem; color:#64748b;"><b>מידות זמינות במלאי עודפים:</b> ${p.sizes || 'בדיקת זמינות מול היבואן'}</div>
         </div>
-        <a href="${mailLink}" class="inquire-btn" style="width:100%; font-size:0.9rem; padding:10px;">
-          <span>✉️</span> שלח פנייה למייל ובדוק זמינות
-        </a>
+        <button onclick="closeQuickView(); openHotLeadModal('${p.id}');" class="inquire-btn" style="width:100%; font-size:0.9rem; padding:10px; background:var(--action-color);">
+          <span>⚡</span> בדיקת זמינות ורכישה במחסן
+        </button>
       `;
       document.getElementById('quickViewOverlay').style.display = 'flex';
     }
@@ -1522,31 +1628,6 @@ ${tsvRow}
 
     function openLeadModal() { document.getElementById('leadModalOverlay').style.display = 'flex'; }
     function closeLeadModal() { document.getElementById('leadModalOverlay').style.display = 'none'; }
-
-    async function submitLeadForm(e) {
-      e.preventDefault();
-      const btn = document.getElementById('leadSubmitBtn');
-      btn.innerText = 'שולח...';
-      btn.disabled = true;
-
-      try {
-        await fetch(LEADS_SCRIPT_URL, {
-          method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            sheetName: 'ליד קר',
-            name: document.getElementById('leadName').value,
-            phone: document.getElementById('leadPhone').value,
-            email: document.getElementById('leadEmail').value,
-            details: document.getElementById('leadDetails').value
-          })
-        });
-        document.getElementById('leadCaptureForm').style.display = 'none';
-        document.getElementById('leadSuccessMsg').style.display = 'block';
-      } catch (err) {
-        alert('הפרטים נשמרו!');
-        closeLeadModal();
-      }
-    }
 
     function applyFilters() {
       const s = document.getElementById('searchInput').value.toLowerCase();
