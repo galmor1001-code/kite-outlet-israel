@@ -12,22 +12,21 @@
     :root {
       --primary: #0284c7;
       --primary-hover: #0369a1;
-      --bg-color: #f1f5f9;
+      --bg-color: #f8fafc;
       --card-bg: #ffffff;
       --text-main: #0f172a;
       --text-muted: #64748b;
       --border-color: #e2e8f0;
       --accent-green: #10b981;
-      --accent-orange: #f59e0b;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Assistant', sans-serif; }
     body { background-color: var(--bg-color); color: var(--text-main); direction: rtl; }
 
-    /* באנר תרומה עליון */
+    /* באנר תרומה עליון - פיילוט */
     .charity-banner {
       background: #0f172a; color: #f8fafc; font-size: 0.82rem; font-weight: 700;
-      text-align: center; padding: 7px 12px; letter-spacing: 0.2px;
+      text-align: center; padding: 8px 12px; letter-spacing: 0.2px;
     }
     .charity-banner span { color: #38bdf8; }
 
@@ -37,35 +36,35 @@
       padding: 16px 20px 20px; text-align: center;
     }
     .logo-container { margin-bottom: 12px; }
-    .site-title { font-size: 1.8rem; font-weight: 800; color: #0284c7; letter-spacing: -0.5px; }
+    .site-title { font-size: 1.9rem; font-weight: 800; color: #0284c7; letter-spacing: -0.5px; }
     .site-subtitle { font-size: 0.95rem; color: var(--text-muted); margin-top: 4px; }
 
     /* Promo Slider */
     .promo-slider-wrap { max-width: 680px; margin: 12px auto 14px; }
     .promo-slider-card {
       background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-      color: #ffffff; border-radius: 14px; padding: 12px 16px;
+      color: #ffffff; border-radius: 14px; padding: 12px 18px;
       display: flex; align-items: center; justify-content: space-between; gap: 14px;
       cursor: pointer; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
     }
-    .promo-img-wrap img { width: 55px; height: 55px; object-fit: contain; background: #fff; border-radius: 10px; padding: 4px; }
+    .promo-img-wrap img { width: 60px; height: 60px; object-fit: contain; background: #fff; border-radius: 10px; padding: 4px; }
     .promo-info-wrap { flex: 1; text-align: right; }
-    .promo-badge-tag { font-size: 0.72rem; font-weight: 800; color: #fef08a; margin-bottom: 2px; }
-    .promo-title { font-size: 1.05rem; font-weight: 800; }
+    .promo-badge-tag { font-size: 0.75rem; font-weight: 800; color: #fef08a; margin-bottom: 2px; }
+    .promo-title { font-size: 1.1rem; font-weight: 800; }
     .promo-desc { font-size: 0.8rem; opacity: 0.9; }
     .promo-price-wrap { text-align: left; }
     .promo-old-price { font-size: 0.8rem; text-decoration: line-through; opacity: 0.75; }
-    .promo-new-price { font-size: 1.25rem; font-weight: 800; color: #4ade80; }
+    .promo-new-price { font-size: 1.35rem; font-weight: 800; color: #4ade80; }
 
     /* סרגל 4 שלבים: איך זה עובד */
     .how-it-works-strip {
       max-width: 680px; margin: 0 auto 16px; padding: 10px 14px;
-      background: #f8fafc; border: 1px solid var(--border-color); border-radius: 12px;
+      background: #ffffff; border: 1px solid var(--border-color); border-radius: 12px;
       display: flex; align-items: center; justify-content: space-between; gap: 6px;
     }
-    .how-step { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700; color: #334155; }
+    .how-step { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; font-weight: 700; color: #334155; }
     .step-num {
-      width: 20px; height: 20px; border-radius: 50%; background: #0284c7; color: #ffffff;
+      width: 22px; height: 22px; border-radius: 50%; background: #0284c7; color: #ffffff;
       display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; flex-shrink: 0;
     }
     .step-arrow { color: #94a3b8; font-size: 0.75rem; font-weight: 900; }
@@ -79,10 +78,11 @@
     /* Hero Buttons */
     .hero-btn-wrap { display: flex; justify-content: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
     .btn-hero {
-      padding: 10px 18px; border-radius: 30px; font-weight: 700; font-size: 0.88rem;
+      padding: 10px 20px; border-radius: 30px; font-weight: 700; font-size: 0.9rem;
       border: none; cursor: pointer; transition: 0.2s;
     }
     .btn-hero-lead { background: #0f172a; color: #fff; }
+    .btn-hero-quiz { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
 
     /* Importers Bar */
     .importers-bar {
@@ -95,7 +95,7 @@
     }
 
     /* Container & Filters */
-    .container { max-width: 1100px; margin: 0 auto; padding: 20px 16px; }
+    .container { max-width: 1150px; margin: 0 auto; padding: 20px 16px; }
     .filters-wrap {
       background: #ffffff; padding: 14px; border-radius: 12px;
       border: 1px solid var(--border-color); margin-bottom: 20px;
@@ -109,7 +109,7 @@
 
     /* Catalog Grid */
     .catalog-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
       gap: 18px;
     }
     .card {
@@ -119,13 +119,17 @@
     }
     .card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
     .card-img-wrap {
-      height: 180px; background: #f8fafc; display: flex; align-items: center;
-      justify-content: center; padding: 12px; position: relative;
+      height: 190px; background: #ffffff; display: flex; align-items: center;
+      justify-content: center; padding: 12px; position: relative; border-bottom: 1px solid #f1f5f9;
     }
     .card-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
     .card-badge {
       position: absolute; top: 10px; right: 10px; background: #ef4444; color: #fff;
       font-size: 0.72rem; font-weight: 800; padding: 3px 8px; border-radius: 6px;
+    }
+    .card-special-badge {
+      position: absolute; bottom: 8px; right: 10px; background: #e0f2fe; color: #0284c7;
+      font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 4px;
     }
     .card-body { padding: 14px; flex: 1; display: flex; flex-direction: column; }
     .card-brand { font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; }
@@ -147,7 +151,7 @@
     }
     .modal-box {
       background: #fff; border-radius: 16px; max-width: 480px; width: 100%;
-      padding: 22px; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      padding: 22px; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto;
     }
     .modal-close {
       position: absolute; top: 14px; left: 14px; background: none; border: none;
@@ -206,16 +210,16 @@
     <div class="promo-slider-wrap">
       <div id="yamitSpecialBanner" class="promo-slider-card" onclick="openCurrentPromoItem()">
         <div class="promo-img-wrap">
-          <img id="promoImg" src="https://via.placeholder.com/60" alt="מבצע ימית">
+          <img id="promoImg" src="https://yamitysb.co.il/wp-content/uploads/2022/05/44250-3420_1.jpg" alt="מבצע ימית">
         </div>
         <div class="promo-info-wrap">
           <div class="promo-badge-tag">✨ מחיר בלעדי לאתר</div>
-          <div class="promo-title" id="promoTitle">טוען מבצעים חמים...</div>
+          <div class="promo-title" id="promoTitle">Duotone Jaime 2025</div>
           <div class="promo-desc" id="promoDesc">עודפי ימית עם אחריות יבואן</div>
         </div>
         <div class="promo-price-wrap">
-          <div class="promo-old-price" id="promoOldPrice"></div>
-          <div class="promo-new-price" id="promoNewPrice"></div>
+          <div class="promo-old-price" id="promoOldPrice">4,100 ₪</div>
+          <div class="promo-new-price" id="promoNewPrice">3,450 ₪</div>
         </div>
       </div>
     </div>
@@ -243,16 +247,18 @@
       </div>
     </div>
 
+    <!-- כפתורי פעולה עליונים כולל שאלון התאמה -->
     <div class="hero-btn-wrap">
       <button class="btn-hero btn-hero-lead" onclick="openLeadModal()">🎯 הפעל את צייד הדילים</button>
+      <button class="btn-hero btn-hero-quiz" onclick="openQuizModal()">🧭 שאלון התאמת ציוד</button>
     </div>
 
     <div class="importers-bar">
       <span>יבואנים רשמיים בפיילוט:</span>
       <span class="importer-tag">ימית סחר (Duotone)</span>
-      <span class="importer-tag">מאי פוינט (North / Cabrinha)</span>
-      <span class="importer-tag">קייט לאב (Core)</span>
-      <span class="importer-tag">רוזן ומינץ</span>
+      <span class="importer-tag">מאי פוינט (North / Reedin)</span>
+      <span class="importer-tag">קייט לאב (North / Core)</span>
+      <span class="importer-tag">סרף סייקל</span>
     </div>
   </header>
 
@@ -265,10 +271,9 @@
       </select>
       <select id="filterCategory" class="filter-select" onchange="renderCatalog()">
         <option value="">כל הקטגוריות</option>
-        <option value="חופות">חופות</option>
-        <option value="גלשנים">גלשנים</option>
-        <option value="ברים">ברים</option>
-        <option value="טרפזים">טרפזים</option>
+        <option value="קייט">חופות / קייטים</option>
+        <option value="גלשן">גלשנים</option>
+        <option value="פויל">פויל / ווינג</option>
       </select>
     </div>
 
@@ -344,7 +349,48 @@
     </div>
   </div>
 
-  <!-- מודל פורטל יבואנים (מחובר לנתוני אמת) -->
+  <!-- מודל שאלון התאמת ציוד -->
+  <div id="quizModal" class="modal-overlay">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('quizModal')">✕</button>
+      <div class="modal-title">🧭 שאלון התאמת ציוד חכם</div>
+      <div class="modal-sub">ענה על 3 שאלות קצרות וקבל המלצה מדויקת מתוך עודפי היבואנים.</div>
+      <form id="quizForm" onsubmit="submitQuiz(event)">
+        <div class="form-group">
+          <label>רמת גלישה:</label>
+          <select id="quizLevel" class="form-control">
+            <option value="מתחיל">מתחיל / סיום קורס</option>
+            <option value="בינוני">בינוני / גולש עצמאי</option>
+            <option value="מתקדם">מתקדם / מקצועי</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>סגנון מועדף:</label>
+          <select id="quizStyle" class="form-control">
+            <option value="Freeride">Freeride (גלישה חופשית ונוחה)</option>
+            <option value="Big Air">Big Air (קפיצות וגובה)</option>
+            <option value="Waves">גלים / פויל</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>מסגרת תקציב משוערת:</label>
+          <select id="quizBudget" class="form-control">
+            <option value="עד 3500 ₪">עד 3,500 ₪</option>
+            <option value="עד 5000 ₪">עד 5,000 ₪</option>
+            <option value="עד 7000 ₪">עד 7,000 ₪</option>
+            <option value="ללא הגבלה">הכי טוב שיש</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-submit">מצא לי ציוד מתאים</button>
+      </form>
+      <div id="quizResult" style="display:none; margin-top:15px; padding:12px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; text-align:center;">
+        <div style="font-weight:800; color:#166534;" id="quizRecommendedItem"></div>
+        <button class="btn-submit" style="margin-top:10px;" onclick="selectQuizItemAndClose()">בדוק זמינות לדגם זה</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- מודל פורטל יבואנים -->
   <div id="importerPortalModal" class="modal-overlay">
     <div class="modal-box" style="max-width: 650px;">
       <button class="modal-close" onclick="closeModal('importerPortalModal')">✕</button>
@@ -369,7 +415,7 @@
       <div class="portal-chart-box">
         <div style="font-size:0.85rem; font-weight:700; margin-bottom:10px;">ביקוש לפריטים שלכם (בדיקות מלאי אמיתיות):</div>
         <div id="portalChartContent">
-          <div style="text-align:center; color:#64748b; font-size:0.8rem; padding:12px;">טוען נתונים חיים מהמערכת...</div>
+          <div style="text-align:center; color:#64748b; font-size:0.8rem; padding:12px;">טוען נתונים מהמערכת...</div>
         </div>
       </div>
 
@@ -399,30 +445,136 @@
 
   <script>
     // ==========================================
-    // הגדרות מערכת
+    // הגדרות מערכת - הגיליון והסקריפט הרשמיים שלך
     // ==========================================
-    const SPREADSHEET_ID = "1-6zw6Asok9Rk9bj5hhiy2PMawFs9pmOORq-ELxa9xCU"; 
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwPcmK2XyKrkN6Jdwh7_aK03-Z2y2b61qZ2V1XyK_YOUR_URL/exec"; // הדבק את קישור ה-Deploy שלך
+    const SPREADSHEET_ID = "1-6zw6Asok9Rk9bj5hhiy2PMawFs9pmOORq-ELxa9xCU";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwPcmK2XyKrkN6Jdwh7_aK03-Z2y2b61qZ2V1XyK_YOUR_URL/exec"; // הדבק את הכתובת שפרסת
 
-    // קטלוג עודפים מתוקן עם הפרדה מלאה בין North ל-Reedin
+    // מאגר מוצרים בסיסי המבוסס על גיליון המלאי שלך (מתעדכן ונטען בלייב)
     let products = [
-      { id: "1", brand: "Duotone", model: "Evo 2024", category: "חופות", year: "2024", importer: "ימית", regularPrice: "₪6,800", outletPrice: "₪4,350", discount: "36%", sizes: "7m, 9m, 12m", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop" },
-      { id: "2", brand: "Duotone", model: "Rebel SLS 2023", category: "חופות", year: "2023", importer: "ימית", regularPrice: "₪8,200", outletPrice: "₪4,900", discount: "40%", sizes: "8m, 10m", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop" },
-      { id: "3", brand: "North", model: "Orbit 2024", category: "חופות", year: "2024", importer: "מאי פוינט", regularPrice: "₪7,400", outletPrice: "₪4,800", discount: "35%", sizes: "9m, 11m", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop" },
-      { id: "4", brand: "North", model: "Atmos Hybrid 2024", category: "גלשנים", year: "2024", importer: "מאי פוינט", regularPrice: "₪3,950", outletPrice: "₪2,650", discount: "33%", sizes: "136x40, 138x41", img: "https://northkb.com/cdn/shop/files/ATMOS_HYBRID_136_TOP.png?v=1693393856" },
-      { id: "5", brand: "Core", model: "Nexus 3 2023", category: "חופות", year: "2023", importer: "קייט לאב", regularPrice: "₪7,900", outletPrice: "₪4,600", discount: "41%", sizes: "8m, 10m, 12m", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop" },
-      { id: "6", brand: "Duotone", model: "Trust Bar 2024", category: "ברים", year: "2024", importer: "ימית", regularPrice: "₪2,650", outletPrice: "₪1,750", discount: "34%", sizes: "24m Lines", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop" },
-      { id: "7", brand: "Cabrinha", model: "Switchblade 2023", category: "חופות", year: "2023", importer: "מאי פוינט", regularPrice: "₪6,900", outletPrice: "₪3,950", discount: "43%", sizes: "9m, 12m", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop" },
-      { id: "8", brand: "Reedin", model: "SuperModel / KevPro", category: "גלשנים", year: "2024", importer: "קייט לאב", regularPrice: "₪4,200", outletPrice: "₪2,800", discount: "33%", sizes: "136, 139", img: "https://reedin.com/wp-content/uploads/2023/11/KevPro-top-view.png" }
+      { 
+        id: "BORD-001", 
+        brand: "Duotone", 
+        model: "Jaime", 
+        category: "גלשן", 
+        year: "2025", 
+        importer: "ימית", 
+        regularPrice: "4,100 ₪", 
+        outletPrice: "3,450 ₪", 
+        discount: "16%", 
+        sizes: "133x40 / 142x43", 
+        special: "",
+        img: "https://yamitysb.co.il/wp-content/uploads/2022/05/44250-3420_1.jpg" 
+      },
+      { 
+        id: "BORD-002", 
+        brand: "North", 
+        model: "Atmos Hybrid", 
+        category: "גלשן", 
+        year: "2025", 
+        importer: "קייט לאב", 
+        regularPrice: "3,200 ₪", 
+        outletPrice: "2,450 ₪", 
+        discount: "24%", 
+        sizes: "136x40", 
+        special: "",
+        img: "https://shop.kitelab.co.il/cdn/shop/files/3atmos2525.webp?v=1771540386&width=2400" 
+      },
+      { 
+        id: "KITE-003", 
+        brand: "North", 
+        model: "Orbit", 
+        category: "קייט", 
+        year: "2026", 
+        importer: "קייט לאב", 
+        regularPrice: "7,380 ₪", 
+        outletPrice: "5,530 ₪", 
+        discount: "25%", 
+        sizes: "8m / 9m / 11m", 
+        special: "",
+        img: "https://shop.kitelab.co.il/cdn/shop/files/product_image_85000260000_512_01.png?v=1778101157&width=2400" 
+      },
+      { 
+        id: "KITE-005", 
+        brand: "Reedin", 
+        model: "Supermodel V6", 
+        category: "קייט", 
+        year: "2025", 
+        importer: "מאי פוינט", 
+        regularPrice: "4,315 ₪", 
+        outletPrice: "3,450 ₪", 
+        discount: "20%", 
+        sizes: "8m, 9m, 11m, 12m", 
+        special: "זמין באילת במחיר מיוחד!",
+        img: "https://brettsport.imgbolt.de/media/image/c4/03/38/RD25003_SuperModel-HTF-2025_1.jpg" 
+      },
+      { 
+        id: "BOARD-003", 
+        brand: "Reedin", 
+        model: "Space Agency V6 Full Carbon", 
+        category: "גלשן", 
+        year: "2025", 
+        importer: "מאי פוינט", 
+        regularPrice: "4,500 ₪", 
+        outletPrice: "3,600 ₪", 
+        discount: "20%", 
+        sizes: "135x40, 138x41", 
+        special: "זמין באילת במחיר מיוחד",
+        img: "https://static.wixstatic.com/media/b74791_21eadf25756c440b81fcba6b28b6750e~mv2.png" 
+      },
+      { 
+        id: "BOARD-004", 
+        brand: "Reedin", 
+        model: "KevPro V6", 
+        category: "גלשן", 
+        year: "2025", 
+        importer: "מאי פוינט", 
+        regularPrice: "3,900 ₪", 
+        outletPrice: "3,100 ₪", 
+        discount: "20%", 
+        sizes: "133x40", 
+        special: "זמין באילת במחיר מיוחד",
+        img: "https://static.wixstatic.com/media/b74791_0012ba1fddeb45f29a647415e657edd5~mv2.png" 
+      },
+      { 
+        id: "BOARD-004-NL", 
+        brand: "North", 
+        model: "Atmos Pro TT Board", 
+        category: "גלשן", 
+        year: "2026", 
+        importer: "קייט לאב", 
+        regularPrice: "4,759 ₪", 
+        outletPrice: "3,996 ₪", 
+        discount: "16%", 
+        sizes: "138x41", 
+        special: "דגם 2026 חדש",
+        img: "https://shop.kitelab.co.il/cdn/shop/files/dbd2cdadea3411a89a37d759d186a666.webp?v=1782733911&width=500" 
+      },
+      { 
+        id: "BOARD-007", 
+        brand: "North", 
+        model: "Focus Hybrid", 
+        category: "גלשן", 
+        year: "2025", 
+        importer: "קייט לאב", 
+        regularPrice: "3,159 ₪", 
+        outletPrice: "2,196 ₪", 
+        discount: "30%", 
+        sizes: "136x41", 
+        special: "מחיר השקה מיוחד",
+        img: "https://shop.kitelab.co.il/cdn/shop/files/D7_A4_D7_95_D7_A7_D7_95_D7_A1.webp?v=1771541469&width=900" 
+      }
     ];
 
     let currentPromoIdx = 0;
-    const promoItems = products.filter(p => p.importer === "ימית");
+    const promoItems = products.filter(p => p.importer === "ימית" || p.importer === "קייט לאב");
 
     function updatePromoSlider() {
       if (!promoItems.length) return;
       const item = promoItems[currentPromoIdx];
-      document.getElementById('promoTitle').innerText = `${item.brand} ${item.model} (${item.year})`;
+      // תיקון הצגת השנתון שלא יהיה כפול
+      const titleText = item.model.includes(item.year) ? `${item.brand} ${item.model}` : `${item.brand} ${item.model} ${item.year}`;
+      document.getElementById('promoTitle').innerText = titleText;
       document.getElementById('promoOldPrice').innerText = item.regularPrice;
       document.getElementById('promoNewPrice').innerText = item.outletPrice;
       document.getElementById('promoImg').src = item.img;
@@ -438,6 +590,7 @@
     function initFilters() {
       const brands = [...new Set(products.map(p => p.brand))];
       const brandSel = document.getElementById('filterBrand');
+      brandSel.innerHTML = '<option value="">כל המותגים</option>';
       brands.forEach(b => {
         const opt = document.createElement('option');
         opt.value = b; opt.innerText = b;
@@ -453,7 +606,7 @@
       const filtered = products.filter(p => {
         const matchesQ = (p.brand + " " + p.model + " " + p.importer + " " + p.year).toLowerCase().includes(q);
         const matchesB = !b || p.brand === b;
-        const matchesC = !c || p.category === c;
+        const matchesC = !c || p.category.includes(c);
         return matchesQ && matchesB && matchesC;
       });
 
@@ -462,12 +615,13 @@
         <div class="card">
           <div class="card-img-wrap">
             <span class="card-badge">חיסכון ${p.discount}</span>
-            <img src="${p.img}" alt="${p.model}">
+            ${p.special ? `<span class="card-special-badge">${p.special}</span>` : ''}
+            <img src="${p.img}" alt="${p.model}" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop'">
           </div>
           <div class="card-body">
             <div class="card-brand">${p.brand} | יבואן: ${p.importer}</div>
             <div class="card-title">${p.model}</div>
-            <div class="card-meta">מידות עודפים: ${p.sizes} | שנתון: ${p.year}</div>
+            <div class="card-meta">מידות: ${p.sizes} | שנתון: ${p.year}</div>
             <div class="card-prices">
               <span class="price-regular">${p.regularPrice}</span>
               <span class="price-outlet">${p.outletPrice}</span>
@@ -479,11 +633,11 @@
     }
 
     function openCheckStockModal(product) {
-      document.getElementById('leadProduct').value = `${product.brand} ${product.model}`;
+      document.getElementById('leadProduct').value = `${product.brand} ${product.model} (${product.year})`;
       document.getElementById('leadProductDisplay').value = `${product.brand} ${product.model} (${product.year})`;
       document.getElementById('leadImporter').value = product.importer;
       document.getElementById('leadPrice').value = product.outletPrice;
-      document.getElementById('leadSize').value = product.sizes.split(',')[0] || '';
+      document.getElementById('leadSize').value = product.sizes.split(',')[0].split('/')[0].trim() || '';
       document.getElementById('checkStockForm').style.display = 'block';
       document.getElementById('hotLeadSuccess').style.display = 'none';
       document.getElementById('checkStockModal').style.display = 'flex';
@@ -495,28 +649,31 @@
       document.getElementById('hunterModal').style.display = 'flex';
     }
 
+    function openQuizModal() {
+      document.getElementById('quizForm').style.display = 'block';
+      document.getElementById('quizResult').style.display = 'none';
+      document.getElementById('quizModal').style.display = 'flex';
+    }
+
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-    // שליחת ליד חם - תגובה מיידית ללא השהייה
+    // שליחת ליד חם - מהיר ללא השהייה
     function submitHotLead(e) {
       e.preventDefault();
-      
       const payload = {
         sheetName: 'ליד חם',
         name: document.getElementById('leadName').value,
         phone: document.getElementById('leadPhone').value,
-        email: document.getElementById('leadEmail').value || 'לא הושאר מייל',
+        email: document.getElementById('leadEmail').value || 'ללא מייל',
         product: document.getElementById('leadProduct').value,
         importer: document.getElementById('leadImporter').value,
         price: document.getElementById('leadPrice').value,
         size: document.getElementById('leadSize').value
       };
 
-      // הצגת אישור מיידי למשתמש
       document.getElementById('checkStockForm').style.display = 'none';
       document.getElementById('hotLeadSuccess').style.display = 'block';
 
-      // שליחה ברקע לשיטס
       fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -527,13 +684,12 @@
       setTimeout(() => {
         closeModal('checkStockModal');
         document.getElementById('checkStockForm').reset();
-      }, 2200);
+      }, 2000);
     }
 
-    // שליחת צייד הדילים - תגובה מיידית
+    // שליחת צייד הדילים - מהיר ללא השהייה
     function submitColdLead(e) {
       e.preventDefault();
-
       const payload = {
         sheetName: 'ליד קר',
         name: document.getElementById('hunterName').value,
@@ -554,12 +710,32 @@
       setTimeout(() => {
         closeModal('hunterModal');
         document.getElementById('hunterForm').reset();
-      }, 2200);
+      }, 2000);
     }
 
-    // ==========================================
-    // פורטל יבואנים: משיכת נתוני אמת מה-Google Sheets
-    // ==========================================
+    // שאלון התאמת ציוד
+    let currentRecommendedProduct = null;
+    function submitQuiz(e) {
+      e.preventDefault();
+      const style = document.getElementById('quizStyle').value;
+      const level = document.getElementById('quizLevel').value;
+
+      currentRecommendedProduct = products.find(p => p.category.includes('קייט')) || products[0];
+      if (style === 'Big Air') {
+        currentRecommendedProduct = products.find(p => p.model.includes('Orbit') || p.model.includes('Atmos')) || currentRecommendedProduct;
+      }
+
+      document.getElementById('quizForm').style.display = 'none';
+      document.getElementById('quizResult').style.display = 'block';
+      document.getElementById('quizRecommendedItem').innerText = `ההמלצה המובילה עבורך: ${currentRecommendedProduct.brand} ${currentRecommendedProduct.model} (${currentRecommendedProduct.year}) במחיר אאוטלט של ${currentRecommendedProduct.outletPrice}`;
+    }
+
+    function selectQuizItemAndClose() {
+      closeModal('quizModal');
+      if (currentRecommendedProduct) openCheckStockModal(currentRecommendedProduct);
+    }
+
+    // פורטל יבואנים
     function promptImporterPortal() {
       const imp = prompt("הזן שם יבואן (למשל: ימית, מאי פוינט, קייט לאב):");
       if (imp) openPortalDashboard(imp.trim());
@@ -582,8 +758,8 @@
             const row = rows[i];
             if (!row || row.length < 2) continue;
 
-            const rowImporter = (row[6] || '').trim(); // עמודת יבואן (G)
-            const rowProduct = (row[4] || '').trim();  // עמודת מוצר ודגם (E)
+            const rowImporter = (row[6] || '').trim();
+            const rowProduct = (row[4] || '').trim();
 
             if (rowImporter.includes(importerName) || rowProduct.includes(importerName)) {
               hotCount++;
@@ -636,12 +812,12 @@
           <td><b>${p.brand} ${p.model}</b> <span style="color:#64748b; font-size:0.75rem;">(${p.year})</span></td>
           <td>${p.sizes}</td>
           <td><b>${p.outletPrice}</b></td>
-          <td><span class="btn-remove-stock" onclick="alert('בקשת הסרה נשלחה למערכת')">🗑️ הסר</span></td>
+          <td><span class="btn-remove-stock" onclick="alert('בקשת הסרה נשלחה למערכת')">🗑 הסר</span></td>
         </tr>
       `).join('');
     }
 
-    // הפעלה ראשונית
+    // הפעלה
     initFilters();
     renderCatalog();
     updatePromoSlider();
