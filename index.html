@@ -216,7 +216,7 @@
         <div class="promo-info-wrap">
           <div class="promo-badge-tag">✨ מחיר בלעדי לאתר</div>
           <div class="promo-title" id="promoTitle">Duotone Jaime 2025</div>
-          <div class="promo-desc" id="promoDesc">עודפי ימית עם אחריות יבואן</div>
+          <div class="promo-desc" id="promoDesc">עודפי יבואן רשמי</div>
         </div>
         <div class="promo-price-wrap">
           <div class="promo-old-price" id="promoOldPrice">4,100 ₪</div>
@@ -257,7 +257,7 @@
     <div class="importers-bar">
       <span>יבואנים רשמיים בפיילוט:</span>
       <span class="importer-tag">ימית סחר (Duotone)</span>
-      <span class="importer-tag">מאי פוינט (Reedin / North)</span>
+      <span class="importer-tag">מאי פוינט (Reedin)</span>
       <span class="importer-tag">קייט לאב (North)</span>
       <span class="importer-tag">סרף סייקל</span>
     </div>
@@ -446,153 +446,97 @@
 
   <script>
     // ==========================================
-    // הגדרות מערכת - מחובר ישירות לגיליון שלך
+    // הגדרות מערכת - חיבור חי ישירות ל-Google Sheets
     // ==========================================
     const SPREADSHEET_ID = "1-6zw6Asok9Rk9bj5hhiy2PMawFs9pmOORq-ELxa9xCU";
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzL0VLGTi-oDU4esdlmJVU69Q2AFrqfobl19yMptCRGU--pOwB7em9WclHzoa7wcS_m-g/exec";
 
-    // קטלוג הציוד האותנטי של האתר (מתוך לשונית מלאי)
+    // מאגר ברירת מחדל אותנטי מתוך הגיליון (מתעדכן בלייב מהשיטס בפתיחת הדף)
     let products = [
-      { 
-        id: "BORD-001", 
-        brand: "Duotone", 
-        model: "Jaime", 
-        category: "גלשן", 
-        year: "2025", 
-        importer: "ימית", 
-        regularPrice: "4,100 ₪", 
-        outletPrice: "3,450 ₪", 
-        discount: "16%", 
-        sizes: "133x40 / 142x43", 
-        special: "",
-        img: "https://yamitysb.co.il/wp-content/uploads/2022/05/44250-3420_1.jpg" 
-      },
-      { 
-        id: "BORD-002", 
-        brand: "North", 
-        model: "Atmos Hybrid", 
-        category: "גלשן", 
-        year: "2025", 
-        importer: "קייט לאב", 
-        regularPrice: "3,200 ₪", 
-        outletPrice: "2,450 ₪", 
-        discount: "24%", 
-        sizes: "136x40", 
-        special: "",
-        img: "https://shop.kitelab.co.il/cdn/shop/files/3atmos2525.webp?v=1771540386&width=2400" 
-      },
-      { 
-        id: "KITE-003", 
-        brand: "North", 
-        model: "Orbit", 
-        category: "קייט", 
-        year: "2026", 
-        importer: "קייט לאב", 
-        regularPrice: "7,380 ₪", 
-        outletPrice: "5,530 ₪", 
-        discount: "25%", 
-        sizes: "8m / 9m / 11m", 
-        special: "",
-        img: "https://shop.kitelab.co.il/cdn/shop/files/product_image_85000260000_512_01.png?v=1778101157&width=2400" 
-      },
-      { 
-        id: "KITE-005", 
-        brand: "Reedin", 
-        model: "Supermodel V6", 
-        category: "קייט", 
-        year: "2025", 
-        importer: "מאי פוינט", 
-        regularPrice: "4,315 ₪", 
-        outletPrice: "3,450 ₪", 
-        discount: "20%", 
-        sizes: "8m, 9m, 11m, 12m", 
-        special: "זמין באילת במחיר מיוחד!",
-        img: "https://brettsport.imgbolt.de/media/image/c4/03/38/RD25003_SuperModel-HTF-2025_1.jpg" 
-      },
-      { 
-        id: "BOARD-003", 
-        brand: "Reedin", 
-        model: "Space Agency V6 Full Carbon", 
-        category: "גלשן", 
-        year: "2025", 
-        importer: "מאי פוינט", 
-        regularPrice: "4,500 ₪", 
-        outletPrice: "3,600 ₪", 
-        discount: "20%", 
-        sizes: "135x40, 138x41", 
-        special: "זמין באילת במחיר מיוחד",
-        img: "https://static.wixstatic.com/media/b74791_21eadf25756c440b81fcba6b28b6750e~mv2.png" 
-      },
-      { 
-        id: "BOARD-004", 
-        brand: "Reedin", 
-        model: "KevPro V6", 
-        category: "גלשן", 
-        year: "2025", 
-        importer: "מאי פוינט", 
-        regularPrice: "3,900 ₪", 
-        outletPrice: "3,100 ₪", 
-        discount: "20%", 
-        sizes: "133x40", 
-        special: "זמין באילת במחיר מיוחד",
-        img: "https://static.wixstatic.com/media/b74791_0012ba1fddeb45f29a647415e657edd5~mv2.png" 
-      },
-      { 
-        id: "BOARD-004-NL", 
-        brand: "North", 
-        model: "Atmos Pro TT Board", 
-        category: "גלשן", 
-        year: "2026", 
-        importer: "קייט לאב", 
-        regularPrice: "4,759 ₪", 
-        outletPrice: "3,996 ₪", 
-        discount: "16%", 
-        sizes: "138x41", 
-        special: "דגם 2026 חדש",
-        img: "https://shop.kitelab.co.il/cdn/shop/files/dbd2cdadea3411a89a37d759d186a666.webp?v=1782733911&width=500" 
-      },
-      { 
-        id: "BOARD-007", 
-        brand: "North", 
-        model: "Focus Hybrid", 
-        category: "גלשן", 
-        year: "2025", 
-        importer: "קייט לאב", 
-        regularPrice: "3,159 ₪", 
-        outletPrice: "2,196 ₪", 
-        discount: "30%", 
-        sizes: "136x41", 
-        special: "מחיר השקה מיוחד",
-        img: "https://shop.kitelab.co.il/cdn/shop/files/D7_A4_D7_95_D7_A7_D7_95_D7_A1.webp?v=1771541469&width=900" 
-      }
+      { id: "BORD-001", brand: "Duotone", model: "Jaime", category: "גלשן", year: "2025", importer: "ימית", regularPrice: "4,100 ₪", outletPrice: "3,450 ₪", discount: "16%", sizes: "133x40 / 142x43", special: "", img: "https://yamitysb.co.il/wp-content/uploads/2022/05/44250-3420_1.jpg" },
+      { id: "BORD-002", brand: "North", model: "Atmos Hybrid", category: "גלשן", year: "2025", importer: "קייט לאב", regularPrice: "3,200 ₪", outletPrice: "2,450 ₪", discount: "24%", sizes: "136x40", special: "", img: "https://shop.kitelab.co.il/cdn/shop/files/3atmos2525.webp?v=1771540386&width=2400" },
+      { id: "KITE-003", brand: "North", model: "Orbit", category: "קייט", year: "2026", importer: "קייט לאב", regularPrice: "7,380 ₪", outletPrice: "5,530 ₪", discount: "25%", sizes: "8m / 9m / 11m", special: "", img: "https://shop.kitelab.co.il/cdn/shop/files/product_image_85000260000_512_01.png?v=1778101157&width=2400" },
+      { id: "KITE-005", brand: "Reedin", model: "Supermodel V6", category: "קייט", year: "2025", importer: "מאי פוינט", regularPrice: "4,315 ₪", outletPrice: "3,450 ₪", discount: "20%", sizes: "8m, 9m, 11m, 12m", special: "זמין באילת במחיר מיוחד!", img: "https://brettsport.imgbolt.de/media/image/c4/03/38/RD25003_SuperModel-HTF-2025_1.jpg" },
+      { id: "BOARD-003", brand: "Reedin", model: "Space Agency V6 Full Carbon", category: "גלשן", year: "2025", importer: "מאי פוינט", regularPrice: "4,500 ₪", outletPrice: "3,600 ₪", discount: "20%", sizes: "135x40, 138x41", special: "זמין באילת במחיר מיוחד", img: "https://static.wixstatic.com/media/b74791_21eadf25756c440b81fcba6b28b6750e~mv2.png" },
+      { id: "BOARD-004", brand: "Reedin", model: "KevPro V6", category: "גלשן", year: "2025", importer: "מאי פוינט", regularPrice: "3,900 ₪", outletPrice: "3,100 ₪", discount: "20%", sizes: "133x40", special: "זמין באילת במחיר מיוחד", img: "https://static.wixstatic.com/media/b74791_0012ba1fddeb45f29a647415e657edd5~mv2.png" },
+      { id: "BOARD-005", brand: "Reedin", model: "Super E V6", category: "גלשן", year: "2025", importer: "מאי פוינט", regularPrice: "3,600 ₪", outletPrice: "2,850 ₪", discount: "21%", sizes: "140x42", special: "זמין באילת במחיר מיוחד", img: "https://static.wixstatic.com/media/b74791_d965eabb280f42d088fcf7424d3c99a3~mv2.png" },
+      { id: "KITE-006", brand: "Reedin", model: "Supermodel V5 HTF2", category: "קייט", year: "2024", importer: "מאי פוינט", regularPrice: "5,500 ₪", outletPrice: "3,850 ₪", discount: "30%", sizes: "8m", special: "זמין באילת במחיר מיוחד", img: "https://static.wixstatic.com/media/b74791_8b443bdc238a465185e844ac5683e4b7~mv2.png" },
+      { id: "KITE-007", brand: "Reedin", model: "HyperModel Aluula", category: "קייט", year: "2024", importer: "מאי פוינט", regularPrice: "8,400 ₪", outletPrice: "5,900 ₪", discount: "30%", sizes: "8m, 11m", special: "זמין באילת במחיר מיוחד", img: "https://omlczucrpiusqeurpqur.supabase.co/storage/v1/object/public/product-images/products/1776185382333-wdi50byaebo.webp" },
+      { id: "FOIL-001", brand: "Reedin", model: "Feather Foil Board V6", category: "פויל", year: "2025", importer: "מאי פוינט", regularPrice: "4,900 ₪", outletPrice: "3,900 ₪", discount: "20%", sizes: "20L, 88L", special: "זמין באילת במחיר מיוחד", img: "https://static.wixstatic.com/media/b74791_280efebe4080440c9cb99d8bf1e32ed9~mv2.webp" },
+      { id: "BOARD-004-NL", brand: "North", model: "Atmos Pro TT Board", category: "גלשן", year: "2026", importer: "קייט לאב", regularPrice: "4,759 ₪", outletPrice: "3,996 ₪", discount: "16%", sizes: "138x41", special: "דגם 2026 חדש", img: "https://shop.kitelab.co.il/cdn/shop/files/dbd2cdadea3411a89a37d759d186a666.webp?v=1782733911&width=500" },
+      { id: "BOARD-007", brand: "North", model: "Focus Hybrid", category: "גלשן", year: "2025", importer: "קייט לאב", regularPrice: "3,159 ₪", outletPrice: "2,196 ₪", discount: "30%", sizes: "136x41", special: "מחיר השקה מיוחד", img: "https://shop.kitelab.co.il/cdn/shop/files/D7_A4_D7_95_D7_A7_D7_95_D7_A1.webp?v=1771541469&width=900" }
     ];
 
     // ==========================================
-    // באנר מבצעים מתחלף (ללא שנתון כפול)
+    // משיכת מלאי חי מ-Google Sheets (לשונית "מלאי")
+    // ==========================================
+    async function loadLiveProductsFromSheet() {
+      const CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent('מלאי')}&t=` + new Date().getTime();
+      try {
+        const res = await fetch(CSV_URL);
+        if (!res.ok) return;
+        const csv = await res.text();
+        const lines = csv.split(/\r?\n/).map(l => {
+          // פירוק CSV תוך התחשבות במרכאות
+          const re = /(".*?"|[^",\s]+)(?=\s*,|\s*$)/g;
+          const matches = l.match(/(?:[^\s",]+|"[^"]*")+/g);
+          return l.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(v => v.replace(/^"\vert{}"$/g, '').trim());
+        });
+
+        if (lines.length > 1) {
+          const liveList = [];
+          for (let i = 1; i < lines.length; i++) {
+            const row = lines[i];
+            if (!row || row.length < 5 || !row[3]) continue;
+            
+            liveList.push({
+              id: row[0] || `item-${i}`,
+              importer: row[1] || 'יבואן רשמי',
+              brand: row[2] || '',
+              model: row[3] || '',
+              category: row[4] || 'ציוד',
+              year: row[5] || '2025',
+              sizes: row[7] || '',
+              regularPrice: row[8] ? (row[8].includes('₪') ? row[8] : row[8] + ' ₪') : '',
+              outletPrice: row[9] ? (row[9].includes('₪') ? row[9] : row[9] + ' ₪') : (row[8] ? row[8] + ' ₪' : ''),
+              discount: row[10] ? (row[10].includes('%') ? row[10] : row[10] + '%') : 'מבצע',
+              special: row[21] || '',
+              img: row[16] && row[16].startsWith('http') ? row[16] : 'https://yamitysb.co.il/wp-content/uploads/2022/05/44250-3420_1.jpg'
+            });
+          }
+          if (liveList.length > 0) {
+            products = liveList;
+            initFilters();
+            renderCatalog();
+          }
+        }
+      } catch (e) {
+        console.log("משתמש במאגר מלאי מקומי");
+      }
+    }
+
+    // ==========================================
+    // באנר מבצעים מתחלף
     // ==========================================
     let currentPromoIdx = 0;
-    const promoItems = products.filter(p => p.importer === "ימית" || p.importer === "קייט לאב");
-
     function updatePromoSlider() {
+      const promoItems = products.filter(p => p.importer && (p.importer.includes("ימית") || p.importer.includes("קייט לאב") || p.importer.includes("מאי פוינט")));
       if (!promoItems.length) return;
-      const item = promoItems[currentPromoIdx];
+      
+      const item = promoItems[currentPromoIdx % promoItems.length];
       const titleText = item.model.includes(item.year) ? `${item.brand} ${item.model}` : `${item.brand} ${item.model} ${item.year}`;
       
-      const titleEl = document.getElementById('promoTitle');
-      const oldPriceEl = document.getElementById('promoOldPrice');
-      const newPriceEl = document.getElementById('promoNewPrice');
-      const imgEl = document.getElementById('promoImg');
-
-      if (titleEl) titleEl.innerText = titleText;
-      if (oldPriceEl) oldPriceEl.innerText = item.regularPrice;
-      if (newPriceEl) newPriceEl.innerText = item.outletPrice;
-      if (imgEl) imgEl.src = item.img;
+      document.getElementById('promoTitle').innerText = titleText;
+      document.getElementById('promoOldPrice').innerText = item.regularPrice;
+      document.getElementById('promoNewPrice').innerText = item.outletPrice;
+      document.getElementById('promoImg').src = item.img;
 
       currentPromoIdx = (currentPromoIdx + 1) % promoItems.length;
     }
     setInterval(updatePromoSlider, 3500);
 
     function openCurrentPromoItem() {
+      const promoItems = products.filter(p => p.importer && (p.importer.includes("ימית") || p.importer.includes("קייט לאב") || p.importer.includes("מאי פוינט")));
       if (!promoItems.length) return;
       const activeIdx = (currentPromoIdx - 1 + promoItems.length) % promoItems.length;
       openCheckStockModal(promoItems[activeIdx]);
@@ -602,7 +546,7 @@
     // סינון וקטלוג
     // ==========================================
     function initFilters() {
-      const brands = [...new Set(products.map(p => p.brand))];
+      const brands = [...new Set(products.map(p => p.brand).filter(Boolean))];
       const brandSel = document.getElementById('filterBrand');
       if (!brandSel) return;
       brandSel.innerHTML = '<option value="">כל המותגים</option>';
@@ -637,7 +581,7 @@
           <div class="card-img-wrap">
             <span class="card-badge">חיסכון ${p.discount}</span>
             ${p.special ? `<span class="card-special-badge">${p.special}</span>` : ''}
-            <img src="${p.img}" alt="${p.model}" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop'">
+            <img src="${p.img}" alt="${p.model}" onerror="this.src='https://yamitysb.co.il/wp-content/uploads/2022/05/44250-3420_1.jpg'">
           </div>
           <div class="card-body">
             <div class="card-brand">${p.brand} | יבואן: ${p.importer}</div>
@@ -668,20 +612,15 @@
     }
 
     function openLeadModal() {
-      const form = document.getElementById('hunterForm');
-      const succ = document.getElementById('hunterSuccess');
-      if (form) form.style.display = 'block';
-      if (succ) succ.style.display = 'none';
+      document.getElementById('hunterForm').style.display = 'block';
+      document.getElementById('hunterSuccess').style.display = 'none';
       document.getElementById('hunterModal').style.display = 'flex';
     }
 
     function openQuizModal() {
-      const qForm = document.getElementById('quizForm');
-      const qRes = document.getElementById('quizResult');
-      if (qForm) qForm.style.display = 'block';
-      if (qRes) qRes.style.display = 'none';
-      const qModal = document.getElementById('quizModal');
-      if (qModal) qModal.style.display = 'flex';
+      document.getElementById('quizForm').style.display = 'block';
+      document.getElementById('quizResult').style.display = 'none';
+      document.getElementById('quizModal').style.display = 'flex';
     }
 
     function closeModal(id) { 
@@ -689,9 +628,7 @@
       if (el) el.style.display = 'none'; 
     }
 
-    // ==========================================
-    // שליחת לידים מהירה ללא השהייה (Optimistic UI)
-    // ==========================================
+    // שליחת ליד חם (Optimistic UI - תגובה מיידית)
     function submitHotLead(e) {
       e.preventDefault();
       const payload = {
@@ -705,17 +642,15 @@
         size: document.getElementById('leadSize').value
       };
 
-      // אישור מיידי למשתמש
       document.getElementById('checkStockForm').style.display = 'none';
       document.getElementById('hotLeadSuccess').style.display = 'block';
 
-      // שליחה ברקע ל-Apps Script
       fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-      }).catch(err => console.error("Hot lead error:", err));
+      }).catch(err => console.error(err));
 
       setTimeout(() => {
         closeModal('checkStockModal');
@@ -723,6 +658,7 @@
       }, 2000);
     }
 
+    // שליחת ליד קר (צייד הדילים)
     function submitColdLead(e) {
       e.preventDefault();
       const payload = {
@@ -732,17 +668,15 @@
         details: document.getElementById('hunterDetails').value
       };
 
-      // אישור מיידי למשתמש
       document.getElementById('hunterForm').style.display = 'none';
       document.getElementById('hunterSuccess').style.display = 'block';
 
-      // שליחה ברקע ל-Apps Script
       fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-      }).catch(err => console.error("Cold lead error:", err));
+      }).catch(err => console.error(err));
 
       setTimeout(() => {
         closeModal('hunterModal');
@@ -770,9 +704,7 @@
       if (currentRecommendedProduct) openCheckStockModal(currentRecommendedProduct);
     }
 
-    // ==========================================
-    // פורטל יבואנים: משיכת נתוני אמת
-    // ==========================================
+    // פורטל יבואנים
     function promptImporterPortal() {
       const imp = prompt("הזן שם יבואן (למשל: ימית, מאי פוינט, קייט לאב):");
       if (imp) openPortalDashboard(imp.trim());
@@ -783,13 +715,13 @@
       let coldCount = 0;
       let modelStats = {};
 
-      const CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export?format=csv&id=${SPREADSHEET_ID}&t=` + new Date().getTime();
+      const CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent('ליד חם')}&t=` + new Date().getTime();
 
       try {
         const response = await fetch(CSV_URL);
         if (response.ok) {
           const csvText = await response.text();
-          const rows = csvText.split(/\r?\n/).map(r => r.split(','));
+          const rows = csvText.split(/\r?\n/).map(r => r.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(v => v.replace(/^"\vert{}"$/g, '').trim()));
           
           for (let i = 1; i < rows.length; i++) {
             const row = rows[i];
@@ -804,9 +736,7 @@
             }
           }
         }
-      } catch (err) {
-        console.log("פורטל: אין נתונים כרגע או גיליון נקי");
-      }
+      } catch (err) {}
 
       return { hotCount, coldCount, modelStats };
     }
@@ -855,11 +785,12 @@
     }
 
     // ==========================================
-    // טעינה ראשונית
+    // הפעלה: טוען ראשונית ומושך עדכונים בלייב
     // ==========================================
     initFilters();
     renderCatalog();
     updatePromoSlider();
+    loadLiveProductsFromSheet(); // משיכה בזמן אמת מגיליון המלאי
   </script>
 </body>
 </html>
