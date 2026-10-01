@@ -33,6 +33,13 @@
       max-width: 100vw;
     }
 
+    /* באנר תרומה עליון - פיילוט השקה */
+    .charity-banner {
+      background: #0f172a; color: #f8fafc; font-size: 0.82rem; font-weight: 700;
+      text-align: center; padding: 7px 12px; letter-spacing: 0.2px;
+    }
+    .charity-banner span { color: #38bdf8; }
+
     /* פופ-אפ דרופ בכניסה */
     #dropWelcomeModal {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -65,7 +72,7 @@
       border-radius: 10px; font-weight: 800; font-size: 1rem; cursor: pointer;
     }
 
-    /* ניווט עליון מסודר ורספונסיבי */
+    /* ניווט עליון */
     .top-nav {
       background: #ffffff; border-bottom: 1px solid var(--border-color); padding: 8px 16px;
       display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100;
@@ -112,7 +119,7 @@
 
     h1 { font-size: 1.85rem; font-weight: 900; color: #0f172a; letter-spacing: -0.5px; margin-bottom: 14px; line-height: 1.25; }
 
-    /* בלוק מבצעים מתחלף כל 3 שניות (ימית) */
+    /* בלוק מבצעים מתחלף */
     .promo-slider-wrap { max-width: 600px; margin: 0 auto 16px; padding: 0 16px; }
     .promo-slider-card {
       background: #f8fafc; border: 2px solid #f59e0b; border-radius: 14px;
@@ -139,6 +146,25 @@
     .promo-price-wrap { text-align: left; flex-shrink: 0; }
     .promo-old-price { font-size: 0.74rem; color: #94a3b8; text-decoration: line-through; }
     .promo-new-price { font-size: 1.25rem; font-weight: 900; color: #ea580c; line-height: 1; }
+
+    /* סרגל 4 שלבים: איך זה עובד */
+    .how-it-works-strip {
+      max-width: 600px; margin: 0 auto 16px; padding: 10px 14px;
+      background: #f8fafc; border: 1px solid var(--border-color); border-radius: 12px;
+      display: flex; align-items: center; justify-content: space-between; gap: 6px;
+    }
+    .how-step { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700; color: #334155; }
+    .step-num {
+      width: 20px; height: 20px; border-radius: 50%; background: #0284c7; color: #ffffff;
+      display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; flex-shrink: 0;
+    }
+    .step-arrow { color: #94a3b8; font-size: 0.75rem; font-weight: 900; }
+
+    @media (max-width: 580px) {
+      .how-it-works-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 10px 12px; }
+      .step-arrow { display: none; }
+      .how-step { font-size: 0.75rem; }
+    }
 
     .hero-btn-wrap { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
     .btn-hero {
@@ -268,7 +294,7 @@
     .trivia-desc { font-size: 0.84rem; color: #334155; line-height: 1.45; margin-bottom: 12px; }
     .trivia-footer { padding-top: 8px; border-top: 1px solid #e2e8f0; font-size: 0.72rem; color: #64748b; font-weight: 700; }
 
-    /* בלוק המידע והיתרונות המלא - לפני הגלריה */
+    /* בלוק המידע והיתרונות */
     .about-outlet-section { max-width: 1240px; margin: 44px auto 14px; padding: 0 16px; }
     .about-outlet-card {
       background: #f8fafc; border: 1.5px solid var(--border-color); border-radius: 14px;
@@ -331,7 +357,6 @@
 
     .item-form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 12px; text-align: right; }
     .form-group-full { grid-column: span 2; }
-    .field-hint { font-size: 0.68rem; color: #64748b; margin-top: 1px; }
 
     /* MODALS */
     .modal-overlay {
@@ -381,6 +406,11 @@
   </style>
 </head>
 <body>
+
+  <!-- באנר תרומה עליון -->
+  <div class="charity-banner">
+    🎗️ <b>פיילוט השקה קהילתי:</b> 100% מעמלות האאוטלט מועברות כתרומת ציוד ושיקום למען <span>פצועי צה״ל ולוחמי המילואים</span>
+  </div>
 
   <!-- פופ-אפ דרופ בכניסה -->
   <div id="dropWelcomeModal">
@@ -466,6 +496,29 @@
       </div>
     </div>
 
+    <!-- סרגל 4 שלבים: איך זה עובד -->
+    <div class="how-it-works-strip">
+      <div class="how-step">
+        <span class="step-num">1</span>
+        <span class="step-text">בוחרים פריט מהקטלוג</span>
+      </div>
+      <span class="step-arrow">◀</span>
+      <div class="how-step">
+        <span class="step-num">2</span>
+        <span class="step-text">בודקים זמינות במחסן</span>
+      </div>
+      <span class="step-arrow">◀</span>
+      <div class="how-step">
+        <span class="step-num">3</span>
+        <span class="step-text">מקבלים קוד הנחה בלעדי</span>
+      </div>
+      <span class="step-arrow">◀</span>
+      <div class="how-step">
+        <span class="step-num">4</span>
+        <span class="step-text">רוכשים ישירות מהיבואן</span>
+      </div>
+    </div>
+
     <div class="hero-btn-wrap">
       <button class="btn-hero btn-hero-lead" onclick="openLeadModal()">🎯 הפעל את צייד הדילים</button>
       <button class="btn-hero btn-hero-quiz" onclick="startQuiz()">🧭 שאלון התאמת חופה (3 שאלות)</button>
@@ -547,7 +600,7 @@
       </p>
       <div class="about-features-grid">
         <div class="about-feature-box">
-          🏷️ <strong>חיסכון של אלפי שקלים:</strong> הנחות בלעדיות ישירות ממחירון היבואן הרשמי על דגמים מובילים.
+          🏷️️ <strong>חיסכון של אלפי שקלים:</strong> הנחות בלעדיות ישירות ממחירון היבואן הרשמי על דגמים מובילים.
         </div>
         <div class="about-feature-box">
           🛡️ <strong>100% אחריות ושירות:</strong> ציוד חדש בניילון המקבל גב, אחריות ושירות מלאים ישירות מהיבואן.
@@ -621,7 +674,7 @@
     </div>
   </div>
 
-  <!-- מודל צייד הדילים (מתויג כ-ליד פנייה קר) -->
+  <!-- מודל צייד הדילים (מתויג כ-ליד קר ישירות לשיטס) -->
   <div class="modal-overlay" id="leadModalOverlay" onclick="closeLeadModal()">
     <div class="modal-card" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeLeadModal()">✕</button>
@@ -814,11 +867,16 @@
   </div>
 
   <script>
+    // ==========================================
+    // הגדרות מערכת וחיבורים רשמיים
+    // ==========================================
     const SPREADSHEET_ID = "2PACX-1vSAncp2nNLO6jIwFT07bDpVDjYerLk6DLW6FOKnf_GHMPGRWKaDclMTYs_AJcNU-kTJXhHdgZ8ikyUj";
     const BASE_CSV_URL = `https://docs.google.com/spreadsheets/d/e/${SPREADSHEET_ID}/pub?output=csv`;
     const CSV_URL = BASE_CSV_URL + "&t=" + new Date().getTime();
     const GALLERY_CSV_URL = "https://docs.google.com/spreadsheets/d/1-6zw6Asok9Rk9bj5hhiy2PMawFs9pmOORq-ELxa9xCU/export?format=csv&gid=1197925606&t=" + new Date().getTime();
-    const LEADS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzyKkaMAo3RYrNiWHkDLO3_g00ImeJhbUgLhuot9OWLDf6JFETHd9nW1y4kd-cbe8tp/exec";
+    
+    // קישור ה-Apps Script המעודכן והפעיל שלך
+    const LEADS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzL0VLGTi-oDU4esdlmJVU69Q2AFrqfobl19yMptCRGU--pOwB7em9WclHzoa7wcS_m-g/exec";
     const DEFAULT_EMAIL = "kiteoutletisrael@gmail.com";
 
     const IMPORTER_ACCESS_CODES = {
@@ -955,12 +1013,6 @@
         if (!image.startsWith('http')) {
           const foundUrl = row.find(val => typeof val === 'string' && val.startsWith('http') && (val.includes('.jpg') || val.includes('.png') || val.includes('.webp') || val.includes('wixstatic') || val.includes('cdn/shop') || val.includes('uploads')));
           if (foundUrl) image = foundUrl;
-        }
-
-        let itemUrl = obj['קישור למפרט היצרן'] || obj['קישור לאתר היבואן'] || obj['קישור למוצר'] || row[18] || '';
-        if (!itemUrl.startsWith('http')) {
-          const foundSite = row.find(val => typeof val === 'string' && val.startsWith('http') && !val.includes('wa.me') && !val.includes('wixstatic') && !val.includes('.jpg') && !val.includes('.png') && !val.includes('.webp'));
-          if (foundSite) itemUrl = foundSite;
         }
 
         let origNum = 0, outletNum = 0;
@@ -1161,7 +1213,6 @@
       `;
     }
 
-    /* פתיחת טופס ליד חם ישירות מהאתר */
     function openHotLeadModal(id) {
       const p = products.find(x => x.id === id);
       if (!p) return;
@@ -1191,13 +1242,10 @@
       document.getElementById('hotLeadModal').style.display = 'none';
     }
 
-    /* שליחת ליד חם ישירות ללשונית ליד חם בשיטס */
-    async function submitHotLeadForm(e) {
+    // שליחת ליד חם ישירות ללשונית "ליד חם" עם תגובה מיידית
+    function submitHotLeadForm(e) {
       e.preventDefault();
-      const btn = document.getElementById('hotLeadSubmitBtn');
-      btn.innerText = 'בודק ושולח...';
-      btn.disabled = true;
-
+      
       const payload = {
         sheetName: 'ליד חם',
         name: document.getElementById('hotLeadCustomerName').value,
@@ -1206,46 +1254,47 @@
         product: document.getElementById('hotLeadItemName').value,
         importer: document.getElementById('hotLeadItemImporter').value,
         price: document.getElementById('hotLeadItemPriceVal').value,
-        size: document.getElementById('hotLeadRequestedSize').value || 'לא צוינה',
-        details: `ליד חם ישיר מהאתר: ${document.getElementById('hotLeadItemName').value} (${document.getElementById('hotLeadItemPriceVal').value}) מידה: ${document.getElementById('hotLeadRequestedSize').value}`
+        size: document.getElementById('hotLeadRequestedSize').value || 'לא צוינה'
       };
 
-      try {
-        await fetch(LEADS_SCRIPT_URL, {
-          method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-      } catch (err) {}
-
+      // הצגת אישור מיידי למשתמש
       document.getElementById('hotLeadForm').style.display = 'none';
       document.getElementById('hotLeadSuccessMsg').style.display = 'block';
-      setTimeout(() => { closeHotLeadModal(); }, 2200);
+
+      // שליחה ברקע לגוגל שיטס
+      fetch(LEADS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(err => console.error("Lead send error:", err));
+
+      setTimeout(() => { closeHotLeadModal(); }, 2000);
     }
 
-    /* שליחת צייד הדילים כ-ליד פנייה קר לשיטס */
-    async function submitColdLeadForm(e) {
+    // שליחת צייד הדילים ישירות ללשונית "ליד קר"
+    function submitColdLeadForm(e) {
       e.preventDefault();
-      const btn = document.getElementById('leadSubmitBtn');
-      btn.innerText = 'שומר...';
-      btn.disabled = true;
+      
+      const payload = {
+        sheetName: 'ליד קר',
+        name: document.getElementById('leadName').value,
+        phone: document.getElementById('leadPhone').value,
+        email: document.getElementById('leadEmail').value,
+        details: document.getElementById('leadDetails').value
+      };
 
-      try {
-        await fetch(LEADS_SCRIPT_URL, {
-          method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            sheetName: 'ליד פנייה קר',
-            name: document.getElementById('leadName').value,
-            phone: document.getElementById('leadPhone').value,
-            email: document.getElementById('leadEmail').value,
-            details: document.getElementById('leadDetails').value
-          })
-        });
-        document.getElementById('leadCaptureForm').style.display = 'none';
-        document.getElementById('leadSuccessMsg').style.display = 'block';
-      } catch (err) {
-        alert('הפרטים נשמרו!');
-        closeLeadModal();
-      }
+      document.getElementById('leadCaptureForm').style.display = 'none';
+      document.getElementById('leadSuccessMsg').style.display = 'block';
+
+      fetch(LEADS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(err => console.error("Cold lead send error:", err));
+
+      setTimeout(() => { closeLeadModal(); }, 2000);
     }
 
     function toggleWishlist(e, id, name) {
@@ -1264,7 +1313,7 @@
 
     function closeWishlistModal() { document.getElementById('wishlistModal').style.display = 'none'; }
 
-    async function submitWishlistAlert(e) {
+    function submitWishlistAlert(e) {
       e.preventDefault();
       const email = document.getElementById('wishlistEmail').value;
       if (!currentWishlistItem) return;
@@ -1272,12 +1321,10 @@
       savedWishlist.push(currentWishlistItem.id);
       localStorage.setItem('ko_wishlist', JSON.stringify(savedWishlist));
 
-      try {
-        await fetch(LEADS_SCRIPT_URL, {
-          method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sheetName: 'ליד פנייה קר', name: 'התראת ירידת מחיר/מלאי', email: email, details: `מעקב פריט: ${currentWishlistItem.name} (ID: ${currentWishlistItem.id})` })
-        });
-      } catch(err) {}
+      fetch(LEADS_SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sheetName: 'ליד קר', name: 'התראת מחיר/מלאי', email: email, details: `מעקב פריט: ${currentWishlistItem.name} (ID: ${currentWishlistItem.id})` })
+      }).catch(err => {});
 
       document.getElementById('wishlistSuccessMsg').style.display = 'block';
       setTimeout(() => { closeWishlistModal(); applyFilters(); }, 1200);
@@ -1517,18 +1564,15 @@ ${tsvRow}
       const mailtoLink = `mailto:${DEFAULT_EMAIL}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
       window.location.href = mailtoLink;
 
-      try {
-        fetch(LEADS_SCRIPT_URL, {
-          method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sheetName: 'ליד פנייה קר', name: `הוספת פריט: ${importer}`, email: importer, details: `${brand} ${model} | ${sizes} | ${outletPrice} ₪` })
-        });
-      } catch(err) {}
+      fetch(LEADS_SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sheetName: 'ליד קר', name: `הוספת פריט: ${importer}`, email: importer, details: `${brand} ${model} | ${sizes} | ${outletPrice} ₪` })
+      }).catch(err => {});
 
       alert('טופס הפריט נוצר בהצלחה! חלון המייל נפתח כעת לשליחה מרוכזת של הנתונים להעתקה לשיטס.');
       closeAddItemModal();
     }
 
-    /* שאלון התאמה נקי ללא שליחת מעקב לשיטס */
     let quizState = { level: '', style: '', budget: 0 };
 
     function startQuiz() {
