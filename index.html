@@ -375,7 +375,18 @@
       max-width: 1240px; margin: 30px auto 10px; padding: 20px 16px; border-top: 1px solid var(--border-color);
       display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
     }
-    .footer-links { display: flex; gap: 10px; align-items: center; }
+    .footer-links { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .legal-link { font-size: 0.78rem; color: #64748b; text-decoration: underline; cursor: pointer; font-weight: 600; }
+    .legal-link:hover { color: var(--primary); }
+
+    .disclaimer-text {
+      max-width: 1240px; margin: 0 auto 20px; padding: 0 16px; font-size: 0.75rem; color: #94a3b8; text-align: center; line-height: 1.4;
+    }
+
+    .spam-checkbox-wrap {
+      display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: #334155; margin-top: 6px; text-align: right; font-weight: 600;
+    }
+    .spam-checkbox-wrap input { width: 16px; height: 16px; accent-color: var(--primary); cursor: pointer; }
 
     @media (max-width: 860px) {
       .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -600,7 +611,7 @@
       </p>
       <div class="about-features-grid">
         <div class="about-feature-box">
-          🏷️️ <strong>חיסכון של אלפי שקלים:</strong> הנחות בלעדיות ישירות ממחירון היבואן הרשמי על דגמים מובילים.
+          🏷 <strong>חיסכון של אלפי שקלים:</strong> הנחות בלעדיות ישירות ממחירון היבואן הרשמי על דגמים מובילים.
         </div>
         <div class="about-feature-box">
           🛡️ <strong>100% אחריות ושירות:</strong> ציוד חדש בניילון המקבל גב, אחריות ושירות מלאים ישירות מהיבואן.
@@ -621,20 +632,27 @@
     <div class="gallery-grid" id="communityGalleryGrid"></div>
   </div>
 
-  <!-- פוטר תחתון נקי -->
+  <!-- פטור משפטי ליבואנים -->
+  <div class="disclaimer-text">
+    * האתר מהווה פלטפורמת קישור ומציג מידע ודילים בלבד. עסקת הרכישה, הסליקה, טיב הציוד והאחריות ניתנים ישירות ומלא בלבד על ידי היבואן/המועדון המפרסם.
+  </div>
+
+  <!-- פוטר תחתון נקי ותקני -->
   <footer>
     <div>
       <div style="font-weight:800; font-size:0.95rem; color:#0f172a;">Kite Outlet Israel</div>
       <div style="font-size:0.75rem; color:#64748b;">מרכז עודפי הציוד הרשמיים בישראל</div>
     </div>
     <div class="footer-links">
+      <a class="legal-link" onclick="openAccessibilityModal()">הצהרת נגישות</a>
+      <a class="legal-link" onclick="openTermsModal()">תקנון ותנאי שימוש</a>
       <a href="mailto:kiteoutletisrael@gmail.com?subject=פנייה להצטרפות יבואן ל-Kite Outlet Israel&body=היי,%20אני%20יבואן/משווק%20של%20מותג%20...%20ואשמח%20להצטרף%20ולפרסם%20עודפי%20יבואן%20באתר." class="nav-btn nav-join-btn">
         <span>🤝</span> הצטרפות יבואן
       </a>
     </div>
   </footer>
 
-  <!-- מודל בדיקת זמינות ורכישה (מתויג כ-ליד חם ישירות לשיטס) -->
+  <!-- מודל בדיקת זמינות ורכישה (מתויג כ-ליד חם ישירות לשיטס + חוק ספאם) -->
   <div class="modal-overlay" id="hotLeadModal" onclick="closeHotLeadModal()">
     <div class="modal-card" style="max-width: 440px;" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeHotLeadModal()">✕</button>
@@ -660,6 +678,11 @@
           <input type="tel" id="hotLeadCustomerPhone" class="filter-input" placeholder="מספר טלפון לחזרה *" required>
           <input type="text" id="hotLeadRequestedSize" class="filter-input" placeholder="מידה מבוקשת (למשל: 9 / 10 / 138)">
           <input type="email" id="hotLeadCustomerEmail" class="filter-input" placeholder="מייל לקבלת אישור (אופציונלי)">
+          
+          <label class="spam-checkbox-wrap">
+            <input type="checkbox" id="hotLeadSpamConsent" required>
+            <span>אני מאשר/ת קבלת עדכונים ודילים מ-Kite Outlet (ניתן להסיר בכל עת) *</span>
+          </label>
         </div>
 
         <button type="submit" id="hotLeadSubmitBtn" class="inquire-btn" style="width:100%; font-size:0.9rem; padding:10px; background:var(--action-color);">
@@ -674,7 +697,7 @@
     </div>
   </div>
 
-  <!-- מודל צייד הדילים (מתויג כ-ליד קר ישירות לשיטס) -->
+  <!-- מודל צייד הדילים (מתויג כ-ליד קר ישירות לשיטס + חוק ספאם) -->
   <div class="modal-overlay" id="leadModalOverlay" onclick="closeLeadModal()">
     <div class="modal-card" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeLeadModal()">✕</button>
@@ -686,6 +709,11 @@
           <input type="tel" id="leadPhone" class="filter-input" placeholder="טלפון *" required>
           <input type="email" id="leadEmail" class="filter-input" placeholder="כתובת מייל לעדכון *" required>
           <input type="text" id="leadDetails" class="filter-input" placeholder="איזה ציוד או מידה אתה מחפש? (למשל: דוטון איוו 9)" required>
+
+          <label class="spam-checkbox-wrap">
+            <input type="checkbox" id="coldLeadSpamConsent" required>
+            <span>אני מאשר/ת קבלת עדכונים ודילים מ-Kite Outlet *</span>
+          </label>
         </div>
         <button type="submit" id="leadSubmitBtn" class="inquire-btn" style="width:100%; border:none; cursor:pointer;">הפעל התראה אישית</button>
       </form>
@@ -695,7 +723,7 @@
     </div>
   </div>
 
-  <!-- מודל שמירת פריט למועדפים -->
+  <!-- מודל שמירת פריט למועדפים + חוק ספאם -->
   <div class="modal-overlay" id="wishlistModal" onclick="closeWishlistModal()">
     <div class="modal-card" style="max-width: 400px;" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeWishlistModal()">✕</button>
@@ -705,11 +733,49 @@
         <p style="font-size:0.82rem; color:#64748b; margin-bottom:12px;">הזן את המייל ונעדכן אותך מיד אם המחיר יורד או שהמלאי מסתיים.</p>
         <form onsubmit="submitWishlistAlert(event)">
           <input type="email" id="wishlistEmail" class="filter-input" placeholder="כתובת מייל לעדכון *" required style="margin-bottom:8px;">
+          
+          <label class="spam-checkbox-wrap" style="margin-bottom:10px;">
+            <input type="checkbox" id="wishlistSpamConsent" required>
+            <span>אני מאשר/ת קבלת עדכונים ודילים *</span>
+          </label>
+
           <button type="submit" id="wishlistSubmitBtn" class="inquire-btn" style="width:100%; border:none; cursor:pointer;">שמור פריט והפעל התראה</button>
         </form>
         <div id="wishlistSuccessMsg" style="display:none; color:#15803d; font-weight:700; font-size:0.85rem; margin-top:8px;">
           🎉 הפריט נשמר בהצלחה!
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- מודל הצהרת נגישות -->
+  <div class="modal-overlay" id="accessibilityModal" onclick="closeAccessibilityModal()">
+    <div class="modal-card" style="max-width: 520px; text-align:right;" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeAccessibilityModal()">✕</button>
+      <h2 style="font-size:1.25rem; font-weight:900; margin-bottom:10px; color:#0f172a;">הצהרת נגישות – Kite Outlet</h2>
+      <div style="font-size:0.86rem; color:#334155; line-height:1.6; display:flex; flex-direction:column; gap:8px;">
+        <p>אנו ב-<strong>Kite Outlet</strong> רואים חשיבות עליונה בהנגשת האתר לאנשים עם מוגבלויות, בהתאם לחוק שוויון זכויות לאנשים עם מוגבלות ותקן ת"י 5568 ברמת AA.</p>
+        <p><strong>התאמות שבוצעו באתר:</strong></p>
+        <ul style="padding-right: 20px;">
+          <li>שימוש בתוסף נגישות המאפשר שינוי ניגודיות צבעים, הגדלת פונטים והדגשת קישורים.</li>
+          <li>ניווט מלא ומסודר באמצעות מקלדת (Tab).</li>
+          <li>התאמה לקוראי מסך ותגיות תיאוריות לתמונות.</li>
+        </ul>
+        <p><strong>נתקלתם בבעיית נגישות?</strong> נשמח לסייע ולשפר. ניתן לפנות לרכז הנגישות בצוות האתר:</p>
+        <p>📧 מייל: <a href="mailto:kiteoutletisrael@gmail.com" style="color:var(--primary); font-weight:700;">kiteoutletisrael@gmail.com</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- מודל תקנון ותנאי שימוש -->
+  <div class="modal-overlay" id="termsModal" onclick="closeTermsModal()">
+    <div class="modal-card" style="max-width: 560px; text-align:right;" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeTermsModal()">✕</button>
+      <h2 style="font-size:1.25rem; font-weight:900; margin-bottom:10px; color:#0f172a;">תקנון ותנאי שימוש</h2>
+      <div style="font-size:0.84rem; color:#334155; line-height:1.6; display:flex; flex-direction:column; gap:8px;">
+        <p>1. <strong>מהות הפלטפורמה:</strong> אתר Kite Outlet משמש כפלטפורמה דיגיטלית המציגה ומקשרת בין גולשים לבין יבואנים ומפיצים מורשים של ציוד קייטסרפינג וגלישה עבור עודפי מלאי ודגמים קודמים.</p>
+        <p>2. <strong>הגבלת אחריות:</strong> האתר אינו מוכר את המוצרים בעצמו ואינו מחזיק במלאי. עסקאות הרכישה, הסליקה, התשלום, מתן האחריות ואספקת הציוד מתבצעות <strong>באחריותם המלאה והבלעדית של היבואנים והמועדונים המפרסמים בלבד</strong>.</p>
+        <p>3. <strong>פרטיות וחוק הספאם:</strong> השארת פרטים באתר מהווה הסכמה לקבלת עדכונים ודילים אודות מוצרים, בהתאם לסעיף 30א לחוק התקשורת. ניתן להסיר את הכתובת מרשימת התפוצה בכל עת דרך פנייה אלינו.</p>
       </div>
     </div>
   </div>
@@ -875,7 +941,6 @@
     const CSV_URL = BASE_CSV_URL + "&t=" + new Date().getTime();
     const GALLERY_CSV_URL = "https://docs.google.com/spreadsheets/d/1-6zw6Asok9Rk9bj5hhiy2PMawFs9pmOORq-ELxa9xCU/export?format=csv&gid=1197925606&t=" + new Date().getTime();
     
-    // קישור ה-Apps Script המעודכן והפעיל שלך
     const LEADS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzL0VLGTi-oDU4esdlmJVU69Q2AFrqfobl19yMptCRGU--pOwB7em9WclHzoa7wcS_m-g/exec";
     const DEFAULT_EMAIL = "kiteoutletisrael@gmail.com";
 
@@ -935,6 +1000,10 @@
     updateDropTimer();
 
     function closeDropWelcomeModal() { document.getElementById('dropWelcomeModal').style.display = 'none'; }
+    function openAccessibilityModal() { document.getElementById('accessibilityModal').style.display = 'flex'; }
+    function closeAccessibilityModal() { document.getElementById('accessibilityModal').style.display = 'none'; }
+    function openTermsModal() { document.getElementById('termsModal').style.display = 'flex'; }
+    function closeTermsModal() { document.getElementById('termsModal').style.display = 'none'; }
 
     function getModelAccolade(brand, model) {
       const full = (brand + ' ' + model).toLowerCase();
@@ -1229,6 +1298,7 @@
       document.getElementById('hotLeadCustomerPhone').value = '';
       document.getElementById('hotLeadRequestedSize').value = p.sizes ? p.sizes.split(',')[0].trim() : '';
       document.getElementById('hotLeadCustomerEmail').value = '';
+      document.getElementById('hotLeadSpamConsent').checked = false;
 
       document.getElementById('hotLeadForm').style.display = 'block';
       document.getElementById('hotLeadSuccessMsg').style.display = 'none';
@@ -1242,7 +1312,7 @@
       document.getElementById('hotLeadModal').style.display = 'none';
     }
 
-    // שליחת ליד חם ישירות ללשונית "ליד חם" עם תגובה מיידית
+    // שליחת ליד חם ישירות ללשונית "ליד חם"
     function submitHotLeadForm(e) {
       e.preventDefault();
       
@@ -1257,11 +1327,9 @@
         size: document.getElementById('hotLeadRequestedSize').value || 'לא צוינה'
       };
 
-      // הצגת אישור מיידי למשתמש
       document.getElementById('hotLeadForm').style.display = 'none';
       document.getElementById('hotLeadSuccessMsg').style.display = 'block';
 
-      // שליחה ברקע לגוגל שיטס
       fetch(LEADS_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -1307,6 +1375,7 @@
       } else {
         document.getElementById('wishlistModalTitle').innerText = `שמירת ${name}`;
         document.getElementById('wishlistSuccessMsg').style.display = 'none';
+        document.getElementById('wishlistSpamConsent').checked = false;
         document.getElementById('wishlistModal').style.display = 'flex';
       }
     }
@@ -1718,5 +1787,8 @@ ${tsvRow}
 
     loadProducts();
   </script>
+
+  <!-- תוסף נגישות חינמי (Enable) -->
+  <script src="https://cdn.enable.co.il/licenses/enable-v1.min.js"></script>
 </body>
 </html>
