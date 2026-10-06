@@ -491,7 +491,7 @@
     🎗️ <b>פיילוט השקה קהילתי:</b> 100% מעמלות האאוטלט מועברות כתרומת ציוד ושיקום למען <span>פצועי צה״ל ולוחמי המילואים</span>
   </div>
 
-  <!-- פופ-אפ דרופ בכניסה -->
+  <!-- פופ-אפ דרופ בכניסה - סגירה חלקה בלחיצה -->
   <div id="dropWelcomeModal" onclick="closeDropWelcomeModal()">
     <div class="drop-modal-card" onclick="event.stopPropagation()">
       <span class="dm-badge" id="dmBadgeStatus">⚡ פתיחת ה-Drop הבא</span>
@@ -1101,7 +1101,7 @@
     let currentWishlistItem = null;
     let activeScenario = null;
 
-    // תיעוד כניסות לאתר בשיטס בצורה בטוחה
+    // תיעוד כניסות לאתר בשיטס בצורה בטוחה ולא חוסמת
     function logSiteVisit(trigger) {
       try {
         const payload = JSON.stringify({
@@ -1170,13 +1170,12 @@
     setInterval(updateDropTimer, 1000);
     updateDropTimer();
 
-    // סגירת פופ-אפ הדרופ
+    // סגירת פופ-אפ הדרופ (ללא תיעוד כפול של כניסה)
     function closeDropWelcomeModal() {
       var modal = document.getElementById('dropWelcomeModal');
       if (modal) {
         modal.style.display = 'none';
       }
-      logSiteVisit('לחיצה על כניסה לקטלוג (דרופ)');
     }
 
     function openAccessibilityModal() { document.getElementById('accessibilityModal').style.display = 'flex'; }
@@ -1723,7 +1722,7 @@
 
     function closePortalModal() { document.getElementById('importerPortalModal').style.display = 'none'; }
 
-    // פתיחת פורטל יבואן עם נתוני LIVE
+    // פתיחת פורטל יבואן עם נתוני LIVE מגוגל שיטס
     async function openPortalDashboard(importerName) {
       document.getElementById('portalSelectedImporterTitle').innerText = importerName;
       document.getElementById('importerPortalModal').style.display = 'flex';
@@ -1895,7 +1894,7 @@
       renderQuizStep(nextStep);
     }
 
-    // סיום השאלון וסינון מדויק
+    // סיום השאלון: סינון קטלוג + שליחה ישירה ללשונית "שאלון"
     function finishQuiz(budget) {
       quizState.budget = budget;
       
@@ -1917,7 +1916,26 @@
         target.scrollIntoView({ behavior: 'smooth' });
       }
 
-      logSiteVisit('סיום שאלון התאמה: ' + quizState.level + ' | ' + quizState.style + ' | ' + budget + ' ₪');
+      // שליחה ישירה ומסודרת לכרטיסיית "שאלון"
+      try {
+        var payload = JSON.stringify({
+          sheetName: 'שאלון',
+          level: quizState.level,
+          style: quizState.style,
+          budget: '₪' + budget.toLocaleString(),
+          details: 'התאמה בוצעה בקטלוג'
+        });
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(LEADS_SCRIPT_URL, payload);
+        } else {
+          fetch(LEADS_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: payload
+          }).catch(function() {});
+        }
+      } catch(e) {}
     }
 
     function closeQuiz() { document.getElementById('quizOverlay').style.display = 'none'; }
@@ -1940,7 +1958,7 @@
             <div style="display:flex; align-items:baseline; gap:8px;">
               <span style="font-size:1.45rem; font-weight:900; color:#0f172a;">${p.outletPrice}</span>
               ${p.originalPrice ? `<span style="font-size:0.8rem; color:#94a3b8; text-decoration:line-through;">מחירון: ${p.originalPrice}</span>` : ''}
-              ${p.discount ? `<span style="background:#dc2626; color:white; font-size:0.72rem; font-weight:800; padding:2px 5px; border-radius:4px;">${p.discount}</span>` : ''}
+              ${p.discount ? `<span style="background:#dc2626; colorwhite; font-size:0.72rem; font-weight:800; padding:2px 5px; border-radius:4px;">${p.discount}</span>` : ''}
             </div>
           </div>
         </div>
@@ -2019,7 +2037,7 @@
       renderCategorizedProducts(products);
     }
 
-    // הפעלה בעליית הדף
+    // הפעלה ראשונית ורישום כניסה יחידה בעליית הדף
     loadProducts();
     logSiteVisit('טעינת דף');
   </script>
