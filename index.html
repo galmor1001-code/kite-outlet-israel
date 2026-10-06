@@ -1268,14 +1268,28 @@
           if (foundUrl) image = foundUrl;
         }
 
-        let origNum = 0, outletNum = 0;
+        // פענוח מחירים חכם התומך במספרים בודדים ובטווחי מחירים (למשל: 4500-6800)
+        let origNum = 0, outletNum = 0, outletMaxNum = 0;
+        let isPriceRange = false;
+        let priceRangeText = '';
+
         const origStr = obj['מחיר מחירון מקורי (₪) '] || obj['מחיר מחירון מקורי (₪)'] || row[8] || '';
         const outletStr = obj['מחיר אאוטלט (₪)'] || row[9] || '';
 
         const origMatch = origStr.replace(/,/g, '').match(/\d+/);
-        const outletMatch = outletStr.replace(/,/g, '').match(/\d+/);
         if (origMatch) origNum = parseInt(origMatch[0], 10);
-        if (outletMatch) outletNum = parseInt(outletMatch[0], 10);
+
+        const outletMatches = outletStr.replace(/,/g, '').match(/\d+/g);
+        if (outletMatches && outletMatches.length > 0) {
+          outletNum = parseInt(outletMatches[0], 10);
+          if (outletMatches.length > 1) {
+            outletMaxNum = parseInt(outletMatches[1], 10);
+            if (outletMaxNum > outletNum) {
+              isPriceRange = true;
+              priceRangeText = `${outletNum.toLocaleString()} ₪ - ${outletMaxNum.toLocaleString()} ₪`;
+            }
+          }
+        }
 
         let finalDisplayPrice = outletNum > 0 ? outletNum : origNum;
         const isImageValid = image.startsWith('http://') || image.startsWith('https://');
@@ -1297,13 +1311,23 @@
           featuresText = featuresText.replace(/אלוף King of the Air[^\.,]*/g, 'ביצועי קצה שעוד לא הכרתם');
         }
 
+        const isKiteItem = categoryVal.includes('קייט');
+        let cardPriceDisplay = `${finalDisplayPrice.toLocaleString()} ₪`;
+        if (isKiteItem || isPriceRange) {
+          cardPriceDisplay = `החל מ- ${finalDisplayPrice.toLocaleString()} ₪`;
+        }
+
         validItems.push({
           id: id, importer: importer, brand: brand, model: model, category: categoryVal, year: year, style: style,
           level: (style.includes('Big Air') || style.includes('Performance')) ? 'מתקדם / מקצועי' : 'לכל הרמות',
           sizes: sizes,
           originalPrice: isDiscounted ? `${origNum.toLocaleString()} ₪` : '',
-          outletPrice: `${finalDisplayPrice.toLocaleString()} ₪`,
+          outletPrice: cardPriceDisplay,
+          rawPrice: `${finalDisplayPrice.toLocaleString()} ₪`,
           minPrice: finalDisplayPrice,
+          isPriceRange: isPriceRange,
+          priceRangeText: priceRangeText,
+          isKite: isKiteItem,
           isDiscounted: isDiscounted, savings: savingsAmount,
           discount: (isDiscounted && discountPercent > 0) ? `${discountPercent}% הנחה` : '',
           features: featuresText,
@@ -1454,6 +1478,7 @@
               <div>
                 ${p.originalPrice ? `<span class="original-price">מחירון: ${p.originalPrice}</span>` : ''}
                 <div class="outlet-price">${p.outletPrice}</div>
+                ${p.isKite ? `<div style="font-size:0.7rem; color:#64748b; font-weight:700; margin-top:2px;">* המחיר משתנה לפי מידה</div>` : ''}
               </div>
             </div>
             <div class="btn-group" onclick="event.stopPropagation()">
@@ -1944,6 +1969,16 @@
       const p = products.find(function(x) { return x.id === id; });
       if (!p) return;
 
+      const rangeInfoHtml = p.isPriceRange ? `
+        <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:8px 10px; margin-top:8px; font-size:0.8rem; color:#166534; font-weight:700;">
+          🏷️ <b>טווח מחירי עודפים במלאי:</b> ${p.priceRangeText} (המחיר הסופי נקבע בהתאם למידה המבוקשת)
+        </div>
+      ` : (p.isKite ? `
+        <div style="font-size:0.75rem; color:#64748b; margin-top:4px; font-weight:700;">
+          * המחיר מתייחס למידת בסיס ומשתנה לפי המידה המבוקשת מול מחסן היבואן
+        </div>
+      ` : '');
+
       document.getElementById('quickViewContent').innerHTML = `
         <div style="display:flex; gap:14px; margin-bottom:14px; flex-wrap:wrap;">
           <div style="width:130px; height:130px; background:#fafafa; border:1px solid #e2e8f0; border-radius:10px; display:flex; align-items:center; justify-content:center; padding:6px;">
@@ -1958,8 +1993,9 @@
             <div style="display:flex; align-items:baseline; gap:8px;">
               <span style="font-size:1.45rem; font-weight:900; color:#0f172a;">${p.outletPrice}</span>
               ${p.originalPrice ? `<span style="font-size:0.8rem; color:#94a3b8; text-decoration:line-through;">מחירון: ${p.originalPrice}</span>` : ''}
-              ${p.discount ? `<span style="background:#dc2626; colorwhite; font-size:0.72rem; font-weight:800; padding:2px 5px; border-radius:4px;">${p.discount}</span>` : ''}
+              ${p.discount ? `<span style="background:#dc2626; color:white; font-size:0.72rem; font-weight:800; padding:2px 5px; border-radius:4px;">${p.discount}</span>` : ''}
             </div>
+            ${rangeInfoHtml}
           </div>
         </div>
         <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; margin-bottom:14px;">
