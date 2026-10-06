@@ -33,7 +33,7 @@
       max-width: 100vw;
     }
 
-    /* באנר תרומה עליון - פיילוט השקה */
+    /* באנר תרומה עליון */
     .charity-banner {
       background: #0f172a; color: #f8fafc; font-size: 0.82rem; font-weight: 700;
       text-align: center; padding: 7px 12px; letter-spacing: 0.2px;
@@ -45,10 +45,12 @@
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(4px);
       z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 16px;
+      cursor: pointer;
     }
     .drop-modal-card {
       background: #ffffff; border-radius: 20px; padding: 32px 24px; max-width: 460px; width: 100%;
       text-align: center; border: 1.5px solid var(--border-color); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
+      cursor: default;
     }
     .dm-badge {
       display: inline-block; background: #e0f2fe; color: #0284c7; font-weight: 800; font-size: 0.8rem;
@@ -68,9 +70,10 @@
       color: #991b1b; font-weight: 800; font-size: 1.05rem; margin-bottom: 18px; line-height: 1.4;
     }
     .dm-btn {
-      width: 100%; background: #0f172a; color: white; border: none; padding: 12px;
-      border-radius: 10px; font-weight: 800; font-size: 1rem; cursor: pointer;
+      width: 100%; background: #0f172a; color: white; border: none; padding: 14px;
+      border-radius: 10px; font-weight: 800; font-size: 1.05rem; cursor: pointer; transition: background 0.2s;
     }
+    .dm-btn:hover { background: #1e293b; }
 
     /* ניווט עליון */
     .top-nav {
@@ -108,7 +111,6 @@
 
     /* כותרת ראשית */
     header { background: #ffffff; border-bottom: 1px solid var(--border-color); padding: 22px 16px 18px; text-align: center; }
-    
     .hero-deal-banner {
       display: inline-flex; align-items: center; gap: 6px;
       background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
@@ -116,7 +118,6 @@
       padding: 5px 14px; border-radius: 999px; font-size: 0.85rem; font-weight: 900;
       margin-bottom: 10px;
     }
-
     h1 { font-size: 1.85rem; font-weight: 900; color: #0f172a; letter-spacing: -0.5px; margin-bottom: 14px; line-height: 1.25; }
 
     /* בלוק מבצעים מתחלף */
@@ -222,7 +223,7 @@
     .filter-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 8px; border-top: 1px solid #f1f5f9; }
     .reset-btn { background: none; border: none; color: #ef4444; font-weight: 700; font-size: 0.78rem; cursor: pointer; }
 
-    /* כותרות קטגוריה וציטוטים */
+    /* כותרות קטגוריה */
     .category-divider-wrap { margin: 30px 0 14px; display: flex; align-items: center; gap: 10px; }
     .category-divider-line { flex-grow: 1; height: 1px; background: #e2e8f0; }
     .category-divider-title {
@@ -231,7 +232,6 @@
       padding: 4px 14px; border-radius: 999px;
     }
     .cat-count { font-size: 0.75rem; font-weight: 700; color: #64748b; }
-
     .community-quote-banner {
       background: #f8fafc; border-right: 4px solid var(--primary);
       border-radius: 8px; padding: 12px 14px; margin: 18px 0 8px;
@@ -491,9 +491,9 @@
     🎗️ <b>פיילוט השקה קהילתי:</b> 100% מעמלות האאוטלט מועברות כתרומת ציוד ושיקום למען <span>פצועי צה״ל ולוחמי המילואים</span>
   </div>
 
-  <!-- פופ-אפ דרופ בכניסה -->
-  <div id="dropWelcomeModal">
-    <div class="drop-modal-card">
+  <!-- פופ-אפ דרופ בכניסה - כולל סגירה בלחיצה על הרקע -->
+  <div id="dropWelcomeModal" onclick="closeDropWelcomeModal()">
+    <div class="drop-modal-card" onclick="event.stopPropagation()">
       <span class="dm-badge" id="dmBadgeStatus">⚡ פתיחת ה-Drop הבא</span>
       <h2 class="dm-title" id="dmTitleText">הדרופ השני נפתח במוצ״ש הקרוב ב-20:30</h2>
       <p class="dm-desc" id="dmDescText">מלאי עודפים מוגבל מיבואנים רשמיים עם אחריות מלאה במחירי יד 2.</p>
@@ -509,7 +509,7 @@
         🔥 ה-Drop באוויר! מלאי עודפים מוגבל.
       </div>
 
-      <button class="dm-btn" onclick="closeDropWelcomeModal()">כניסה לקטלוג ←</button>
+      <button type="button" class="dm-btn" onclick="closeDropWelcomeModal()">כניסה לקטלוג ←</button>
     </div>
   </div>
 
@@ -958,14 +958,14 @@
     </div>
   </div>
 
-  <!-- מודל פורטל יבואנים מוגן -->
+  <!-- מודל פורטל יבואנים מוגן עם נתוני LIVE -->
   <div class="modal-overlay" id="importerPortalModal" onclick="closePortalModal()">
     <div class="modal-card" style="max-width: 760px;" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closePortalModal()">✕</button>
       
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid var(--border-color); padding-bottom:10px; flex-wrap:gap:8px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid var(--border-color); padding-bottom:10px; flex-wrap:wrap; gap:8px;">
         <div>
-          <span style="font-size:0.72rem; font-weight:800; color:#0284c7; text-transform:uppercase;">פורטל ניהול מאובטח</span>
+          <span style="font-size:0.72rem; font-weight:800; color:#0284c7; text-transform:uppercase;">פורטל ניהול מאובטח • Live מ-Google Sheets</span>
           <h2 id="portalSelectedImporterTitle" style="font-size:1.25rem; font-weight:900; margin-top:1px;">יבואן</h2>
         </div>
         <div style="display:flex; gap:6px;">
@@ -977,13 +977,13 @@
       </div>
 
       <div class="portal-stats-grid">
-        <div class="stat-box"><div class="stat-val" id="portalStatCount">0</div><div class="stat-lbl">פריטים פעילים שלך</div></div>
-        <div class="stat-box"><div class="stat-val" id="portalStatHot" style="color:var(--primary);">0</div><div class="stat-lbl">פניות והתעניינות השבוע</div></div>
-        <div class="stat-box"><div class="stat-val" id="portalStatCold" style="color:var(--accent);">0</div><div class="stat-lbl">ממתינים בצייד הדילים</div></div>
+        <div class="stat-box"><div class="stat-val" id="portalStatCount">0</div><div class="stat-lbl">פריטים פעילים בקטלוג</div></div>
+        <div class="stat-box"><div class="stat-val" id="portalStatHot" style="color:var(--primary);">...</div><div class="stat-lbl">פניות רכישה (ליד חם בשיטס)</div></div>
+        <div class="stat-box"><div class="stat-val" id="portalStatCold" style="color:var(--accent);">...</div><div class="stat-lbl">ממתינים בצייד הדילים</div></div>
       </div>
 
       <div class="chart-container">
-        <div class="chart-title"><span>התפלגות עניין במוצרים שלך</span><span style="font-size:0.7rem; color:var(--text-muted);">נתונים שבועיים</span></div>
+        <div class="chart-title"><span>התפלגות עניין בדגמים שלך</span><span id="portalSyncTime" style="font-size:0.7rem; color:var(--text-muted);">סנכרון נתונים...</span></div>
         <div id="portalChartContent"></div>
       </div>
 
@@ -1079,7 +1079,7 @@
 
   <script>
     const SPREADSHEET_ID = "2PACX-1vSAncp2nNLO6jIwFT07bDpVDjYerLk6DLW6FOKnf_GHMPGRWKaDclMTYs_AJcNU-kTJXhHdgZ8ikyUj";
-    const BASE_CSV_URL = `https://docs.google.com/spreadsheets/d/e/${SPREADSHEET_ID}/pub?output=csv`;
+    const BASE_CSV_URL = "https://docs.google.com/spreadsheets/d/e/" + SPREADSHEET_ID + "/pub?output=csv";
     const CSV_URL = BASE_CSV_URL + "&t=" + new Date().getTime();
     const GALLERY_CSV_URL = "https://docs.google.com/spreadsheets/d/1-6zw6Asok9Rk9bj5hhiy2PMawFs9pmOORq-ELxa9xCU/export?format=csv&gid=1197925606&t=" + new Date().getTime();
     
@@ -1101,18 +1101,24 @@
     let currentWishlistItem = null;
     let activeScenario = null;
 
-    // רישום כניסות לאתר ולחיצות בשיטס
+    // שליחת אירועים לשיטס בצורה בטוחה ולא חוסמת
     function logSiteVisit(trigger) {
-      const payload = {
-        sheetName: 'כניסות',
-        source: trigger || 'טעינת דף'
-      };
-      fetch(LEADS_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).catch(function(err) {});
+      try {
+        const payload = JSON.stringify({
+          sheetName: 'כניסות',
+          source: trigger || 'טעינת דף'
+        });
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(LEADS_SCRIPT_URL, payload);
+        } else {
+          fetch(LEADS_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: payload
+          }).catch(function() {});
+        }
+      } catch(e) {}
     }
 
     function getNextSaturdayDrop() {
@@ -1135,10 +1141,14 @@
       const diff = dropTargetTime - now;
 
       if (diff <= 0) {
-        document.getElementById('dmTimerGrid').style.display = 'none';
-        document.getElementById('dmLiveBanner').style.display = 'block';
-        document.getElementById('dmBadgeStatus').innerText = '🔥 ה-Drop באוויר!';
-        document.getElementById('dmTitleText').innerText = 'דרופ 2 פעיל כעת באתר!';
+        var grid = document.getElementById('dmTimerGrid');
+        var banner = document.getElementById('dmLiveBanner');
+        var status = document.getElementById('dmBadgeStatus');
+        var title = document.getElementById('dmTitleText');
+        if (grid) grid.style.display = 'none';
+        if (banner) banner.style.display = 'block';
+        if (status) status.innerText = '🔥 ה-Drop באוויר!';
+        if (title) title.innerText = 'דרופ 2 פעיל כעת באתר!';
         return;
       }
 
@@ -1147,17 +1157,25 @@
       const mins = Math.floor((diff % (1000 * 60)) / (1000 * 60));
       const secs = Math.floor((diff % (1000 * 60)) / 1000);
 
-      document.getElementById('popDays').innerText = String(days).padStart(2, '0');
-      document.getElementById('popHours').innerText = String(hours).padStart(2, '0');
-      document.getElementById('popMins').innerText = String(mins).padStart(2, '0');
-      document.getElementById('popSecs').innerText = String(secs).padStart(2, '0');
+      var d = document.getElementById('popDays');
+      var h = document.getElementById('popHours');
+      var m = document.getElementById('popMins');
+      var s = document.getElementById('popSecs');
+      if (d) d.innerText = String(days).padStart(2, '0');
+      if (h) h.innerText = String(hours).padStart(2, '0');
+      if (m) m.innerText = String(mins).padStart(2, '0');
+      if (s) s.innerText = String(secs).padStart(2, '0');
     }
 
     setInterval(updateDropTimer, 1000);
     updateDropTimer();
 
+    // סגירת פופ-אפ הדרופ מיידית
     function closeDropWelcomeModal() {
-      document.getElementById('dropWelcomeModal').style.display = 'none';
+      var modal = document.getElementById('dropWelcomeModal');
+      if (modal) {
+        modal.style.display = 'none';
+      }
       logSiteVisit('לחיצה על כניסה לקטלוג (דרופ)');
     }
 
@@ -1705,36 +1723,19 @@
 
     function closePortalModal() { document.getElementById('importerPortalModal').style.display = 'none'; }
 
-    function openPortalDashboard(importerName) {
+    // פתיחת פורטל יבואן עם נתוני LIVE מגוגל שיטס
+    async function openPortalDashboard(importerName) {
       document.getElementById('portalSelectedImporterTitle').innerText = importerName;
       document.getElementById('importerPortalModal').style.display = 'flex';
 
       const myItems = products.filter(function(p) { return p.importer === importerName; });
       document.getElementById('portalStatCount').innerText = myItems.length;
 
-      const hotClicks = Math.round(myItems.length * 3 + 5);
-      const coldLeads = Math.round(myItems.length * 1.5 + 2);
-      document.getElementById('portalStatHot').innerText = hotClicks;
-      document.getElementById('portalStatCold').innerText = coldLeads;
+      document.getElementById('portalStatHot').innerText = '...';
+      document.getElementById('portalStatCold').innerText = '...';
+      document.getElementById('portalSyncTime').innerText = 'מסנכרן נתונים מהגיליון...';
 
-      const chartEl = document.getElementById('portalChartContent');
-      if (!myItems.length) {
-        chartEl.innerHTML = '<div style="text-align:center; color:#64748b; font-size:0.8rem; padding:10px;">אין פריטים פעילים להצגת גרף</div>';
-      } else {
-        const top = myItems.slice(0, 5);
-        chartEl.innerHTML = top.map(function(p, idx) {
-          const clicks = Math.max(1, Math.round(hotClicks * (0.35 - (idx * 0.05))));
-          const percent = Math.min(100, Math.round((clicks / (hotClicks * 0.4)) * 100));
-          return `
-            <div class="bar-row">
-              <div class="bar-label" title="${p.brand} ${p.model}">${p.brand} ${p.model}</div>
-              <div class="bar-track"><div class="bar-fill" style="width:${percent}%;"></div></div>
-              <div class="bar-num">${clicks} ✉️</div>
-            </div>
-          `;
-        }).join('');
-      }
-
+      // מילוי טבלת המלאי של היבואן
       const tbody = document.getElementById('portalTableBody');
       tbody.innerHTML = myItems.map(function(p) {
         const removeMsg = encodeURIComponent(`דיווח הסרת פריט מהמלאי באתר Kite Outlet:\nדגם: ${p.brand} ${p.model} (${p.year})\nמידה: ${p.sizes}\nמזהה פריט: ${p.id}`);
@@ -1752,6 +1753,45 @@
           </tr>
         `;
       }).join('');
+
+      // משיכת נתוני לייב מ-Apps Script
+      try {
+        const fetchUrl = LEADS_SCRIPT_URL + "?importer=" + encodeURIComponent(importerName) + "&t=" + new Date().getTime();
+        const res = await fetch(fetchUrl);
+        const stats = await res.json();
+
+        if (stats.status === 'success') {
+          document.getElementById('portalStatHot').innerText = stats.hotCount;
+          document.getElementById('portalStatCold').innerText = stats.coldCount;
+          document.getElementById('portalSyncTime').innerText = 'עודכן הרגע מ-Google Sheets';
+
+          const chartEl = document.getElementById('portalChartContent');
+          const modelKeys = Object.keys(stats.modelClicks || {});
+
+          if (modelKeys.length === 0) {
+            chartEl.innerHTML = '<div style="text-align:center; color:#64748b; font-size:0.8rem; padding:10px;">טרם נרשמו פניות לפריטים שלכם השבוע בגיליון</div>';
+          } else {
+            let maxVal = 1;
+            modelKeys.forEach(function(k) { if (stats.modelClicks[k] > maxVal) maxVal = stats.modelClicks[k]; });
+
+            chartEl.innerHTML = modelKeys.map(function(modelName) {
+              const clicks = stats.modelClicks[modelName];
+              const pct = Math.round((clicks / maxVal) * 100);
+              return `
+                <div class="bar-row">
+                  <div class="bar-label" title="${modelName}">${modelName}</div>
+                  <div class="bar-track"><div class="bar-fill" style="width:${pct}%;"></div></div>
+                  <div class="bar-num">${clicks} ✉️</div>
+                </div>
+              `;
+            }).join('');
+          }
+        }
+      } catch (err) {
+        document.getElementById('portalStatHot').innerText = '0';
+        document.getElementById('portalStatCold').innerText = '0';
+        document.getElementById('portalSyncTime').innerText = 'שגיאת סנכרון רשת';
+      }
     }
 
     function openAddItemModal() {
@@ -1772,3 +1812,203 @@
       const brand = document.getElementById('addBrand').value.trim();
       const model = document.getElementById('addModel').value.trim();
       const category = document.getElementById('addCategory').value;
+      const year = document.getElementById('addYear').value.trim();
+      const style = document.getElementById('addStyle').value;
+      const sizes = document.getElementById('addSizes').value.trim();
+      const origPrice = document.getElementById('addOrigPrice').value.trim();
+      const outletPrice = document.getElementById('addOutletPrice').value.trim();
+      const image = document.getElementById('addImageUrl').value.trim();
+      const itemUrl = document.getElementById('addItemUrl').value.trim();
+      const features = document.getElementById('addFeatures').value.trim();
+
+      let discountCalc = '';
+      if (origPrice && outletPrice && Number(origPrice) > Number(outletPrice)) {
+        discountCalc = Math.round(((origPrice - outletPrice) / origPrice) * 100) + '%';
+      }
+
+      const cleanBrand = brand.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const cleanModel = model.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const autoId = cleanBrand + '-' + cleanModel + '-' + year;
+
+      const tsvRow = autoId + '\t' + importer + '\t' + brand + '\t' + model + '\t' + category + '\t' + year + '\t' + style + '\t' + sizes + '\t' + origPrice + ' ₪\t' + outletPrice + ' ₪\t' + discountCalc + '\t' + features + '\t\t\t\t\t\t' + image + '\t' + itemUrl;
+
+      const emailSubject = "הוספת פריט חדש למלאי: " + importer + " - " + brand + " " + model;
+      const emailBody = "שלום מנהל Kite Outlet,\n\nהתקבלה בקשה להעלאת פריט עודפים חדש למערכת עבור: " + importer + "\n\n=======================================\n📋 שורה מוכנה להעתקה והדבקה לשיטס:\n" + tsvRow + "\n=======================================\n\n• מזהה מוצר: " + autoId + "\n• יבואן: " + importer + "\n• מותג: " + brand + "\n• דגם: " + model + "\n• קטגוריה: " + category + "\n• שנתון: " + year + "\n• סגנון: " + style + "\n• מידות: " + sizes + "\n• מחירון: " + origPrice + " ₪\n• אאוטלט: " + outletPrice + " ₪ (" + discountCalc + ")\n• תמונה: " + image + "\n• אתר: " + itemUrl + "\n• מאפיינים: " + features;
+
+      const mailtoLink = "mailto:" + DEFAULT_EMAIL + "?subject=" + encodeURIComponent(emailSubject) + "&body=" + encodeURIComponent(emailBody);
+      window.location.href = mailtoLink;
+
+      fetch(LEADS_SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sheetName: 'ליד קר', name: 'הוספת פריט: ' + importer, email: importer, details: brand + ' ' + model + ' | ' + sizes + ' | ' + outletPrice + ' ₪' })
+      }).catch(function(err) {});
+
+      alert('טופס הפריט נוצר בהצלחה! חלון המייל נפתח כעת לשליחה מרוכזת של הנתונים.');
+      closeAddItemModal();
+    }
+
+    let quizState = { level: '', style: '', budget: 0 };
+
+    function startQuiz() {
+      quizState = { level: '', style: '', budget: 0 };
+      renderQuizStep(1);
+      document.getElementById('quizOverlay').style.display = 'flex';
+    }
+
+    function renderQuizStep(step) {
+      const c = document.getElementById('quizContent');
+      if (step === 1) {
+        c.innerHTML = `
+          <div style="font-size:0.75rem; color:#0284c7; font-weight:800; margin-bottom:4px;">שלב 1 מתוך 3</div>
+          <h3 style="font-size:1.2rem; font-weight:800; margin-bottom:6px;">מה רמת הגלישה שלך?</h3>
+          <p style="font-size:0.82rem; color:#64748b; margin-bottom:12px;">כדי שנתאים חופה יציבה וסלחנית או חופה חדה ומהירה.</p>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <button class="importer-card-btn" onclick="saveQuizAnswer('level', 'לכל הרמות', 2)">מתחיל / בינוני (שליטה בחידוד ומעברים)</button>
+            <button class="importer-card-btn" onclick="saveQuizAnswer('level', 'מתקדם / מקצועי', 2)">מתקדם / מקצועי (קפיצות גבוהות ו-Big Air)</button>
+          </div>
+        `;
+      } else if (step === 2) {
+        c.innerHTML = `
+          <div style="font-size:0.75rem; color:#0284c7; font-weight:800; margin-bottom:4px;">שלב 2 מתוך 3</div>
+          <h3 style="font-size:1.2rem; font-weight:800; margin-bottom:6px;">מה סגנון הגלישה המרכזי שלך?</h3>
+          <p style="font-size:0.82rem; color:#64748b; margin-bottom:12px;">בחר את הסגנון העיקרי שאתה מחפש לקבל מהציוד.</p>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <button class="importer-card-btn" onclick="saveQuizAnswer('style', 'Freeride', 3)">Freeride (נוחות, חידוד קל וגלישה בכל תנאי)</button>
+            <button class="importer-card-btn" onclick="saveQuizAnswer('style', 'Big Air', 3)">Big Air (גובה קיצוני, Hangtime ולופים)</button>
+            <button class="importer-card-btn" onclick="saveQuizAnswer('style', 'Waves', 3)">Waves (גלישת גלים ודריפט מושלם)</button>
+          </div>
+        `;
+      } else if (step === 3) {
+        c.innerHTML = `
+          <div style="font-size:0.75rem; color:#0284c7; font-weight:800; margin-bottom:4px;">שלב 3 מתוך 3</div>
+          <h3 style="font-size:1.2rem; font-weight:800; margin-bottom:6px;">מה מסגרת התקציב שלך לחופה?</h3>
+          <p style="font-size:0.82rem; color:#64748b; margin-bottom:12px;">נציג לך את העודפים הטובים ביותר בטווח זה.</p>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <button class="importer-card-btn" onclick="finishQuiz(4500)">עד 4,500 ₪</button>
+            <button class="importer-card-btn" onclick="finishQuiz(6500)">עד 6,500 ₪</button>
+            <button class="importer-card-btn" onclick="finishQuiz(9500)">ללא הגבלת תקציב (דגמי High-End)</button>
+          </div>
+        `;
+      }
+    }
+
+    function saveQuizAnswer(key, val, nextStep) {
+      quizState[key] = val;
+      renderQuizStep(nextStep);
+    }
+
+    function finishQuiz(budget) {
+      quizState.budget = budget;
+      document.getElementById('levelSelect').value = quizState.level;
+      document.getElementById('styleSelect').value = quizState.style;
+      document.getElementById('priceRange').value = budget;
+      document.getElementById('priceDisplay').innerText = `₪${budget.toLocaleString()}`;
+      applyFilters();
+      closeQuiz();
+    }
+
+    function closeQuiz() { document.getElementById('quizOverlay').style.display = 'none'; }
+
+    function openQuickView(id) {
+      const p = products.find(function(x) { return x.id === id; });
+      if (!p) return;
+
+      document.getElementById('quickViewContent').innerHTML = `
+        <div style="display:flex; gap:14px; margin-bottom:14px; flex-wrap:wrap;">
+          <div style="width:130px; height:130px; background:#fafafa; border:1px solid #e2e8f0; border-radius:10px; display:flex; align-items:center; justify-content:center; padding:6px;">
+            <img src="${p.image}" style="max-width:100%; max-height:100%; object-fit:contain;">
+          </div>
+          <div style="flex:1; min-width:180px;">
+            <div style="font-size:0.75rem; color:#0284c7; font-weight:800; text-transform:uppercase;">${p.importer} • יבואן רשמי</div>
+            <h3 style="font-size:1.25rem; font-weight:900; margin:2px 0 4px;">${p.brand} ${p.model}</h3>
+            <div style="font-size:0.8rem; color:#475569; margin-bottom:6px;">
+              <span>סגנון: <b>${p.style}</b></span> • <span>שנתון: <b>${p.year}</b></span> • <span>רמה: <b>${p.level}</b></span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:1.45rem; font-weight:900; color:#0f172a;">${p.outletPrice}</span>
+              ${p.originalPrice ? `<span style="font-size:0.8rem; color:#94a3b8; text-decoration:line-through;">מחירון: ${p.originalPrice}</span>` : ''}
+              ${p.discount ? `<span style="background:#dc2626; color:white; font-size:0.72rem; font-weight:800; padding:2px 5px; border-radius:4px;">${p.discount}</span>` : ''}
+            </div>
+          </div>
+        </div>
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; margin-bottom:14px;">
+          <div style="font-weight:800; font-size:0.82rem; color:#0f172a; margin-bottom:4px;">🛠 מאפיינים וטכנולוגיית חומרים:</div>
+          <p style="font-size:0.82rem; color:#334155; line-height:1.45; margin-bottom:6px;">${p.features || 'חומרים מתקדמים מעודפי יבואן רשמי.'}</p>
+          <div style="font-size:0.78rem; color:#64748b;"><b>מידות זמינות במלאי עודפים:</b> ${p.sizes || 'בדיקת זמינות מול היבואן'}</div>
+        </div>
+        <button onclick="closeQuickView(); openHotLeadModal('${p.id}');" class="inquire-btn" style="width:100%; font-size:0.9rem; padding:10px; background:var(--action-color);">
+          <span>⚡</span> בדיקת זמינות ורכישה במחסן
+        </button>
+      `;
+      document.getElementById('quickViewOverlay').style.display = 'flex';
+    }
+    function closeQuickView() { document.getElementById('quickViewOverlay').style.display = 'none'; }
+
+    function openLeadModal() { document.getElementById('leadModalOverlay').style.display = 'flex'; }
+    function closeLeadModal() { document.getElementById('leadModalOverlay').style.display = 'none'; }
+
+    function applyFilters() {
+      const s = document.getElementById('searchInput').value.toLowerCase();
+      const cat = document.getElementById('categorySelect').value;
+      const l = document.getElementById('levelSelect').value;
+      const st = document.getElementById('styleSelect').value;
+      const maxP = parseInt(document.getElementById('priceRange').value, 10);
+
+      const f = products.filter(function(p) {
+        let matchScenario = true;
+        if (activeScenario === 'beginner') {
+          const isKiteBeginner = (p.category.includes('קייט') && p.level === 'לכל הרמות');
+          const isBigBoard = (p.category.includes('גלשן') && (p.sizes.includes('14') || p.sizes.includes('15') || p.sizes.includes('רחב')));
+          matchScenario = isKiteBeginner || isBigBoard;
+        } else if (activeScenario === 'storm') {
+          const isStormKite = p.category.includes('קייט') && (p.sizes.includes('7') || p.sizes.includes('8') || p.sizes.includes('9'));
+          const isStormAccessory = p.category.includes('בר') || p.category.includes('טרפז');
+          matchScenario = isStormKite || isStormAccessory;
+        } else if (activeScenario === 'bigair') {
+          matchScenario = p.style.includes('Big Air') || p.level.includes('מתקדם');
+        }
+
+        return matchScenario &&
+               (currentImporter === 'all' || p.importer === currentImporter) &&
+               (cat === 'all' || p.category.includes(cat)) &&
+               (p.brand.toLowerCase().includes(s) || p.model.toLowerCase().includes(s)) &&
+               (l === 'all' || p.level === l) &&
+               (st === 'all' || p.style.includes(st)) &&
+               (p.minPrice <= maxP);
+      });
+      renderCategorizedProducts(f);
+    }
+
+    function setImporter(imp, btn) {
+      currentImporter = imp;
+      document.querySelectorAll('.importer-card-btn').forEach(function(b) { b.classList.remove('active'); });
+      if (btn) btn.classList.add('active');
+      applyFilters();
+    }
+
+    function updatePriceSlider() {
+      const v = document.getElementById('priceRange').value;
+      document.getElementById('priceDisplay').innerText = `₪${parseInt(v).toLocaleString()}`;
+      applyFilters();
+    }
+
+    function resetAllFilters() {
+      currentImporter = 'all';
+      activeScenario = null;
+      document.querySelectorAll('.scenario-chip').forEach(function(c) { c.classList.remove('active'); });
+      document.getElementById('searchInput').value = '';
+      document.getElementById('categorySelect').value = 'all';
+      document.getElementById('levelSelect').value = 'all';
+      document.getElementById('styleSelect').value = 'all';
+      document.getElementById('priceRange').value = '9500';
+      document.getElementById('priceDisplay').innerText = '₪9,500';
+      renderFilters();
+      renderCategorizedProducts(products);
+    }
+
+    // הפעלה בעליית הדף
+    loadProducts();
+    logSiteVisit('טעינת דף');
+  </script>
+</body>
+</html>
