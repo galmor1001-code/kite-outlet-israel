@@ -491,7 +491,7 @@
     🎗️ <b>פיילוט השקה קהילתי:</b> 100% מעמלות האאוטלט מועברות כתרומת ציוד ושיקום למען <span>פצועי צה״ל ולוחמי המילואים</span>
   </div>
 
-  <!-- פופ-אפ דרופ בכניסה - כולל סגירה בלחיצה על הרקע -->
+  <!-- פופ-אפ דרופ בכניסה -->
   <div id="dropWelcomeModal" onclick="closeDropWelcomeModal()">
     <div class="drop-modal-card" onclick="event.stopPropagation()">
       <span class="dm-badge" id="dmBadgeStatus">⚡ פתיחת ה-Drop הבא</span>
@@ -797,7 +797,7 @@
     ♿
   </button>
 
-  <!-- מודל בדיקת זמינות ורכישה -->
+  <!-- מודל בדיקת זמינות ורכישה (ליד חם) -->
   <div class="modal-overlay" id="hotLeadModal" onclick="closeHotLeadModal()">
     <div class="modal-card" style="max-width: 440px;" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeHotLeadModal()">✕</button>
@@ -842,7 +842,7 @@
     </div>
   </div>
 
-  <!-- מודל צייד הדילים -->
+  <!-- מודל צייד הדילים (ליד קר) -->
   <div class="modal-overlay" id="leadModalOverlay" onclick="closeLeadModal()">
     <div class="modal-card" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeLeadModal()">✕</button>
@@ -925,7 +925,7 @@
     </div>
   </div>
 
-  <!-- שאלון התאמה -->
+  <!-- שאלון התאמה (3 שלבים) -->
   <div class="modal-overlay" id="quizOverlay" onclick="closeQuiz()">
     <div class="modal-card" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeQuiz()">✕</button>
@@ -978,7 +978,7 @@
 
       <div class="portal-stats-grid">
         <div class="stat-box"><div class="stat-val" id="portalStatCount">0</div><div class="stat-lbl">פריטים פעילים בקטלוג</div></div>
-        <div class="stat-box"><div class="stat-val" id="portalStatHot" style="color:var(--primary);">...</div><div class="stat-lbl">פניות רכישה (ליד חם בשיטס)</div></div>
+        <div class="stat-box"><div class="stat-val" id="portalStatHot" style="color:var(--primary);">...</div><div class="stat-lbl">פניות רכישה (ליד חם)</div></div>
         <div class="stat-box"><div class="stat-val" id="portalStatCold" style="color:var(--accent);">...</div><div class="stat-lbl">ממתינים בצייד הדילים</div></div>
       </div>
 
@@ -1002,7 +1002,7 @@
     </div>
   </div>
 
-  <!-- מודל הוספת פריט -->
+  <!-- מודל הוספת פריט בפורטל -->
   <div class="modal-overlay" id="addItemModal" onclick="closeAddItemModal()">
     <div class="modal-card" style="max-width: 640px;" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeAddItemModal()">✕</button>
@@ -1101,7 +1101,7 @@
     let currentWishlistItem = null;
     let activeScenario = null;
 
-    // שליחת אירועים לשיטס בצורה בטוחה ולא חוסמת
+    // תיעוד כניסות לאתר בשיטס בצורה בטוחה
     function logSiteVisit(trigger) {
       try {
         const payload = JSON.stringify({
@@ -1170,7 +1170,7 @@
     setInterval(updateDropTimer, 1000);
     updateDropTimer();
 
-    // סגירת פופ-אפ הדרופ מיידית
+    // סגירת פופ-אפ הדרופ
     function closeDropWelcomeModal() {
       var modal = document.getElementById('dropWelcomeModal');
       if (modal) {
@@ -1501,7 +1501,7 @@
       e.preventDefault();
       
       const payload = {
-        sheetName: 'ליד חם',
+        sheetName: 'ליד חם (בדיקת זמינות)',
         name: document.getElementById('hotLeadCustomerName').value,
         phone: document.getElementById('hotLeadCustomerPhone').value,
         email: document.getElementById('hotLeadCustomerEmail').value || 'ללא מייל',
@@ -1528,7 +1528,7 @@
       e.preventDefault();
       
       const payload = {
-        sheetName: 'ליד קר',
+        sheetName: 'ליד קר (צייד הדילים)',
         name: document.getElementById('leadName').value,
         phone: document.getElementById('leadPhone').value,
         email: document.getElementById('leadEmail').value,
@@ -1575,7 +1575,7 @@
 
       fetch(LEADS_SCRIPT_URL, {
         method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sheetName: 'ליד קר', name: 'התראת מחיר/מלאי', email: email, details: `מעקב פריט: ${currentWishlistItem.name} (ID: ${currentWishlistItem.id})` })
+        body: JSON.stringify({ sheetName: 'ליד קר (צייד הדילים)', name: 'התראת מחיר/מלאי', email: email, details: `מעקב פריט: ${currentWishlistItem.name} (ID: ${currentWishlistItem.id})` })
       }).catch(function(err) {});
 
       document.getElementById('wishlistSuccessMsg').style.display = 'block';
@@ -1603,7 +1603,7 @@
       document.getElementById('resultsCount').innerText = `מציג ${items.length} פריטים במלאי`;
 
       if (!items.length) {
-        container.innerHTML = '<div style="text-align:center; padding:30px; color:#64748b; font-weight:700;">לא נמצאו פריטים תואמים</div>';
+        container.innerHTML = '<div style="text-align:center; padding:30px; color:#64748b; font-weight:700;">לא נמצאו פריטים תואמים לסינון הנוכחי</div>';
         return;
       }
 
@@ -1723,7 +1723,7 @@
 
     function closePortalModal() { document.getElementById('importerPortalModal').style.display = 'none'; }
 
-    // פתיחת פורטל יבואן עם נתוני LIVE מגוגל שיטס
+    // פתיחת פורטל יבואן עם נתוני LIVE
     async function openPortalDashboard(importerName) {
       document.getElementById('portalSelectedImporterTitle').innerText = importerName;
       document.getElementById('importerPortalModal').style.display = 'flex';
@@ -1735,7 +1735,6 @@
       document.getElementById('portalStatCold').innerText = '...';
       document.getElementById('portalSyncTime').innerText = 'מסנכרן נתונים מהגיליון...';
 
-      // מילוי טבלת המלאי של היבואן
       const tbody = document.getElementById('portalTableBody');
       tbody.innerHTML = myItems.map(function(p) {
         const removeMsg = encodeURIComponent(`דיווח הסרת פריט מהמלאי באתר Kite Outlet:\nדגם: ${p.brand} ${p.model} (${p.year})\nמידה: ${p.sizes}\nמזהה פריט: ${p.id}`);
@@ -1754,7 +1753,6 @@
         `;
       }).join('');
 
-      // משיכת נתוני לייב מ-Apps Script
       try {
         const fetchUrl = LEADS_SCRIPT_URL + "?importer=" + encodeURIComponent(importerName) + "&t=" + new Date().getTime();
         const res = await fetch(fetchUrl);
@@ -1840,7 +1838,7 @@
 
       fetch(LEADS_SCRIPT_URL, {
         method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sheetName: 'ליד קר', name: 'הוספת פריט: ' + importer, email: importer, details: brand + ' ' + model + ' | ' + sizes + ' | ' + outletPrice + ' ₪' })
+        body: JSON.stringify({ sheetName: 'ליד קר (צייד הדילים)', name: 'הוספת פריט: ' + importer, email: importer, details: brand + ' ' + model + ' | ' + sizes + ' | ' + outletPrice + ' ₪' })
       }).catch(function(err) {});
 
       alert('טופס הפריט נוצר בהצלחה! חלון המייל נפתח כעת לשליחה מרוכזת של הנתונים.');
@@ -1897,14 +1895,29 @@
       renderQuizStep(nextStep);
     }
 
+    // סיום השאלון וסינון מדויק
     function finishQuiz(budget) {
       quizState.budget = budget;
+      
+      document.getElementById('categorySelect').value = 'קייט';
       document.getElementById('levelSelect').value = quizState.level;
       document.getElementById('styleSelect').value = quizState.style;
       document.getElementById('priceRange').value = budget;
-      document.getElementById('priceDisplay').innerText = `₪${budget.toLocaleString()}`;
+      document.getElementById('priceDisplay').innerText = '₪' + budget.toLocaleString();
+      
+      document.getElementById('searchInput').value = '';
+      activeScenario = null;
+      document.querySelectorAll('.scenario-chip').forEach(function(c) { c.classList.remove('active'); });
+
       applyFilters();
       closeQuiz();
+
+      var target = document.getElementById('categorizedContainer');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      logSiteVisit('סיום שאלון התאמה: ' + quizState.level + ' | ' + quizState.style + ' | ' + budget + ' ₪');
     }
 
     function closeQuiz() { document.getElementById('quizOverlay').style.display = 'none'; }
@@ -1988,7 +2001,7 @@
 
     function updatePriceSlider() {
       const v = document.getElementById('priceRange').value;
-      document.getElementById('priceDisplay').innerText = `₪${parseInt(v).toLocaleString()}`;
+      document.getElementById('priceDisplay').innerText = '₪' + parseInt(v).toLocaleString();
       applyFilters();
     }
 
