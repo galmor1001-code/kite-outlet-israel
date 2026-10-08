@@ -101,8 +101,8 @@
 
     .nav-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
     .nav-btn {
-      padding: 6px 10px; border-radius: 8px; font-weight: 700; font-size: 0.78rem; cursor: pointer;
-      display: inline-flex; align-items: center; gap: 4px; text-decoration: none;
+      padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 5px; text-decoration: none;
       border: 1px solid var(--border-color); background: #ffffff; color: var(--text-main); white-space: nowrap;
     }
     .nav-join-btn { background: #f0fdf4; border-color: #86efac; color: #166534; }
@@ -166,8 +166,9 @@
       .brand-name-main { font-size: 0.95rem; }
       .brand-name-sub { font-size: 0.58rem; }
       .nav-actions { gap: 4px; }
-      .nav-btn { font-size: 0.72rem; padding: 5px 6px; }
-      .nav-join-btn span.btn-label-text { display: none; }
+      .nav-btn { font-size: 0.74rem; padding: 5px 8px; }
+      .nav-join-btn .full-label { display: none; }
+      .nav-join-btn .short-label { display: inline !important; }
       .how-it-works-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 10px 12px; }
       .step-arrow { display: none; }
       .how-step { font-size: 0.75rem; }
@@ -246,7 +247,7 @@
 
     /* גריד מוצרים */
     .container { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
-    .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
     .product-card {
       background: #ffffff; border-radius: 12px; border: 1px solid var(--border-color);
       overflow: hidden; display: flex; flex-direction: column; position: relative;
@@ -332,18 +333,72 @@
       position: relative; text-align: right; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
     }
 
-    /* כרטיסי הידעת */
+    /* כרטיסי הידעת - משודרג ומותאם במדויק לדסקטופ */
     .trivia-card {
-      background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 12px;
-      padding: 16px 14px; display: flex; flex-direction: column; justify-content: space-between;
-      text-align: right; min-height: 220px;
+      background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+      border: 1.5px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: right;
+      height: 100%;
+      box-sizing: border-box;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .trivia-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-    .trivia-brand-badge { color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 6px; border-radius: 4px; }
-    .trivia-tag { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; }
-    .trivia-title { font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
-    .trivia-desc { font-size: 0.84rem; color: #334155; line-height: 1.45; margin-bottom: 12px; }
-    .trivia-footer { padding-top: 8px; border-top: 1px solid #e2e8f0; font-size: 0.72rem; color: #64748b; font-weight: 700; }
+    .trivia-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+      border-color: #94a3b8;
+    }
+    .trivia-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .trivia-brand-badge {
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.3px;
+    }
+    .trivia-tag {
+      font-size: 0.76rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .trivia-title {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .trivia-desc {
+      font-size: 0.88rem;
+      color: #334155;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+    .trivia-footer {
+      padding-top: 10px;
+      border-top: 1px dashed #cbd5e1;
+      font-size: 0.75rem;
+      color: #64748b;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
 
     /* בלוק השקיפות והאמון */
     .about-outlet-section { max-width: 1240px; margin: 40px auto 16px; padding: 0 16px; }
@@ -581,7 +636,9 @@
     
     <div class="nav-actions">
       <a href="mailto:kiteoutletisrael@gmail.com?subject=פנייה להצטרפות יבואן ל-Kite Outlet Israel" class="nav-btn nav-join-btn">
-        <span>🤝</span> <span class="btn-label-text">הצטרפות יבואן</span>
+        <span>🤝</span>
+        <span class="btn-label-text full-label">הצטרפות יבואן</span>
+        <span class="btn-label-text short-label" style="display:none;">ליבואנים</span>
       </a>
       <button class="nav-btn nav-portal-btn" onclick="openPortalAuthModal()">
         <span>🏢</span> <span class="btn-label-text">פורטל יבואנים</span>
@@ -1739,7 +1796,7 @@
         <div class="trivia-card">
           <div>
             <div class="trivia-header">
-              <span class="trivia-tag" style="color:${trivia.tagColor};">${trivia.tag}</span>
+              <span class="trivia-tag" style="color:${trivia.tagColor};">💡 ${trivia.tag}</span>
               <span class="trivia-brand-badge" style="background:${trivia.badgeBg};">${trivia.brand}</span>
             </div>
             <h4 class="trivia-title">${trivia.title}</h4>
@@ -1755,7 +1812,6 @@
       document.getElementById('resultsCount').innerText = `מציג ${items.length} פריטים במלאי`;
 
       if (!items.length) {
-        // תיבת Empty State חכמה במקום הודעה סתמית
         container.innerHTML = `
           <div class="empty-state-box">
             <div style="font-size:2rem; margin-bottom:8px;">🔍</div>
@@ -1888,7 +1944,6 @@
 
     function closePortalModal() { document.getElementById('importerPortalModal').style.display = 'none'; }
 
-    // פתיחת פורטל יבואן עם נתוני LIVE מגוגל שיטס
     async function openPortalDashboard(importerName) {
       document.getElementById('portalSelectedImporterTitle').innerText = importerName;
       document.getElementById('importerPortalModal').style.display = 'flex';
@@ -2161,7 +2216,6 @@
     function openLeadModal() { document.getElementById('leadModalOverlay').style.display = 'flex'; }
     function closeLeadModal() { document.getElementById('leadModalOverlay').style.display = 'none'; }
 
-    // חיפוש חופשי עם סלחנות לעברית/אנגלית ושגיאות הקלדה
     function applyFilters() {
       const rawSearch = document.getElementById('searchInput').value;
       const s = normalizeStr(rawSearch);
@@ -2170,7 +2224,6 @@
       const st = document.getElementById('styleSelect').value;
       const maxP = parseInt(document.getElementById('priceRange').value, 10);
 
-      // מילון מילים נרדפות עברית/אנגלית
       const termsMap = {
         'דוטון': 'duotone', 'דואוטון': 'duotone',
         'רידין': 'reedin', 'רדין': 'reedin',
@@ -2236,7 +2289,6 @@
       renderCategorizedProducts(products);
     }
 
-    // הפעלה ראשונית ורישום כניסה יחידה בעליית הדף
     loadProducts();
     logSiteVisit('טעינת דף');
   </script>
