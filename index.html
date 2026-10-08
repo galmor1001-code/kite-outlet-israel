@@ -75,7 +75,7 @@
     }
     .dm-btn:hover { background: #1e293b; }
 
-    /* ניווט עליון רספונסיבי מותאם לנייד שאינו נחתך */
+    /* ניווט עליון רספונסיבי מותאם לנייד */
     .top-nav {
       background: #ffffff; border-bottom: 1px solid var(--border-color); padding: 8px 16px;
       display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100;
@@ -99,11 +99,17 @@
       font-weight: 800; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap;
     }
 
-    .nav-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
     .nav-btn {
       padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; cursor: pointer;
-      display: inline-flex; align-items: center; gap: 5px; text-decoration: none;
+      display: inline-flex; align-items: center; justify-content: center; gap: 5px; text-decoration: none;
       border: 1px solid var(--border-color); background: #ffffff; color: var(--text-main); white-space: nowrap;
+      box-sizing: border-box;
     }
     .nav-join-btn { background: #f0fdf4; border-color: #86efac; color: #166534; }
     .nav-join-btn:hover { background: #dcfce7; }
@@ -162,13 +168,25 @@
     .step-arrow { color: #94a3b8; font-size: 0.75rem; font-weight: 900; }
 
     @media (max-width: 580px) {
-      .top-nav { padding: 6px 10px; gap: 4px; }
+      .top-nav { padding: 6px 10px; gap: 6px; align-items: center; }
       .brand-name-main { font-size: 0.95rem; }
       .brand-name-sub { font-size: 0.58rem; }
-      .nav-actions { gap: 4px; }
-      .nav-btn { font-size: 0.74rem; padding: 5px 8px; }
-      .nav-join-btn .full-label { display: none; }
-      .nav-join-btn .short-label { display: inline !important; }
+      
+      /* סידור כפתורים תואם זה מעל זה בטלפון */
+      .nav-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 108px;
+      }
+      .nav-btn {
+        width: 100%;
+        font-size: 0.72rem;
+        padding: 4px 6px;
+        height: 27px;
+        justify-content: center;
+      }
+      
       .how-it-works-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 10px 12px; }
       .step-arrow { display: none; }
       .how-step { font-size: 0.75rem; }
@@ -559,10 +577,6 @@
       .accessibility-float-btn { bottom: 14px; left: 12px; width: 38px; height: 38px; font-size: 1.1rem; }
     }
     @media (max-width: 580px) {
-      .top-nav { padding: 6px 10px; }
-      .brand-name-main { font-size: 0.92rem; }
-      .brand-name-sub { font-size: 0.58rem; }
-      .nav-btn { font-size: 0.72rem; padding: 5px 7px; }
       h1 { font-size: 1.4rem; margin-bottom: 10px; }
       .img-container { height: 130px; }
       .product-title { font-size: 0.86rem; }
@@ -580,7 +594,7 @@
 
   <!-- באנר תרומה עליון -->
   <div class="charity-banner">
-    🎗️ <b>פיילוט השקה קהילתי:</b> 100% מעמלות האאוטלט מועברות כתרומת ציוד ושיקום למען <span>פצועי צה״ל ולוחמי המילואים</span>
+    🎗️ <b>פיילוט השקה קהילתי:</b> 100% מעמלות האאוטלט מועברות כתרומה למען <span>פצועי צה״ל ולוחמים בסדיר ומילואים</span>
   </div>
 
   <!-- פופ-אפ דרופ בכניסה -->
@@ -635,14 +649,12 @@
     </div>
     
     <div class="nav-actions">
-      <a href="mailto:kiteoutletisrael@gmail.com?subject=פנייה להצטרפות יבואן ל-Kite Outlet Israel" class="nav-btn nav-join-btn">
-        <span>🤝</span>
-        <span class="btn-label-text full-label">הצטרפות יבואן</span>
-        <span class="btn-label-text short-label" style="display:none;">ליבואנים</span>
-      </a>
       <button class="nav-btn nav-portal-btn" onclick="openPortalAuthModal()">
-        <span>🏢</span> <span class="btn-label-text">פורטל יבואנים</span>
+        <span>🏢</span> <span>פורטל יבואנים</span>
       </button>
+      <a href="mailto:kiteoutletisrael@gmail.com?subject=פנייה להצטרפות יבואן ל-Kite Outlet Israel" class="nav-btn nav-join-btn">
+        <span>🤝</span> <span>הצטרפות יבואן</span>
+      </a>
     </div>
   </nav>
 
@@ -653,7 +665,7 @@
     </div>
     <h1>חדש בניילון. אחריות יבואן רשמי. במחיר של יד שנייה.</h1>
 
-    <!-- בלוק מתחלף כל 3 שניות -->
+    <!-- בלוק מבצעים מתחלף כל 3 שניות -->
     <div class="promo-slider-wrap">
       <div id="yamitSpecialBanner" class="promo-slider-card" onclick="openCurrentPromoItem()">
         <div class="promo-img-wrap">
