@@ -950,7 +950,7 @@
       </button>
     </div>
 
-    <!-- בלוק מתחלף כל 3 שניות -->
+    <!-- בלוק מתחלף בסדר אקראי -->
     <div class="promo-slider-wrap">
       <div id="yamitSpecialBanner" class="promo-slider-card" onclick="openCurrentPromoItem()">
         <div class="promo-img-wrap">
@@ -1034,6 +1034,7 @@
               <option value="קייט">חופות / קייטים</option>
               <option value="גלשן">גלשנים (טווינטיפ וגלים)</option>
               <option value="בר">ברים ומערכות שליטה</option>
+              <option value="חליפ">חליפות גלישה</option>
               <option value="טרפז">טרפזים ואביזרים</option>
             </select>
           </div>
@@ -1069,12 +1070,12 @@
       </div>
     </div>
 
-    <!-- 1. נבחרת הדרופ (Featured Deals) - 6-8 פריטים בעלי הנחה מרבית -->
+    <!-- 1. נבחרת הדרופ (15 פריטים לפי יחס מוגדר + 3 כרטיסי הידעת) -->
     <section class="featured-section" id="featuredSection">
       <div class="section-header-wrap">
         <div>
-          <h2 class="section-header-title">🔥 נבחרת הדרופ: הדילים המובילים באתר</h2>
-          <div class="section-header-sub">פריטי דגל מיבואנים רשמיים עם החיסכון השקלי הגבוה ביותר</div>
+          <h2 class="section-header-title">🔥 נבחרת הדרופ: 15 הפריטים הנבחרים</h2>
+          <div class="section-header-sub">פריטי דגל מיבואנים רשמיים עם החיסכון השקלי הגבוה ביותר (קייטים, גלשנים, ברים, חליפות וטרפזים)</div>
         </div>
       </div>
       <div class="product-grid" id="featuredProductGrid"></div>
@@ -1105,7 +1106,7 @@
         </button>
         <button class="drawer-trigger-btn" id="drawerBtn-gear" onclick="toggleCatalogDrawer('gear')">
           <span class="drawer-btn-icon">🛡️</span>
-          <span>טרפזים וציוד משלים</span>
+          <span>טרפזים, חליפות ומשלים</span>
           <span class="drawer-btn-count" id="countCat-gear">0 פריטים במלאי</span>
         </button>
       </div>
@@ -1531,6 +1532,7 @@
               <option value="קייט">חופות / קייטים</option>
               <option value="גלשן">גלשנים (טווינטיפ וגלים)</option>
               <option value="בר">ברים ומערכות שליטה</option>
+              <option value="חליפה">חליפות גלישה</option>
               <option value="טרפז">טרפזים ואביזרים</option>
             </select>
           </div>
@@ -1714,9 +1716,7 @@
       ],
       'טרפז': [
         { brand: "Mystic", tag: "טרפז הארדשל קרבון", title: "Bionic Core Frame וקצף Dry Tech", desc: "<strong>הידעת?</strong> טרפז המיסטיק Stealth משלב סיבי קרבון קשיחים אופקית וגמישים אנכית, לצד ריפוד שאינו סופג אפילו גרם אחד של מים במהלך הגלישה.", footer: "משקל נטו אפס תוספת במים", badgeBg: "#18181b", tagColor: "#18181b" },
-        { brand: "Mystic Hardware", tag: "ספרדר בר וסגירה", title: "Stealth Bar & Lever Lock", desc: "<strong>הידעת?</strong> סגר ה-Lever Lock של מיסטיק כולל כנפיים ארגונומיות שנכנסות עמוק לתוך דפנות הטרפז ומבטלות ב-100% את עליית הבר לכיוון הצלעות בזמן משיכה חזקה.", footer: "מבנה מרוכב Fiber-Fusion דק", badgeBg: "#18181b", tagColor: "#18181b" },
-        { brand: "ION", tag: "חומרים תרמופלסטיים", title: "Curv Composite & Ergo_Pad", desc: "<strong>הידעת?</strong> טרפזי ION Riot ו-Sol מיוצרים מחומר Curv שאינו שביר כלל, ומשלבים פדים מתחלפים להתאמה מדויקת של קשת הגב התחתון (Ergonomic Spine).", footer: "מערכת תמיכת גב מתכווננת אישית", badgeBg: "#2563eb", tagColor: "#2563eb" },
-        { brand: "ION Hardware", tag: "ספרדר בר היברידי", title: "Spectre Bar 2.0 עם Curv Flaps", desc: "<strong>הידעת?</strong> ה-Spectre Bar 2.0 מוריד עשרות גרמים הודות לשלדת קרבון דחוסה, ומאפשר החלפה מהירה בין וו פלדה רגיל לחבל גלישה תוך שניות בודדות.", footer: "סגירת קליפס מאובטחת במשיכה אחת", badgeBg: "#2563eb", tagColor: "#2563eb" }
+        { brand: "ION", tag: "חומרים תרמופלסטיים", title: "Curv Composite & Ergo_Pad", desc: "<strong>הידעת?</strong> טרפזי ION Riot ו-Sol מיוצרים מחומר Curv שאינו שביר כלל, ומשלבים פדים מתחלפים להתאמה מדויקת של קשת הגב התחתון (Ergonomic Spine).", footer: "מערכת תמיכת גב מתכווננת אישית", badgeBg: "#2563eb", tagColor: "#2563eb" }
       ]
     };
 
@@ -1849,6 +1849,9 @@
         if (yamitSpecialDeals.length === 0) {
           yamitSpecialDeals = products.filter(function(p) { return p.importer === 'ימית'; });
         }
+        
+        // ערבוב אקראי של המבצעים המתחלפים בבאנר הדרופ
+        shuffleArray(yamitSpecialDeals);
         initPromoSlider();
 
         renderFilters();
@@ -1858,6 +1861,17 @@
       } catch (err) {
         document.getElementById('resultsCount').innerText = "שגיאה בטעינת הנתונים";
       }
+    }
+
+    // פונקציית ערבוב אקראי (Fisher-Yates Shuffle)
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+      }
+      return arr;
     }
 
     function initPromoSlider() {
@@ -2055,17 +2069,84 @@
       });
     }
 
-    // רינדור נבחרת הדרופ (Featured Deals) וספירת המגירות
+    // בחירת נבחרת של 15 פריטים בדיוק לפי יחס הקטגוריות המבוקש
+    function pickExactFeaturedSelection(sourceList) {
+      const isKite = p => p.category.includes('קייט');
+      const isBoard = p => p.category.includes('גלשן');
+      const isBar = p => p.category.includes('בר');
+      const isSuit = p => p.category.includes('חליפ');
+      const isHarness = p => p.category.includes('טרפז');
+
+      const kites = sourceList.filter(isKite);
+      const boards = sourceList.filter(isBoard);
+      const bars = sourceList.filter(isBar);
+      
+      const suitsMen = sourceList.filter(p => isSuit(p) && !normalizeStr(p.model).includes('women') && !normalizeStr(p.model).includes('נשים'));
+      const suitsWomen = sourceList.filter(p => isSuit(p) && (normalizeStr(p.model).includes('women') || normalizeStr(p.model).includes('נשים')));
+      const allSuits = sourceList.filter(isSuit);
+
+      const harnesses = sourceList.filter(isHarness);
+
+      const selected = [];
+      const usedIds = new Set();
+
+      function addItems(pool, count) {
+        let added = 0;
+        for (const item of pool) {
+          if (!usedIds.has(item.id)) {
+            selected.push(item);
+            usedIds.add(item.id);
+            added++;
+            if (added >= count) break;
+          }
+        }
+      }
+
+      // 5 חופות
+      addItems(kites, 5);
+      // 4 גלשנים
+      addItems(boards, 4);
+      // 2 ברים
+      addItems(bars, 2);
+      
+      // 2 חליפות (גברים ונשים)
+      if (suitsMen.length > 0) addItems(suitsMen, 1);
+      if (suitsWomen.length > 0) addItems(suitsWomen, 1);
+      // גיבוי במידה ואחת מחליפות הגברים/נשים לא נמצאה בסינון
+      if (selected.filter(isSuit).length < 2) {
+        addItems(allSuits, 2 - selected.filter(isSuit).length);
+      }
+
+      // 2 טרפזים
+      addItems(harnesses, 2);
+
+      // השלמה ל-15 במידת הצורך מיתר הפריטים
+      if (selected.length < 15) {
+        for (const item of sourceList) {
+          if (!usedIds.has(item.id)) {
+            selected.push(item);
+            usedIds.add(item.id);
+            if (selected.length >= 15) break;
+          }
+        }
+      }
+
+      return selected;
+    }
+
+    // רינדור נבחרת הדרופ (15 פריטים + 3 כרטיסי הידעת) וספירת המגירות
     function renderFeaturedAndDrawers() {
       const filtered = getFilteredProducts();
       document.getElementById('resultsCount').innerText = `מציג ${filtered.length} פריטים תואמים במלאי`;
 
-      // בחירת 6-8 פריטי דגל (ממוינים לפי חיסכון שקלי ומחיר מיוחד)
+      // מיון ראשוני לפי גובה החיסכון והטבות מיוחדות
       const sortedByDeal = [...filtered].sort(function(a, b) {
         if (b.isSpecialDeal !== a.isSpecialDeal) return (b.isSpecialDeal ? 1 : 0) - (a.isSpecialDeal ? 1 : 0);
         return (b.savings || 0) - (a.savings || 0);
       });
-      const featuredList = sortedByDeal.slice(0, 6);
+
+      // בחירה מדויקת של 15 פריטים לפי ההרכב הקטגורי המבוקש
+      const featuredList = pickExactFeaturedSelection(sortedByDeal);
 
       const featuredGrid = document.getElementById('featuredProductGrid');
       if (featuredList.length === 0) {
@@ -2076,14 +2157,34 @@
           </div>
         `;
       } else {
-        featuredGrid.innerHTML = featuredList.map(createProductCardHTML).join('');
+        // שלוש כרטיסי הידעת שיוצגו כל 5 פריטים (אחרי פריט 5, 10 ו-15)
+        const triviaCards = [
+          CATEGORY_TRIVIA['קייט'][0],
+          CATEGORY_TRIVIA['בר'][0],
+          CATEGORY_TRIVIA['גלשן'][0]
+        ];
+
+        let html = '';
+        featuredList.forEach(function(p, idx) {
+          html += createProductCardHTML(p);
+          // הוספת כרטיס הידעת כל 5 פריטים (עד 3 כרטיסים סך הכל)
+          if ((idx + 1) === 5) {
+            html += createTriviaCardHTML(triviaCards[0]);
+          } else if ((idx + 1) === 10) {
+            html += createTriviaCardHTML(triviaCards[1]);
+          } else if ((idx + 1) === 15) {
+            html += createTriviaCardHTML(triviaCards[2]);
+          }
+        });
+
+        featuredGrid.innerHTML = html;
       }
 
       // עדכון מונים בכפתורי המגירות
       const kitesCount = filtered.filter(p => p.category.includes('קייט')).length;
       const boardsCount = filtered.filter(p => p.category.includes('גלשן')).length;
       const barsCount = filtered.filter(p => p.category.includes('בר')).length;
-      const gearCount = filtered.filter(p => p.category.includes('טרפז') || p.category.includes('אביזרים') || p.category.includes('וסט')).length;
+      const gearCount = filtered.filter(p => p.category.includes('טרפז') || p.category.includes('חליפ') || p.category.includes('אביזרים') || p.category.includes('וסט')).length;
 
       document.getElementById('countCat-kites').innerText = `${kitesCount} פריטים במלאי`;
       document.getElementById('countCat-boards').innerText = `${boardsCount} פריטים במלאי`;
@@ -2140,8 +2241,8 @@
         title = '🕹️ ברים ומערכות שליטה עם אחריות יבואן רשמי';
         triviaKey = 'בר';
       } else if (catKey === 'gear') {
-        items = filtered.filter(p => p.category.includes('טרפז') || p.category.includes('אביזרים') || p.category.includes('וסט'));
-        title = '🛡️ טרפזים וציוד משלים במחירי עודפים';
+        items = filtered.filter(p => p.category.includes('טרפז') || p.category.includes('חליפ') || p.category.includes('אביזרים') || p.category.includes('וסט'));
+        title = '🛡️ טרפזים, חליפות גלישה וציוד משלים במחירי עודפים';
         triviaKey = 'טרפז';
       }
 
@@ -2308,7 +2409,7 @@
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-      }).catch(function() {});
+      }).catch(function(err) {});
     }
 
     // טופס צייד הדילים במודל הקופץ
