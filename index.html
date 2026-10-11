@@ -8,6 +8,46 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  /* --- תיקון תצוגת מובייל לכרטיס מוצר צף ב-Hero --- */
+@media (max-width: 768px) {
+    /* מרחיב את התיבה הלבנה הצפה בטלפון כדי שלא תידחס */
+    .hero-section div[style*="background: #ffffff"],
+    .hero-section div[style*="background:#ffffff"],
+    .hero-section div[style*="background: white"],
+    .hero-section div[style*="background:white"],
+    .hero-section [class*="deal"],
+    .hero-section [class*="card"],
+    .hero-section [class*="ticker"] {
+        width: 92% !important;
+        max-width: 390px !important;
+        margin: 15px auto !important;
+        padding: 10px 12px !important;
+        box-sizing: border-box !important;
+        min-height: auto !important;
+        height: auto !important;
+    }
+
+    /* מונע מהשם של הפריט להיחתך ומאפשר לו לרדת שורה */
+    .hero-section [class*="deal"] *,
+    .hero-section [class*="card"] *,
+    .hero-section [class*="ticker"] * {
+        white-space: normal !important;
+        text-overflow: unset !important;
+        overflow: visible !important;
+        word-break: break-word !important;
+    }
+
+    /* שומר על גודל תקין של תמונת המוצר בתוך התיבה */
+    .hero-section [class*="deal"] img,
+    .hero-section [class*="card"] img,
+    .hero-section [class*="ticker"] img {
+        width: 60px !important;
+        height: 60px !important;
+        min-width: 60px !important;
+        object-fit: contain !important;
+        flex-shrink: 0 !important;
+    }
+}
   <style>
     :root {
       --primary: #0284c7;
