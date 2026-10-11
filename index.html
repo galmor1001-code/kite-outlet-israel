@@ -28,7 +28,6 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Assistant', sans-serif; }
     
-    /* רקע נקי ללא ריצוף או משבצות */
     html, body {
       background-color: var(--bg-page) !important;
       background-image: none !important;
@@ -150,7 +149,7 @@
     }
     .nav-portal-btn:hover { background: #1e293b; }
 
-    /* Hero Section מיוצב למניעת CLS */
+    /* Hero Section מיוצב */
     .hero-section {
       position: relative;
       background-color: #0f172a;
@@ -276,7 +275,7 @@
       background: rgba(255, 255, 255, 0.25);
     }
 
-    /* 1. כרטיס המבצע המתחלף: ללא חיתוך, ללא גובה קבוע, תמונה יציבה */
+    /* כרטיס המבצע המתחלף: ללא חיתוך, ללא גובה קבוע, תמונה יציבה */
     .promo-slider-wrap {
       width: 100%;
       margin-top: 10px;
@@ -572,7 +571,6 @@
     .btn-wishlist:hover { transform: scale(1.1); }
     .btn-wishlist.active { color: #e11d48; }
 
-    /* גוף הכרטיס עם תגיות הנחה וחיסכון נקיות */
     .card-body { padding: 14px; display: flex; flex-direction: column; flex-grow: 1; text-align: right; }
     .importer-line { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
     .importer-tag { font-size: 0.76rem; font-weight: 800; color: #0284c7; }
@@ -1039,7 +1037,6 @@
       .product-title { font-size: 0.9rem; }
       .outlet-price { font-size: 1.15rem; }
       
-      /* מובייל בכרטיס המבצע: גובה אוטומטי, טקסט חופשי ושמירת גודל תמונה */
       .promo-slider-card {
         height: auto !important;
         min-height: 70px;
@@ -1147,7 +1144,7 @@
           </button>
         </div>
 
-        <!-- 1. כרטיס המבצע המתחלף: רספונסיבי לחלוטין ללא חיתוך טקסט -->
+        <!-- כרטיס המבצע המתחלף -->
         <div class="promo-slider-wrap">
           <div id="yamitSpecialBanner" class="promo-slider-card" onclick="openCurrentPromoItem()">
             <div class="promo-img-wrap">
@@ -1639,7 +1636,7 @@
     </div>
   </div>
 
-  <!-- מודל כניסה לפורטל יבואנים (אימות מול השרת) -->
+  <!-- מודל כניסה לפורטל יבואנים -->
   <div class="modal-overlay" id="portalAuthModal" onclick="closePortalAuthModal()">
     <div class="modal-card" style="max-width: 380px; text-align:center;" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closePortalAuthModal()">✕</button>
@@ -2118,7 +2115,7 @@
       if (p) openQuickView(p.id);
     }
 
-    /* 4. משיכת תמונות הגלריה מגיליון 'תמונות לגלריה' מעמודה A בלבד (שורות 2 ומטה) */
+    /* משיכת תמונות הגלריה מגיליון 'תמונות לגלריה' מעמודה A בלבד (שורות 2 ומטה) */
     async function loadCommunityGallery() {
       const galleryGrid = document.getElementById('communityGalleryGrid');
       let photos = [];
@@ -2128,7 +2125,6 @@
         if (res.ok) {
           const text = await res.text();
           const rawLines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
-          // דילוג על שורה 1 (כותרת) ומשיכת עמודה A בלבד
           for (let i = 1; i < rawLines.length; i++) {
             const firstCell = rawLines[i].split(',')[0].replace(/["']/g, '').trim();
             if (firstCell && firstCell.startsWith('http')) {
@@ -2555,12 +2551,42 @@
 
     function closeHotLeadModal() { document.getElementById('hotLeadModal').style.display = 'none'; }
 
-    function submitHotLeadForm(e) {
+    // פונקציית תקשורת חסינת CORS ו-Redirects מול Apps Script
+    async function sendToBackend(payload, timeoutSec = 10) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), timeoutSec * 1000);
+
+      try {
+        const response = await fetch(LEADS_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload),
+          redirect: 'follow',
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        const json = await response.json();
+        return json;
+      } catch (err) {
+        clearTimeout(timeoutId);
+        if (err.name === 'AbortError') {
+          throw new Error('זמן ההמתנה לשרת הסתיים (Timeout). אנא נסה שוב.');
+        }
+        throw new Error('שגיאת תקשורת עם שרת האימות. אנא ודא חיבור לרשת ונסה שוב.');
+      }
+    }
+
+    async function submitHotLeadForm(e) {
       e.preventDefault();
       const generatedRef = "KO-" + Math.floor(1000 + Math.random() * 9000);
+      const submitBtn = document.getElementById('hotLeadSubmitBtn');
       
+      submitBtn.innerText = 'שולח בדיקת זמינות...';
+      submitBtn.disabled = true;
+
       const payload = {
-        sheetName: 'ליד חם (בדיקת זמינות)',
+        sheetName: 'בדיקת זמינות',
         refId: generatedRef,
         name: document.getElementById('hotLeadCustomerName').value,
         phone: document.getElementById('hotLeadCustomerPhone').value,
@@ -2578,16 +2604,16 @@
       document.getElementById('hotLeadRefDisplay').innerText = `מספר הפנייה שלך: ${generatedRef}`;
       document.getElementById('hotLeadSuccessMsg').style.display = 'block';
 
-      fetch(LEADS_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload)
-      }).catch(() => {});
+      try {
+        await sendToBackend(payload, 8);
+      } catch (err) {
+        console.warn('Backend queued:', err);
+      }
 
       setTimeout(() => closeHotLeadModal(), 3500);
     }
 
-    function submitAlwaysOnLead(e) {
+    async function submitAlwaysOnLead(e) {
       e.preventDefault();
       const payload = {
         sheetName: 'ליד קר (צייד הדילים)',
@@ -2600,17 +2626,15 @@
       document.getElementById('alwaysLeadSubmitBtn').disabled = true;
       document.getElementById('alwaysLeadSuccessMsg').style.display = 'block';
 
-      fetch(LEADS_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload)
-      }).catch(() => {});
+      try {
+        await sendToBackend(payload, 8);
+      } catch (err) {}
     }
 
     function openLeadModal() { document.getElementById('leadModalOverlay').style.display = 'flex'; }
     function closeLeadModal() { document.getElementById('leadModalOverlay').style.display = 'none'; }
 
-    function submitColdLeadForm(e) {
+    async function submitColdLeadForm(e) {
       e.preventDefault();
       const payload = {
         sheetName: 'ליד קר (צייד הדילים)',
@@ -2623,11 +2647,9 @@
       document.getElementById('leadCaptureForm').style.display = 'none';
       document.getElementById('leadSuccessMsg').style.display = 'block';
 
-      fetch(LEADS_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload)
-      }).catch(() => {});
+      try {
+        await sendToBackend(payload, 8);
+      } catch (err) {}
 
       setTimeout(() => closeLeadModal(), 2000);
     }
@@ -2649,7 +2671,7 @@
 
     function closeWishlistModal() { document.getElementById('wishlistModal').style.display = 'none'; }
 
-    function submitWishlistAlert(e) {
+    async function submitWishlistAlert(e) {
       e.preventDefault();
       const email = document.getElementById('wishlistEmail').value;
       if (!currentWishlistItem) return;
@@ -2657,16 +2679,20 @@
       savedWishlist.push(currentWishlistItem.id);
       localStorage.setItem('ko_wishlist', JSON.stringify(savedWishlist));
 
-      fetch(LEADS_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ sheetName: 'ליד קר (צייד הדילים)', name: 'התראת מחיר/מלאי', email: email, details: `מעקב פריט: ${currentWishlistItem.name} (ID: ${currentWishlistItem.id})` })
-      }).catch(() => {});
+      try {
+        await sendToBackend({
+          sheetName: 'ליד קר (צייד הדילים)',
+          name: 'התראת מחיר/מלאי',
+          email: email,
+          details: `מעקב פריט: ${currentWishlistItem.name} (ID: ${currentWishlistItem.id})`
+        }, 8);
+      } catch (err) {}
 
       document.getElementById('wishlistSuccessMsg').style.display = 'block';
       setTimeout(() => { closeWishlistModal(); applyFilters(); }, 1200);
     }
 
+    // אימות כניסה לפורטל יבואנים מול השרת
     function openPortalAuthModal() {
       if (authenticatedImporter) {
         openPortalDashboard(authenticatedImporter);
@@ -2680,31 +2706,31 @@
 
     async function handlePortalLogin(e) {
       e.preventDefault();
-      const codeInput = document.getElementById('portalAccessCode').value;
+      const rawCode = document.getElementById('portalAccessCode').value;
       const btn = document.getElementById('portalLoginSubmitBtn');
       const errBox = document.getElementById('portalAuthError');
-      
-      btn.innerText = 'מאמת נתונים מול השרת...';
+
+      btn.innerText = 'מאמת ומסנכרן נתונים...';
       btn.disabled = true;
       errBox.style.display = 'none';
 
       try {
-        const response = await fetch(LEADS_SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ action: 'verifyImporterCode', code: codeInput })
-        });
-        const result = await response.json();
+        const res = await sendToBackend({
+          action: 'verifyImporterCode',
+          code: rawCode
+        }, 12);
 
-        if (result.status === 'success' && result.importer) {
-          authenticatedImporter = result.importer;
+        if (res.success && res.importer) {
+          authenticatedImporter = res.importer;
           closePortalAuthModal();
-          openPortalDashboard(authenticatedImporter);
+          populatePortalDashboard(res);
+          document.getElementById('importerPortalModal').style.display = 'flex';
         } else {
+          errBox.innerText = res.message || 'קוד גישה שגוי. אנא פנה למנהל האתר.';
           errBox.style.display = 'block';
         }
-      } catch (err) {
-        errBox.innerText = 'שגיאת תקשורת עם שרת האימות. נסה שוב.';
+      } catch (error) {
+        errBox.innerText = error.message;
         errBox.style.display = 'block';
       } finally {
         btn.innerText = 'כניסה מאובטחת לפורטל';
@@ -2719,24 +2745,75 @@
 
     function closePortalModal() { document.getElementById('importerPortalModal').style.display = 'none'; }
 
-    async function openPortalDashboard(importerName) {
+    function populatePortalDashboard(bundle) {
+      const importerName = bundle.importer;
       document.getElementById('portalSelectedImporterTitle').innerText = importerName;
-      document.getElementById('importerPortalModal').style.display = 'flex';
+      
+      document.getElementById('portalStatCount').innerText = bundle.activeProductsCount || (bundle.products ? bundle.products.length : 0);
+      document.getElementById('portalStatHot').innerText = bundle.hotCount || 0;
+      document.getElementById('portalStatCold').innerText = bundle.closedDealsCount || 0;
+      document.getElementById('portalSyncTime').innerText = 'עודכן ישירות מ-Google Sheets';
 
-      const myItems = products.filter(p => p.importer === importerName);
-      document.getElementById('portalStatCount').innerText = myItems.length;
+      const chartEl = document.getElementById('portalChartContent');
+      const modelClicks = bundle.modelClicks || {};
+      const modelKeys = Object.keys(modelClicks);
 
-      document.getElementById('portalStatHot').innerText = '...';
-      document.getElementById('portalStatCold').innerText = '...';
-      document.getElementById('portalSyncTime').innerText = 'מסנכרן נתונים מהגיליון...';
+      if (modelKeys.length === 0) {
+        chartEl.innerHTML = '<div style="text-align:center; color:#64748b; font-size:0.8rem; padding:10px;">טרם נרשמו פניות לפריטים שלכם</div>';
+      } else {
+        let maxVal = 1;
+        modelKeys.forEach(k => { if (modelClicks[k] > maxVal) maxVal = modelClicks[k]; });
+
+        chartEl.innerHTML = modelKeys.map(modelName => {
+          const clicks = modelClicks[modelName];
+          const pct = Math.round((clicks / maxVal) * 100);
+          return `
+            <div class="bar-row">
+              <div class="bar-label" title="${modelName}">${modelName}</div>
+              <div class="bar-track"><div class="bar-fill" style="width:${pct}%;"></div></div>
+              <div class="bar-num">${clicks} ✉️</div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      const leadsTbody = document.getElementById('portalLeadsTableBody');
+      const recentLeads = bundle.recentLeads || [];
+      if (recentLeads.length === 0) {
+        leadsTbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#64748b; padding:10px;">אין פניות להצגה</td></tr>`;
+      } else {
+        leadsTbody.innerHTML = recentLeads.map(lead => {
+          const cleanPhone = (lead.phone || '').replace(/[^\d]/g, '');
+          const waPhone = cleanPhone.startsWith('0') ? ('972' + cleanPhone.slice(1)) : cleanPhone;
+          const waText = encodeURIComponent(`היי ${lead.name || ''}, פנית דרך Kite Outlet בנוגע ל-${lead.product || ''} (הפנייה #${lead.refId || ''}). המידה זמינה במחסן, נשמח לסייע!`);
+          const waLink = `https://wa.me/${waPhone}?text=${waText}`;
+
+          return `
+            <tr>
+              <td><small style="color:#64748b;">${lead.date || ''}</small></td>
+              <td><b>${lead.name || 'גולש'}</b></td>
+              <td>${lead.product || ''}</td>
+              <td>${lead.size || 'כללי'}</td>
+              <td>
+                <a href="${waLink}" target="_blank" class="btn-wa-action">
+                  <span>💬 וואטסאפ ישיר</span>
+                </a>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
 
       const tbody = document.getElementById('portalTableBody');
-      tbody.innerHTML = myItems.map(p => {
-        const removeMsg = encodeURIComponent(`דיווח הסרת פריט מהמלאי באתר Kite Outlet:\nדגם: ${p.brand} ${p.model} (${p.year})\nמידה: ${p.sizes}\nמזהה פריט: ${p.id}`);
-        const mailRemove = `mailto:${DEFAULT_EMAIL}?subject=${encodeURIComponent('הסרת פריט מהמלאי: ' + p.brand + ' ' + p.model)}&body=${removeMsg}`;
+      const items = bundle.products || [];
+      
+      tbody.innerHTML = items.map(p => {
+        const removeMsg = encodeURIComponent(`דיווח הסרת פריט מהמלאי באתר Kite Outlet:\nדגם: ${p.brand} ${p.model}\nמידה: ${p.sizes}\nמזהה: ${p.id}`);
+        const mailRemove = `mailto:${DEFAULT_EMAIL}?subject=${encodeURIComponent('הסרת פריט: ' + p.brand + ' ' + p.model)}&body=${removeMsg}`;
+        
         return `
           <tr>
-            <td><b>${p.brand} ${p.model}</b> <span style="color:#64748b; font-size:0.75rem;">(${p.year})</span></td>
+            <td><b>${p.brand} ${p.model}</b></td>
             <td>${p.sizes || 'רגיל'}</td>
             <td><b>${p.outletPrice}</b></td>
             <td>
@@ -2745,98 +2822,32 @@
               </button>
             </td>
             <td>
-              <a href="${mailRemove}" class="btn-remove-stock">
-                <span>🗑️</span> הסר
-              </a>
+              <a href="${mailRemove}" class="btn-remove-stock"><span>🗑️</span> הסר</a>
             </td>
           </tr>
         `;
       }).join('');
-
-      try {
-        const fetchUrl = `${LEADS_SCRIPT_URL}?importer=${encodeURIComponent(importerName)}&t=${new Date().getTime()}`;
-        const res = await fetch(fetchUrl);
-        const stats = await res.json();
-
-        if (stats.status === 'success') {
-          document.getElementById('portalStatHot').innerText = stats.hotCount || '0';
-          document.getElementById('portalStatCold').innerText = stats.closedDealsCount || stats.coldCount || '0';
-          document.getElementById('portalSyncTime').innerText = 'עודכן הרגע מ-Google Sheets';
-
-          const chartEl = document.getElementById('portalChartContent');
-          const modelKeys = Object.keys(stats.modelClicks || {});
-
-          if (modelKeys.length === 0) {
-            chartEl.innerHTML = '<div style="text-align:center; color:#64748b; font-size:0.8rem; padding:10px;">טרם נרשמו פניות לפריטים שלכם השבוע בגיליון</div>';
-          } else {
-            let maxVal = 1;
-            modelKeys.forEach(k => { if (stats.modelClicks[k] > maxVal) maxVal = stats.modelClicks[k]; });
-
-            chartEl.innerHTML = modelKeys.map(modelName => {
-              const clicks = stats.modelClicks[modelName];
-              const pct = Math.round((clicks / maxVal) * 100);
-              return `
-                <div class="bar-row">
-                  <div class="bar-label" title="${modelName}">${modelName}</div>
-                  <div class="bar-track"><div class="bar-fill" style="width:${pct}%;"></div></div>
-                  <div class="bar-num">${clicks} ✉️</div>
-                </div>
-              `;
-            }).join('');
-          }
-
-          const leadsTbody = document.getElementById('portalLeadsTableBody');
-          const recentLeads = stats.recentLeads || [];
-          if (recentLeads.length === 0) {
-            leadsTbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#64748b; padding:10px;">אין פניות חדשות להצגה</td></tr>`;
-          } else {
-            leadsTbody.innerHTML = recentLeads.map(lead => {
-              const cleanPhone = (lead.phone || '').replace(/[^\d]/g, '');
-              const waPhone = cleanPhone.startsWith('0') ? ('972' + cleanPhone.slice(1)) : cleanPhone;
-              const waText = encodeURIComponent(`היי ${lead.name || ''}, פנית דרך Kite Outlet בנוגע ל-${lead.product || ''} (הפנייה #${lead.refId || ''}). המידה זמינה במחסן, נשמח לסייע!`);
-              const waLink = `https://wa.me/${waPhone}?text=${waText}`;
-
-              return `
-                <tr>
-                  <td><small style="color:#64748b;">${lead.date || ''}</small></td>
-                  <td><b>${lead.name || 'גולש'}</b></td>
-                  <td>${lead.product || ''}</td>
-                  <td>${lead.size || 'כללי'}</td>
-                  <td>
-                    <a href="${waLink}" target="_blank" class="btn-wa-action">
-                      <span>💬 וואטסאפ ישיר</span>
-                    </a>
-                  </td>
-                </tr>
-              `;
-            }).join('');
-          }
-        }
-      } catch (err) {
-        document.getElementById('portalStatHot').innerText = '0';
-        document.getElementById('portalStatCold').innerText = '0';
-        document.getElementById('portalSyncTime').innerText = 'שגיאת סנכרון רשת';
-      }
     }
 
-    function toggleProductStock(productId, btnEl) {
-      const p = products.find(x => x.id === productId);
-      if (!p) return;
+    async function toggleProductStock(productId, btnEl) {
+      const isCurrentlyInStock = btnEl.classList.contains('in-stock');
+      const nextState = !isCurrentlyInStock;
 
-      p.inStock = !p.inStock;
-      btnEl.className = `stock-toggle-btn ${p.inStock ? 'in-stock' : 'out-stock'}`;
-      btnEl.innerText = p.inStock ? '✓ זמין במלאי' : '✕ נמכר';
+      btnEl.className = `stock-toggle-btn ${nextState ? 'in-stock' : 'out-stock'}`;
+      btnEl.innerText = nextState ? '✓ זמין במלאי' : '✕ נמכר';
 
-      fetch(LEADS_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({
+      try {
+        await sendToBackend({
           action: 'toggleStockStatus',
           productId: productId,
-          inStock: p.inStock,
+          inStock: nextState,
           importer: authenticatedImporter
-        })
-      }).catch(() => {});
+        }, 5);
+      } catch (err) {
+        btnEl.className = `stock-toggle-btn ${isCurrentlyInStock ? 'in-stock' : 'out-stock'}`;
+        btnEl.innerText = isCurrentlyInStock ? '✓ זמין במלאי' : '✕ נמכר';
+        alert('שגיאה בעדכון הסטטוס בגיליון.');
+      }
     }
 
     function openAddItemModal() {
@@ -2890,11 +2901,7 @@
       };
 
       try {
-        await fetch(LEADS_SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(newProductPayload)
-        });
+        await sendToBackend(newProductPayload, 10);
         alert('הפריט נוסף בהצלחה למאגר העודפים!');
         closeAddItemModal();
         loadProducts();
