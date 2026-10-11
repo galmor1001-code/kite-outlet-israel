@@ -28,6 +28,7 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Assistant', sans-serif; }
     
+    /* רקע נקי ללא ריצוף או משבצות */
     html, body {
       background-color: var(--bg-page) !important;
       background-image: none !important;
@@ -149,12 +150,13 @@
     }
     .nav-portal-btn:hover { background: #1e293b; }
 
-    /* Hero Section מיוצב */
+    /* Hero Section מיוצב למניעת CLS */
     .hero-section {
       position: relative;
       background-color: #0f172a;
       color: #ffffff;
       min-height: 520px;
+      aspect-ratio: 16 / 9;
       padding: 48px 24px;
       display: flex;
       align-items: center;
@@ -199,6 +201,7 @@
     .hero-left-box {
       max-width: 640px;
       text-align: right;
+      width: 100%;
     }
     .hero-tag-badge {
       display: inline-flex;
@@ -273,7 +276,7 @@
       background: rgba(255, 255, 255, 0.25);
     }
 
-    /* תיקון יציבות התיבה המתחלפת - מניעת תזוזת הדף */
+    /* 1. כרטיס המבצע המתחלף: ללא חיתוך, ללא גובה קבוע, תמונה יציבה */
     .promo-slider-wrap {
       width: 100%;
       margin-top: 10px;
@@ -286,16 +289,21 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
       cursor: pointer;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
       text-align: right;
-      min-height: 98px;
+      height: auto !important;
+      min-height: 70px;
       box-sizing: border-box;
+      transition: transform 0.15s ease;
+    }
+    .promo-slider-card:active {
+      transform: scale(0.99);
     }
     .promo-img-wrap {
-      width: 76px;
-      height: 76px;
+      width: 60px;
+      height: 60px;
       background: #f8fafc;
       border-radius: 10px;
       display: flex;
@@ -305,13 +313,19 @@
       padding: 4px;
       border: 1px solid var(--border-color);
     }
-    .promo-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .promo-img-wrap img {
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
     .promo-info-wrap {
-      flex-grow: 1;
-      overflow: hidden;
+      flex: 1 1 auto;
+      min-width: 0;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      text-align: right;
     }
     .promo-badge-tag {
       display: inline-flex;
@@ -327,28 +341,28 @@
       width: fit-content;
     }
     .promo-title {
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       font-weight: 900;
       color: #0f172a;
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: unset !important;
+      word-break: break-word;
       line-height: 1.25;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      margin-bottom: 2px;
     }
     .promo-desc {
       font-size: 0.76rem;
       color: #64748b;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      line-height: 1.2;
     }
     .promo-price-wrap {
       text-align: left;
       flex-shrink: 0;
-      min-width: 85px;
+      min-width: 80px;
     }
     .promo-old-price { font-size: 0.74rem; color: #94a3b8; text-decoration: line-through; }
-    .promo-new-price { font-size: 1.3rem; font-weight: 900; color: #ea580c; line-height: 1; }
+    .promo-new-price { font-size: 1.28rem; font-weight: 900; color: #ea580c; line-height: 1; }
 
     /* סרגל 4 שלבים */
     .how-it-works-strip {
@@ -558,6 +572,7 @@
     .btn-wishlist:hover { transform: scale(1.1); }
     .btn-wishlist.active { color: #e11d48; }
 
+    /* גוף הכרטיס עם תגיות הנחה וחיסכון נקיות */
     .card-body { padding: 14px; display: flex; flex-direction: column; flex-grow: 1; text-align: right; }
     .importer-line { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
     .importer-tag { font-size: 0.76rem; font-weight: 800; color: #0284c7; }
@@ -971,6 +986,7 @@
     @media (max-width: 768px) {
       .hero-section {
         min-height: 480px;
+        aspect-ratio: auto;
         padding: 40px 16px;
       }
       .hero-bg-layer {
@@ -1023,17 +1039,32 @@
       .product-title { font-size: 0.9rem; }
       .outlet-price { font-size: 1.15rem; }
       
-      /* קיבוע גובה ורוחב בטלפון למניעת תזוזת הדף בעת החלפת מוצר */
+      /* מובייל בכרטיס המבצע: גובה אוטומטי, טקסט חופשי ושמירת גודל תמונה */
       .promo-slider-card {
-        min-height: 94px;
-        height: 94px;
+        height: auto !important;
+        min-height: 70px;
         padding: 8px 12px;
+        gap: 10px;
       }
       .promo-img-wrap {
-        width: 65px;
-        height: 65px;
+        width: 60px;
+        height: 60px;
+        flex-shrink: 0;
       }
-      .promo-title { font-size: 0.86rem; }
+      .promo-img-wrap img {
+        width: 60px;
+        height: 60px;
+        flex-shrink: 0;
+        object-fit: contain;
+      }
+      .promo-title {
+        font-size: 0.88rem;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: unset !important;
+        word-break: break-word;
+        line-height: 1.25;
+      }
       .promo-desc { font-size: 0.72rem; }
       .promo-new-price { font-size: 1.15rem; }
 
@@ -1116,11 +1147,11 @@
           </button>
         </div>
 
-        <!-- בלוק מבצע מתחלף (יציב ללא תזוזה) -->
+        <!-- 1. כרטיס המבצע המתחלף: רספונסיבי לחלוטין ללא חיתוך טקסט -->
         <div class="promo-slider-wrap">
           <div id="yamitSpecialBanner" class="promo-slider-card" onclick="openCurrentPromoItem()">
             <div class="promo-img-wrap">
-              <img id="promoImg" src="" alt="מבצע יבואן" onerror="handleImageError(this)">
+              <img id="promoImg" src="" alt="מבצע יבואן" referrerpolicy="no-referrer" onerror="handleImageError(this)">
             </div>
             <div class="promo-info-wrap">
               <div class="promo-badge-tag">✨ מחיר בלעדי לאתר</div>
@@ -1466,7 +1497,7 @@
       <button class="modal-close" onclick="closeHotLeadModal()">✕</button>
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px; border-bottom:1px solid var(--border-color); padding-bottom:10px;">
         <div style="width:50px; height:50px; background:#f8fafc; border-radius:8px; border:1px solid #e2e8f0; display:flex; align-items:center; justify-content:center; overflow:hidden;">
-          <img id="hotLeadItemImg" src="" style="max-width:100%; max-height:100%; object-fit:contain;" onerror="handleImageError(this)">
+          <img id="hotLeadItemImg" src="" style="max-width:100%; max-height:100%; object-fit:contain;" referrerpolicy="no-referrer" onerror="handleImageError(this)">
         </div>
         <div style="text-align:right;">
           <h3 id="hotLeadItemTitle" style="font-size:1.05rem; font-weight:900; margin:0; color:#0f172a;">דגם</h3>
@@ -1830,7 +1861,6 @@
     function handleImageError(img) {
       if (img.dataset.hasFailed) return;
       img.dataset.hasFailed = "true";
-      // אם מדובר ב-Trust Bar מבית Duotone שנחסם, נטען גיבוי ישיר תואם
       if (img.alt && img.alt.includes('Trust Bar')) {
         img.src = "https://yamitysb.co.il/wp-content/uploads/2022/01/44250-3201_1-2048x2048.png";
         return;
@@ -2088,7 +2118,7 @@
       if (p) openQuickView(p.id);
     }
 
-    // טעינת גלריה עמידה
+    /* 4. משיכת תמונות הגלריה מגיליון 'תמונות לגלריה' מעמודה A בלבד (שורות 2 ומטה) */
     async function loadCommunityGallery() {
       const galleryGrid = document.getElementById('communityGalleryGrid');
       let photos = [];
@@ -2097,31 +2127,29 @@
         const res = await fetch(GALLERY_CSV_URL);
         if (res.ok) {
           const text = await res.text();
-          const rawLines = text.split(/\r?\n/);
-          for (let i = 0; i < rawLines.length; i++) {
-            const line = rawLines[i].trim();
-            if (line) {
-              const urlMatches = line.match(/https?:\/\/[^\s,"]+/g);
-              if (urlMatches && urlMatches.length > 0) {
-                photos.push(formatProductImageUrl(urlMatches[0]));
-              }
+          const rawLines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+          // דילוג על שורה 1 (כותרת) ומשיכת עמודה A בלבד
+          for (let i = 1; i < rawLines.length; i++) {
+            const firstCell = rawLines[i].split(',')[0].replace(/["']/g, '').trim();
+            if (firstCell && firstCell.startsWith('http')) {
+              photos.push(formatProductImageUrl(firstCell));
             }
           }
         }
       } catch (e) {}
 
-      // רשימת תמונות גיבוי יפהפיות לגלריה אם השיטס לא השיב
       if (photos.length === 0) {
         photos = [
-          "https://images.unsplash.com/photo-1508873696983-2df5293cb395?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
-          "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=600&q=80"
+          "https://tse1.mm.bing.net/th/id/OIP.71-iIpEImF2PezOfhQ3EkwHaEo?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+          "https://tse3.mm.bing.net/th/id/OIP.8BmIxa6yi9jzlY5WAnbyfQHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+          "https://kitesurf.co.il/team-4-action.webp",
+          "https://kitesurfer.co.il/wp-content/uploads/2018/12/%D7%A7%D7%99%D7%99%D7%98%D7%A1%D7%A8%D7%A4%D7%99%D7%A0%D7%92-%D7%91%D7%9E%D7%90%D7%95%D7%A8%D7%99%D7%A6%D7%99%D7%95%D7%A1.jpg"
         ];
       }
 
       let html = '';
       photos.forEach(src => {
-        html += `<div class="gallery-item"><img src="${src}" alt="גולש קהילת Kite Outlet" onerror="handleImageError(this)"></div>`;
+        html += `<div class="gallery-item"><img src="${src}" alt="גולש קהילת Kite Outlet" referrerpolicy="no-referrer" onerror="handleImageError(this)"></div>`;
       });
 
       html += `
@@ -2170,7 +2198,7 @@
                 ${isFav ? '❤️' : '🤍'}
               </button>
             </div>
-            <img src="${p.image}" alt="${p.brand} ${p.model}" onerror="handleImageError(this)">
+            <img src="${p.image}" alt="${p.brand} ${p.model}" referrerpolicy="no-referrer" onerror="handleImageError(this)">
           </div>
           <div class="card-body">
             <div class="importer-line">
@@ -2983,7 +3011,7 @@
       document.getElementById('quickViewContent').innerHTML = `
         <div style="display:flex; gap:14px; margin-bottom:14px; flex-wrap:wrap;">
           <div style="width:130px; height:130px; background:#fafafa; border:1px solid #e2e8f0; border-radius:10px; display:flex; align-items:center; justify-content:center; padding:6px;">
-            <img src="${p.image}" style="max-width:100%; max-height:100%; object-fit:contain;" onerror="handleImageError(this)">
+            <img src="${p.image}" style="max-width:100%; max-height:100%; object-fit:contain;" referrerpolicy="no-referrer" onerror="handleImageError(this)">
           </div>
           <div style="flex:1; min-width:180px;">
             <div style="font-size:0.75rem; color:#0284c7; font-weight:800; text-transform:uppercase;">${p.importer} • יבואן רשמי</div>
