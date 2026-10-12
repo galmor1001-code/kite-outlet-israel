@@ -41,6 +41,7 @@
       scroll-behavior: smooth;
     }
 
+    /* באנר תרומה עליון */
     .charity-banner {
       background: #0f172a;
       color: #f8fafc;
@@ -52,8 +53,9 @@
     }
     .charity-banner span { color: #38bdf8; }
 
+    /* ניווט עליון רספונסיבי מותאם לנייד */
     .top-nav {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border-color);
       padding: 10px 20px;
@@ -67,14 +69,20 @@
       box-sizing: border-box;
       gap: 12px;
     }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 1;
+      min-width: 0;
+    }
     .brand-logo-custom {
       display: flex;
       align-items: center;
       gap: 10px;
       text-decoration: none;
       cursor: pointer;
-      flex-shrink: 1;
-      min-width: 0;
+      flex-shrink: 0;
     }
     .logo-svg-wrap {
       width: 42px;
@@ -109,6 +117,45 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       white-space: nowrap;
+    }
+
+    /* סושיאל ותיוג ליד הלוגו */
+    .nav-social-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-right: 12px;
+      border-right: 1.5px solid var(--border-color);
+    }
+    .social-link-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: #475569;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .social-link-icon:hover {
+      background: #0284c7;
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+    .social-link-icon svg { width: 15px; height: 15px; fill: currentColor; }
+    .nav-tag-hashtag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: #0284c7;
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      padding: 3px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      letter-spacing: 0.2px;
     }
 
     .nav-actions {
@@ -147,6 +194,7 @@
     }
     .nav-portal-btn:hover { background: #1e293b; }
 
+    /* Hero Section מיוצב */
     .hero-section {
       position: relative;
       background-color: #0f172a;
@@ -272,6 +320,7 @@
       background: rgba(255, 255, 255, 0.25);
     }
 
+    /* כרטיס המבצע המתחלף */
     .promo-slider-wrap {
       width: 100%;
       margin-top: 10px;
@@ -357,6 +406,7 @@
     .promo-old-price { font-size: 0.74rem; color: #94a3b8; text-decoration: line-through; }
     .promo-new-price { font-size: 1.28rem; font-weight: 900; color: #ea580c; line-height: 1; }
 
+    /* סרגל 4 שלבים */
     .how-it-works-strip {
       max-width: 1240px;
       margin: 18px auto 0;
@@ -388,6 +438,7 @@
 
     .main-wrapper { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
 
+    /* בר יבואנים */
     .importers-section { margin: 20px auto 12px; }
     .importers-bar {
       background: #ffffff;
@@ -423,6 +474,7 @@
     .importer-badge-count { background: #f1f5f9; color: #475569; padding: 1px 7px; border-radius: 999px; font-size: 0.7rem; }
     .importer-card-btn.active .importer-badge-count { background: rgba(255, 255, 255, 0.2); color: #ffffff; }
 
+    /* צ'יפים של סינון מהיר */
     .scenario-filter-wrap {
       margin: 0 auto 12px;
       display: flex;
@@ -452,34 +504,142 @@
     .scenario-chip:hover { border-color: var(--primary); background: #f0f9ff; }
     .scenario-chip.active { background: #0284c7; color: white; border-color: #0284c7; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35); }
 
-    .filter-wrapper { margin-bottom: 24px; }
-    .filter-box {
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 14px 16px;
-      border: 1px solid var(--border-color);
-      box-shadow: var(--shadow-sm);
+    /* כפתור סינונים צף (Floating Filter Button) */
+    .floating-filter-trigger {
+      position: fixed;
+      bottom: 74px;
+      right: 20px;
+      z-index: 9980;
+      background: var(--accent);
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-weight: 800;
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(234, 88, 12, 0.4);
+      transition: all 0.2s ease;
     }
-    .filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; align-items: end; }
-    .filter-col { display: flex; flex-direction: column; gap: 4px; }
-    .filter-label { font-size: 0.75rem; font-weight: 800; color: #475569; }
+    .floating-filter-trigger:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    /* מגירת מסננים צדדית (Filter Drawer) */
+    .filter-drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 10000;
+      display: none;
+      justify-content: flex-start;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .filter-drawer-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+    .filter-drawer-panel {
+      background: #ffffff;
+      width: 100%;
+      max-width: 380px;
+      height: 100%;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.25);
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+    }
+    .filter-drawer-overlay.active .filter-drawer-panel {
+      transform: translateX(0);
+    }
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      border-bottom: 1.5px solid var(--border-color);
+      padding-bottom: 12px;
+    }
+    .drawer-header h3 {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .drawer-close-btn {
+      background: #f1f5f9;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .drawer-body-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex-grow: 1;
+    }
+    .filter-col { display: flex; flex-direction: column; gap: 4px; text-align: right; }
+    .filter-label { font-size: 0.8rem; font-weight: 800; color: #475569; }
     .filter-input, .filter-select {
       width: 100%;
-      padding: 8px 10px;
-      border: 1px solid var(--border-color);
+      padding: 9px 12px;
+      border: 1.5px solid var(--border-color);
       border-radius: 8px;
-      font-size: 0.84rem;
+      font-size: 0.86rem;
       outline: none;
       background: #ffffff;
       color: var(--text-main);
       font-weight: 600;
     }
     .filter-input:focus, .filter-select:focus { border-color: var(--primary); }
-    .price-slider-header { display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 800; }
+    .price-slider-header { display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 800; }
     .price-range-input { width: 100%; accent-color: var(--primary); cursor: pointer; }
-    .filter-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid #f1f5f9; }
-    .reset-btn { background: none; border: none; color: #ef4444; font-weight: 800; font-size: 0.8rem; cursor: pointer; }
+    .drawer-footer-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-color);
+    }
+    .btn-apply-filters {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-apply-filters:hover { background: var(--primary-dark); }
 
+    /* קטלוג עודפים נבחר */
     .featured-section { margin-bottom: 34px; }
     .section-header-wrap {
       display: flex;
@@ -499,6 +659,7 @@
     }
     .section-header-sub { font-size: 0.85rem; color: #64748b; font-weight: 600; margin-top: 2px; }
 
+    /* גריד מוצרים */
     .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
     
     .product-card {
@@ -559,6 +720,7 @@
     .btn-wishlist:hover { transform: scale(1.1); }
     .btn-wishlist.active { color: #e11d48; }
 
+    /* גוף הכרטיס */
     .card-body { padding: 14px; display: flex; flex-direction: column; flex-grow: 1; text-align: right; }
     .importer-line { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
     .importer-tag { font-size: 0.76rem; font-weight: 800; color: #0284c7; }
@@ -632,6 +794,7 @@
     }
     .inquire-btn:hover { background: #1e293b; }
 
+    /* קטלוג מורחב */
     .catalog-drawers-section { margin-bottom: 40px; }
     .drawers-header-box {
       text-align: center;
@@ -980,7 +1143,7 @@
     }
 
     .wind-forecast-tab-btn {
-      position: fixed; bottom: 20px; right: 20px; z-index: 9990;
+      position: fixed; bottom: 20px; right: 20px; z-index: 9970;
       background: #0f172a; color: #ffffff; border: 2px solid #38bdf8;
       border-radius: 999px; padding: 9px 18px; font-weight: 800; font-size: 0.86rem;
       display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
@@ -1014,7 +1177,7 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      z-index: 9990;
+      z-index: 9970;
       transition: transform 0.2s, background 0.2s;
     }
     .accessibility-float-btn:hover { background: #0369a1; transform: scale(1.08); }
@@ -1072,7 +1235,7 @@
 
     .modal-overlay {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 14px;
+      backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 14px;
     }
     .modal-card {
       background: #ffffff; border-radius: 14px; max-width: 620px; width: 100%; max-height: 90vh;
@@ -1105,39 +1268,60 @@
       .form-group-full { grid-column: span 1; }
     }
 
+    /* התאמת Hero ומובייל ייעודית (45%-50% עליון נקי לתמונת הגולש) */
     @media (max-width: 768px) {
       .hero-section {
-        min-height: 480px;
+        min-height: 640px;
         aspect-ratio: auto;
-        padding: 40px 16px;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
       }
       .hero-bg-layer {
-        background-position: 72% center;
+        height: 52% !important; /* 50% עליון מוקדש לתמונה בלבד */
+        bottom: auto !important;
+        background-position: 70% center !important;
       }
       .hero-overlay-layer {
-        background: linear-gradient(to top, rgba(15, 23, 42, 0.96) 0%, rgba(15, 23, 42, 0.78) 55%, rgba(15, 23, 42, 0.4) 100%);
+        background: linear-gradient(to top, #0f172a 0%, rgba(15, 23, 42, 0.95) 45%, rgba(15, 23, 42, 0.1) 65%, transparent 100%);
+      }
+      .hero-content-container {
+        padding: 24px 16px 20px;
+        z-index: 4;
       }
       .hero-left-box {
         max-width: 100%;
         text-align: right;
+        margin-top: auto;
       }
+      .hero-tag-badge { margin-bottom: 10px; font-size: 0.76rem; padding: 4px 12px; }
       .hero-title {
-        font-size: 1.7rem;
+        font-size: 1.55rem;
         line-height: 1.3;
+        margin-bottom: 8px;
       }
       .hero-subtitle {
-        font-size: 0.92rem;
+        font-size: 0.86rem;
+        margin-bottom: 16px;
+      }
+      .hero-cta-group {
+        gap: 8px;
+        margin-bottom: 12px;
       }
       .btn-hero-cta {
         width: 100%;
         justify-content: center;
-        padding: 12px 18px;
+        padding: 11px 16px;
         font-size: 0.88rem;
       }
       .btn-hero-secondary {
         width: 100%;
         text-align: center;
+        padding: 10px 14px;
+        font-size: 0.84rem;
       }
+      .nav-social-wrap { display: none; } /* חיסכון במקום בהדר הנייד */
     }
 
     @media (max-width: 580px) {
@@ -1195,6 +1379,7 @@
       .step-arrow { display: none; }
       .gallery-grid { grid-template-columns: 1fr; }
       .wind-forecast-tab-btn { bottom: 14px; right: 12px; padding: 7px 12px; font-size: 0.78rem; }
+      .floating-filter-trigger { bottom: 62px; right: 12px; padding: 8px 14px; font-size: 0.8rem; }
       .accessibility-float-btn { bottom: 14px; left: 12px; width: 38px; height: 38px; font-size: 1.1rem; }
     }
   </style>
@@ -1206,32 +1391,45 @@
     🎗️ <b>פיילוט השקה קהילתי:</b> 100% מעמלות האאוטלט מועברות כתרומה למען <span>פצועי צה״ל ולוחמים בסדיר ומילואים</span>
   </div>
 
-  <!-- ניווט עליון שאינו נחתך בנייד -->
+  <!-- ניווט עליון עם סושיאל ותיוג מעוצב -->
   <nav class="top-nav">
-    <div class="brand-logo-custom" onclick="resetAllFilters()">
-      <div class="logo-svg-wrap">
-        <svg viewBox="0 0 200 200" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 68 115 A 64 64 0 1 1 138 115" stroke="#38bdf8" stroke-width="4.5" stroke-linecap="round"/>
-          <circle cx="98" cy="38" r="4.5" fill="#38bdf8" />
-          <circle cx="71" cy="88" r="4" fill="#38bdf8" />
-          <circle cx="138" cy="85" r="4" fill="#38bdf8" />
-          <path d="M 103 48 C 114 26 148 24 163 46 C 172 58 158 78 142 80 C 137 68 126 56 103 48 Z" fill="#0284c7" stroke="#38bdf8" stroke-width="4" stroke-linejoin="round"/>
-          <path d="M 115 51 C 124 38 144 38 152 50" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-          <line x1="97" y1="84" x2="108" y2="52" stroke="#38bdf8" stroke-width="2.5" />
-          <line x1="99" y1="85" x2="128" y2="58" stroke="#38bdf8" stroke-width="2.5" />
-          <line x1="101" y1="86" x2="148" y2="69" stroke="#38bdf8" stroke-width="2.5" />
-          <circle cx="83" cy="78" r="5" fill="#0f172a" />
-          <path d="M 83 83 L 88 92 L 98 87" stroke="#0f172a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M 88 92 L 83 103 L 94 105 L 105 100 L 110 102" stroke="#0f172a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M 76 112 C 92 108 114 102 126 97 C 116 110 94 116 76 112 Z" fill="#38bdf8" stroke="#0284c7" stroke-width="3"/>
-          <path d="M 60 118 C 80 111 108 108 132 116 C 144 110 142 93 129 93 C 120 93 115 101 126 108 C 114 105 88 109 60 118 Z" fill="#e0f2fe" stroke="#38bdf8" stroke-width="3.5" stroke-linejoin="round"/>
-          <path d="M 73 140 C 80 156 118 156 128 144" stroke="#38bdf8" stroke-width="3.5" stroke-linecap="round"/>
-          <circle cx="132" cy="142" r="3.5" stroke="#38bdf8" stroke-width="2.5" fill="#ffffff" />
-        </svg>
+    <div class="brand-group">
+      <div class="brand-logo-custom" onclick="resetAllFilters()">
+        <div class="logo-svg-wrap">
+          <svg viewBox="0 0 200 200" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 68 115 A 64 64 0 1 1 138 115" stroke="#38bdf8" stroke-width="4.5" stroke-linecap="round"/>
+            <circle cx="98" cy="38" r="4.5" fill="#38bdf8" />
+            <circle cx="71" cy="88" r="4" fill="#38bdf8" />
+            <circle cx="138" cy="85" r="4" fill="#38bdf8" />
+            <path d="M 103 48 C 114 26 148 24 163 46 C 172 58 158 78 142 80 C 137 68 126 56 103 48 Z" fill="#0284c7" stroke="#38bdf8" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M 115 51 C 124 38 144 38 152 50" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+            <line x1="97" y1="84" x2="108" y2="52" stroke="#38bdf8" stroke-width="2.5" />
+            <line x1="99" y1="85" x2="128" y2="58" stroke="#38bdf8" stroke-width="2.5" />
+            <line x1="101" y1="86" x2="148" y2="69" stroke="#38bdf8" stroke-width="2.5" />
+            <circle cx="83" cy="78" r="5" fill="#0f172a" />
+            <path d="M 83 83 L 88 92 L 98 87" stroke="#0f172a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 88 92 L 83 103 L 94 105 L 105 100 L 110 102" stroke="#0f172a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 76 112 C 92 108 114 102 126 97 C 116 110 94 116 76 112 Z" fill="#38bdf8" stroke="#0284c7" stroke-width="3"/>
+            <path d="M 60 118 C 80 111 108 108 132 116 C 144 110 142 93 129 93 C 120 93 115 101 126 108 C 114 105 88 109 60 118 Z" fill="#e0f2fe" stroke="#38bdf8" stroke-width="3.5" stroke-linejoin="round"/>
+            <path d="M 73 140 C 80 156 118 156 128 144" stroke="#38bdf8" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="132" cy="142" r="3.5" stroke="#38bdf8" stroke-width="2.5" fill="#ffffff" />
+          </svg>
+        </div>
+        <div class="logo-titles-wrap">
+          <span class="brand-name-main">Kite Outlet</span>
+          <span class="brand-name-sub">Israel</span>
+        </div>
       </div>
-      <div class="logo-titles-wrap">
-        <span class="brand-name-main">Kite Outlet</span>
-        <span class="brand-name-sub">Israel</span>
+
+      <!-- אייקוני סושיאל ותיוג -->
+      <div class="nav-social-wrap">
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link-icon" title="עקבו אחרינו בפייסבוק" aria-label="פייסבוק">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link-icon" title="עקבו אחרינו באינסטגרם" aria-label="אינסטגרם">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <span class="nav-tag-hashtag">#kiteoutlet.co.il</span>
       </div>
     </div>
     
@@ -1340,63 +1538,12 @@
       </button>
     </div>
 
-    <!-- תיבת סינונים -->
-    <div class="filter-wrapper">
-      <div class="filter-box">
-        <div class="filter-grid">
-          <div class="filter-col">
-            <label class="filter-label">חיפוש חופשי (עברית / אנגלית)</label>
-            <input type="text" id="searchInput" class="filter-input" placeholder="דגם, מותג..." oninput="applyFilters()">
-          </div>
-          <div class="filter-col">
-            <label class="filter-label">סוג ציוד</label>
-            <select id="categorySelect" class="filter-select" onchange="applyFilters()">
-              <option value="all">כל הציוד</option>
-              <option value="קייט">חופות / קייטים</option>
-              <option value="גלשן">גלשנים (טווינטיפ וגלים)</option>
-              <option value="בר">ברים ומערכות שליטה</option>
-              <option value="חליפ">חליפות גלישה</option>
-              <option value="טרפז">טרפזים ואביזרים</option>
-            </select>
-          </div>
-          <div class="filter-col">
-            <label class="filter-label">רמת גולש</label>
-            <select id="levelSelect" class="filter-select" onchange="applyFilters()">
-              <option value="all">כל הרמות</option>
-              <option value="לכל הרמות">מתחילים עד בינוניים</option>
-              <option value="מתקדם / מקצועי">מתקדם / מקצועי (Big Air)</option>
-            </select>
-          </div>
-          <div class="filter-col">
-            <label class="filter-label">סגנון גלישה</label>
-            <select id="styleSelect" class="filter-select" onchange="applyFilters()">
-              <option value="all">כל הסגנונות</option>
-              <option value="Big Air">Big Air</option>
-              <option value="Freeride">Freeride</option>
-              <option value="Waves">Waves (גלים)</option>
-            </select>
-          </div>
-          <div class="filter-col">
-            <div class="price-slider-header">
-              <span>מחיר מקסימלי:</span>
-              <span id="priceDisplay" style="color:var(--primary); font-weight:800;">₪9,500</span>
-            </div>
-            <input type="range" id="priceRange" class="price-range-input" min="1000" max="9500" step="250" value="9500" oninput="updatePriceSlider()">
-          </div>
-        </div>
-        <div class="filter-actions">
-          <div id="resultsCount" style="color:var(--text-muted); font-weight:700; font-size:0.8rem;">טוען מוצרים...</div>
-          <button class="reset-btn" onclick="resetAllFilters()">✕ איפוס סינונים</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- קטלוג עודפים נבחר (15 פריטים נקיים) -->
+    <!-- קטלוג עוגן ראשי (9 פריטי עוגן נבחרים בלבד) -->
     <section class="featured-section" id="featuredSection">
       <div class="section-header-wrap">
         <div>
-          <h2 class="section-header-title">🔥 קטלוג עודפים נבחר</h2>
-          <div class="section-header-sub">מוצגת כאן טעימה מחלק מהמלאי. השתמשו בסינון או בחיפוש למעלה כדי למצוא פריטים, מידות ודגמים נוספים.</div>
+          <h2 class="section-header-title">🔥 9 פריטי העוגן הנבחרים</h2>
+          <div class="section-header-sub">3 חופות קצה, 2 גלשנים, בר שליטה, אימפקט, טרפז וחליפת גלישה במחירי העודפים המובילים</div>
         </div>
       </div>
       <div class="product-grid" id="featuredProductGrid"></div>
@@ -1441,7 +1588,7 @@
       </div>
     </section>
 
-    <!-- סקשן מדריכים מקצועיים מעודכן (החליף לחלוטין את כרטיסי ההידעת) -->
+    <!-- סקשן מדריכים מקצועיים מעודכן -->
     <section class="guides-section" id="guidesSection">
       <div class="section-header-wrap">
         <div>
@@ -1565,7 +1712,7 @@
             <span class="faq-icon">▼</span>
           </div>
           <div class="faq-answer">
-            ניתן להפעיל את שאלון ההתאמה באתר (3 שאלות קצרות) או להשאיר פרטים בטופס בדיקת זמינות – הצוות והיבואן יוודאו שהדגם והמידה שבחרתם מתאימים בדיוק למשקל, לרמת הגלישה ולרוחות בהן אתם גולשים.
+            ניתן להפעיל את שאלון ההתאמה באתר (3 שאלות קצרות) או להשאיר פרטים בטופס בדיקת הזמינות – הצוות והיבואן יוודאו שהדגם והמידה שבחרתם מתאימים בדיוק למשקל, לרמת הגלישה ולרוחות בהן אתם גולשים.
           </div>
         </div>
       </div>
@@ -1585,6 +1732,72 @@
       * האתר מהווה פלטפורמת קישור ומציג מידע ודילים בלבד. עסקת הרכישה, הסליקה, טיב הציוד והאחריות ניתנים ישירות ומלא בלבד על ידי היבואן/המועדון המפרסם.
     </div>
   </main>
+
+  <!-- כפתור מסננים צף (Floating Filter Trigger) -->
+  <button class="floating-filter-trigger" onclick="openFilterDrawer()">
+    <span>🔍</span>
+    <span>סינון וחיפוש מוצרים</span>
+  </button>
+
+  <!-- מגירת מסננים (Filters Drawer) -->
+  <div class="filter-drawer-overlay" id="filterDrawerOverlay" onclick="closeFilterDrawer()">
+    <div class="filter-drawer-panel" onclick="event.stopPropagation()">
+      <div class="drawer-header">
+        <h3><span>⚡</span> סינון וחיפוש ציוד</h3>
+        <button class="drawer-close-btn" onclick="closeFilterDrawer()">✕</button>
+      </div>
+
+      <div class="drawer-body-grid">
+        <div class="filter-col">
+          <label class="filter-label">חיפוש חופשי (עברית / אנגלית)</label>
+          <input type="text" id="searchInput" class="filter-input" placeholder="דגם, מותג..." oninput="applyFilters()">
+        </div>
+        <div class="filter-col">
+          <label class="filter-label">סוג ציוד</label>
+          <select id="categorySelect" class="filter-select" onchange="applyFilters()">
+            <option value="all">כל הציוד</option>
+            <option value="קייט">חופות / קייטים</option>
+            <option value="גלשן">גלשנים (טווינטיפ וגלים)</option>
+            <option value="בר">ברים ומערכות שליטה</option>
+            <option value="חליפ">חליפות גלישה</option>
+            <option value="טרפז">טרפזים ואביזרים</option>
+          </select>
+        </div>
+        <div class="filter-col">
+          <label class="filter-label">רמת גולש</label>
+          <select id="levelSelect" class="filter-select" onchange="applyFilters()">
+            <option value="all">כל הרמות</option>
+            <option value="לכל הרמות">מתחילים עד בינוניים</option>
+            <option value="מתקדם / מקצועי">מתקדם / מקצועי (Big Air)</option>
+          </select>
+        </div>
+        <div class="filter-col">
+          <label class="filter-label">סגנון גלישה</label>
+          <select id="styleSelect" class="filter-select" onchange="applyFilters()">
+            <option value="all">כל הסגנונות</option>
+            <option value="Big Air">Big Air</option>
+            <option value="Freeride">Freeride</option>
+            <option value="Waves">Waves (גלים)</option>
+          </select>
+        </div>
+        <div class="filter-col">
+          <div class="price-slider-header">
+            <span>מחיר מקסימלי:</span>
+            <span id="priceDisplay" style="color:var(--primary); font-weight:800;">₪9,500</span>
+          </div>
+          <input type="range" id="priceRange" class="price-range-input" min="1000" max="9500" step="250" value="9500" oninput="updatePriceSlider()">
+        </div>
+      </div>
+
+      <div class="drawer-footer-actions">
+        <div id="resultsCount" style="color:var(--text-muted); font-weight:700; font-size:0.8rem; text-align:center;">טוען מוצרים...</div>
+        <button class="btn-apply-filters" onclick="closeFilterDrawer()">
+          <span>✓</span> החל סינון וסגור מגירה
+        </button>
+        <button class="reset-btn" onclick="resetAllFilters()" style="text-align:center; padding:6px;">✕ איפוס כל הסינונים</button>
+      </div>
+    </div>
+  </div>
 
   <!-- מודל קריאת מאמר מלא -->
   <div class="modal-overlay" id="articleModal" onclick="closeArticleModal()">
@@ -1780,7 +1993,7 @@
     </div>
   </div>
 
-  <!-- מודל כניסה לפורטל יבואנים (אימות מול השרת) -->
+  <!-- מודל כניסה לפורטל יבואנים -->
   <div class="modal-overlay" id="portalAuthModal" onclick="closePortalAuthModal()">
     <div class="modal-card" style="max-width: 380px; text-align:center;" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closePortalAuthModal()">✕</button>
@@ -1962,7 +2175,7 @@
     const DEFAULT_EMAIL = "kiteoutletisrael@gmail.com";
     const DEFAULT_IMAGE_PLACEHOLDER = "https://images.unsplash.com/photo-1508873696983-2df5293cb395?auto=format&fit=crop&w=600&q=80";
 
-    // מאגר המאמרים והמדריכים המקצועיים (כולל הכותרת המעודכנת)
+    // מאגר המאמרים והמדריכים המקצועיים
     const ARTICLES_DATA = [
       {
         "id": "article-winter-prep",
@@ -2132,6 +2345,19 @@
 
     function openWindForecastModal() { document.getElementById('windForecastModal').style.display = 'flex'; }
     function closeWindForecastModal() { document.getElementById('windForecastModal').style.display = 'none'; }
+
+    // פונקציות מגירת המסננים הצפה
+    function openFilterDrawer() {
+      const drawer = document.getElementById('filterDrawerOverlay');
+      drawer.style.display = 'flex';
+      setTimeout(() => drawer.classList.add('active'), 10);
+    }
+
+    function closeFilterDrawer() {
+      const drawer = document.getElementById('filterDrawerOverlay');
+      drawer.classList.remove('active');
+      setTimeout(() => drawer.style.display = 'none', 250);
+    }
 
     async function loadWindForecast() {
       let fTitle = "💨 סערת דרום-מערביות בסוף השבוע";
@@ -2517,61 +2743,49 @@
       });
     }
 
-    function pickExactFeaturedSelection(sourceList) {
-      const isKite = p => p.category.includes('קייט');
-      const isBoard = p => p.category.includes('גלשן');
-      const isBar = p => p.category.includes('בר');
-      const isSuit = p => p.category.includes('חליפ');
-      const isHarness = p => p.category.includes('טרפז');
-
-      const kites = sourceList.filter(isKite);
-      const boards = sourceList.filter(isBoard);
-      const bars = sourceList.filter(isBar);
-      
-      const suitsMen = sourceList.filter(p => isSuit(p) && !normalizeStr(p.model).includes('women') && !normalizeStr(p.model).includes('נשים'));
-      const suitsWomen = sourceList.filter(p => isSuit(p) && (normalizeStr(p.model).includes('women') || normalizeStr(p.model).includes('נשים')));
-      const allSuits = sourceList.filter(isSuit);
-
-      const harnesses = sourceList.filter(isHarness);
+    /* 4. רידוד התצוגה הראשית לבדיוק 9 פריטי העוגן שביקשת */
+    function pickExactAnchorProducts(sourceList) {
+      const anchorMatches = [
+        // 3 חופות
+        p => p.category.includes('קייט') && (p.brand.includes('Duotone') && p.model.includes('Neo')),
+        p => p.category.includes('קייט') && (p.brand.includes('North') && p.model.includes('Orbit')),
+        p => p.category.includes('קייט') && (p.brand.includes('Reedin') && (p.model.includes('HyperModel') || p.model.includes('SuperModel'))),
+        // 2 גלשנים (גלים וטווינטיפ)
+        p => p.category.includes('גלשן') && (p.brand.includes('Duotone') && p.model.includes('Wam')),
+        p => p.category.includes('גלשן') && (p.brand.includes('North') && p.model.includes('Atmos')),
+        // 1 בר
+        p => p.category.includes('בר') && (p.brand.includes('Duotone') && p.model.includes('Trust')),
+        // 1 אימפקט
+        p => (p.category.includes('אביזרים') || p.category.includes('וסט') || p.model.includes('Vest')) && p.model.includes('Slasher'),
+        // 1 טרפז
+        p => p.category.includes('טרפז') && (p.brand.includes('ION') && p.model.includes('AXXIS')),
+        // 1 חליפת גלישה
+        p => p.category.includes('חליפ') && (p.brand.includes('ION') && p.model.includes('Element'))
+      ];
 
       const selected = [];
       const usedIds = new Set();
 
-      function addItems(pool, count) {
-        let added = 0;
-        for (const item of pool) {
-          if (!usedIds.has(item.id)) {
-            selected.push(item);
-            usedIds.add(item.id);
-            added++;
-            if (added >= count) break;
+      anchorMatches.forEach(matchFn => {
+        const found = sourceList.find(p => !usedIds.has(p.id) && matchFn(p));
+        if (found) {
+          selected.push(found);
+          usedIds.add(found.id);
+        }
+      });
+
+      // השלמה ל-9 במידה ודגם ספציפי אזל זמנית במלאי
+      if (selected.length < 9) {
+        for (const p of sourceList) {
+          if (!usedIds.has(p.id)) {
+            selected.push(p);
+            usedIds.add(p.id);
+            if (selected.length === 9) break;
           }
         }
       }
 
-      addItems(kites, 5);
-      addItems(boards, 4);
-      addItems(bars, 2);
-      
-      if (suitsMen.length > 0) addItems(suitsMen, 1);
-      if (suitsWomen.length > 0) addItems(suitsWomen, 1);
-      if (selected.filter(isSuit).length < 2) {
-        addItems(allSuits, 2 - selected.filter(isSuit).length);
-      }
-
-      addItems(harnesses, 2);
-
-      if (selected.length < 15) {
-        for (const item of sourceList) {
-          if (!usedIds.has(item.id)) {
-            selected.push(item);
-            usedIds.add(item.id);
-            if (selected.length >= 15) break;
-          }
-        }
-      }
-
-      return selected;
+      return selected.slice(0, 9);
     }
 
     function renderFeaturedAndDrawers() {
@@ -2583,10 +2797,19 @@
         return (b.savings || 0) - (a.savings || 0);
       });
 
-      const featuredList = pickExactFeaturedSelection(sortedByDeal);
+      // בדיקה אם יש סינון פעיל או שנציג את 9 פריטי העוגן
+      const isFilteringActive = document.getElementById('searchInput').value.trim() !== '' ||
+                                document.getElementById('categorySelect').value !== 'all' ||
+                                document.getElementById('levelSelect').value !== 'all' ||
+                                document.getElementById('styleSelect').value !== 'all' ||
+                                document.getElementById('priceRange').value !== '9500' ||
+                                activeScenario !== null ||
+                                currentImporter !== 'all';
+
+      const mainDisplayItems = isFilteringActive ? sortedByDeal.slice(0, 9) : pickExactAnchorProducts(sortedByDeal);
 
       const featuredGrid = document.getElementById('featuredProductGrid');
-      if (featuredList.length === 0) {
+      if (mainDisplayItems.length === 0) {
         featuredGrid.innerHTML = `
           <div style="grid-column: 1/-1; text-align:center; padding:30px; background:#ffffff; border-radius:12px; border:1px dashed #cbd5e1;">
             <h3>לא נמצאו פריטים תואמים לסינון הנוכחי</h3>
@@ -2594,8 +2817,7 @@
           </div>
         `;
       } else {
-        // 15 מוצרים בלבד ללא כרטיסי הידעת
-        featuredGrid.innerHTML = featuredList.map(createProductCardHTML).join('');
+        featuredGrid.innerHTML = mainDisplayItems.map(createProductCardHTML).join('');
       }
 
       const kitesCount = filtered.filter(p => p.category.includes('קייט')).length;
