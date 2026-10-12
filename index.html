@@ -53,7 +53,7 @@
     }
     .charity-banner span { color: #38bdf8; }
 
-    /* ניווט עליון רספונסיבי מותאם לנייד שאינו נחתך */
+    /* ניווט עליון רספונסיבי מותאם לנייד */
     .top-nav {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(8px);
@@ -149,7 +149,7 @@
     }
     .nav-portal-btn:hover { background: #1e293b; }
 
-    /* Hero Section מיוצב */
+    /* Hero Section */
     .hero-section {
       position: relative;
       background-color: #0f172a;
@@ -275,7 +275,7 @@
       background: rgba(255, 255, 255, 0.25);
     }
 
-    /* כרטיס המבצע המתחלף: ללא חיתוך, ללא גובה קבוע, תמונה יציבה */
+    /* כרטיס מבצע מתחלף */
     .promo-slider-wrap {
       width: 100%;
       margin-top: 10px;
@@ -571,6 +571,7 @@
     .btn-wishlist:hover { transform: scale(1.1); }
     .btn-wishlist.active { color: #e11d48; }
 
+    /* גוף הכרטיס */
     .card-body { padding: 14px; display: flex; flex-direction: column; flex-grow: 1; text-align: right; }
     .importer-line { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
     .importer-tag { font-size: 0.76rem; font-weight: 800; color: #0284c7; }
@@ -735,6 +736,177 @@
     .trivia-title { font-size: 1.15rem; font-weight: 900; color: #0f172a; margin-bottom: 10px; line-height: 1.3; }
     .trivia-desc { font-size: 0.88rem; color: #334155; line-height: 1.6; margin-bottom: 16px; flex-grow: 1; }
     .trivia-footer { padding-top: 10px; border-top: 1px dashed #cbd5e1; font-size: 0.75rem; color: #64748b; font-weight: 800; }
+
+    /* סקשן מדריכים מקצועיים */
+    .guides-section {
+      margin: 40px auto 26px;
+    }
+    .guides-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .guide-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+    }
+    .guide-card:hover {
+      transform: translateY(-3px);
+      border-color: #cbd5e1;
+      box-shadow: var(--shadow-md);
+    }
+    .guide-card-img-wrap {
+      width: 100%;
+      height: 145px;
+      overflow: hidden;
+      background: #f1f5f9;
+      position: relative;
+    }
+    .guide-card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .guide-card:hover .guide-card-img-wrap img {
+      transform: scale(1.05);
+    }
+    .guide-card-body {
+      padding: 16px 14px 14px;
+      text-align: right;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .guide-badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0284c7;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      width: fit-content;
+      margin-bottom: 8px;
+    }
+    .guide-card-title {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+    .guide-card-snippet {
+      font-size: 0.8rem;
+      color: #64748b;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      flex-grow: 1;
+    }
+    .guide-read-more {
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: auto;
+    }
+
+    /* מודל מאמר מלא */
+    .article-modal-card {
+      max-width: 680px;
+      text-align: right;
+      padding: 26px;
+    }
+    .article-modal-img-wrap {
+      width: 100%;
+      height: 220px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      background: #f1f5f9;
+    }
+    .article-modal-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .article-header {
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+    }
+    .article-title {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.3;
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+    .article-subtitle {
+      font-size: 0.95rem;
+      color: #0284c7;
+      font-weight: 700;
+    }
+    .article-body p {
+      font-size: 0.88rem;
+      color: #334155;
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+    .article-takeaways {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+    .article-takeaways h4 {
+      font-size: 0.92rem;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+    .article-takeaways ul {
+      padding-right: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .article-takeaways li {
+      font-size: 0.82rem;
+      color: #475569;
+      line-height: 1.45;
+    }
+    .article-cta-btn {
+      width: 100%;
+      background: var(--accent);
+      color: white;
+      border: none;
+      font-weight: 800;
+      font-size: 0.92rem;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+    .article-cta-btn:hover {
+      background: var(--accent-hover);
+    }
 
     /* בלוק שקיפות ואמון */
     .about-outlet-section {
@@ -977,6 +1149,7 @@
       .lead-strip-grid { grid-template-columns: 1fr; }
       .drawers-buttons-grid { grid-template-columns: repeat(2, 1fr); }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .guides-grid { grid-template-columns: repeat(2, 1fr); }
       .item-form-grid { grid-template-columns: 1fr; }
       .form-group-full { grid-column: span 1; }
     }
@@ -1065,6 +1238,7 @@
       .promo-desc { font-size: 0.72rem; }
       .promo-new-price { font-size: 1.15rem; }
 
+      .guides-grid { grid-template-columns: 1fr; }
       .about-model-grid { grid-template-columns: 1fr; }
       .how-it-works-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 10px 12px; }
       .step-arrow { display: none; }
@@ -1316,6 +1490,17 @@
       </div>
     </section>
 
+    <!-- סקשן מדריכי גלישה מקצועיים -->
+    <section class="guides-section" id="guidesSection">
+      <div class="section-header-wrap">
+        <div>
+          <h2 class="section-header-title">📚 מדריכי רכישה וציוד מקצועי</h2>
+          <div class="section-header-sub">כל מה שצריך לדעת על התאמת סט ראשון, סערות חורף, טכנולוגיית חומרים ויתרונות היבואן הרשמי</div>
+        </div>
+      </div>
+      <div class="guides-grid" id="guidesGrid"></div>
+    </section>
+
     <!-- בלוק השקיפות והאמון -->
     <section class="about-outlet-section">
       <div class="about-hero-strip">
@@ -1449,6 +1634,14 @@
       * האתר מהווה פלטפורמת קישור ומציג מידע ודילים בלבד. עסקת הרכישה, הסליקה, טיב הציוד והאחריות ניתנים ישירות ומלא בלבד על ידי היבואן/המועדון המפרסם.
     </div>
   </main>
+
+  <!-- מודל קריאת מאמר מלא -->
+  <div class="modal-overlay" id="articleModal" onclick="closeArticleModal()">
+    <div class="modal-card article-modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeArticleModal()">✕</button>
+      <div id="articleModalContent"></div>
+    </div>
+  </div>
 
   <!-- ווידג'ט צף: תחזית רוח -->
   <button class="wind-forecast-tab-btn" onclick="openWindForecastModal()">
@@ -1636,7 +1829,7 @@
     </div>
   </div>
 
-  <!-- מודל כניסה לפורטל יבואנים -->
+  <!-- מודל כניסה לפורטל יבואנים (אימות מול השרת) -->
   <div class="modal-overlay" id="portalAuthModal" onclick="closePortalAuthModal()">
     <div class="modal-card" style="max-width: 380px; text-align:center;" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closePortalAuthModal()">✕</button>
@@ -1818,6 +2011,94 @@
     const DEFAULT_EMAIL = "kiteoutletisrael@gmail.com";
     const DEFAULT_IMAGE_PLACEHOLDER = "https://images.unsplash.com/photo-1508873696983-2df5293cb395?auto=format&fit=crop&w=600&q=80";
 
+    // מאגר המאמרים והמדריכים המקצועיים
+    const ARTICLES_DATA = [
+      {
+        "id": "article-winter-prep",
+        "category": "טיפ רכישה חכם",
+        "card_title": "החורף הישראלי קצר: איך להצטייד לסערות בלי לשלם ביוקר?",
+        "image_url": "https://th.bing.com/th/id/OIP.NyAOFngF1830hDCs7J-T6wHaEJ?w=299&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+        "summary_content": {
+          "subtitle": "סערות עמוקות של 30 קשר דורשות קייט קטן וחליפה אטומה – אבל האם באמת צריך לשלם מחיר מלא על כמה שבועות בשנה?",
+          "paragraphs": [
+            "עונת הסערות בישראל עוצמתית בטירוף, אבל היא קצרה ומסתכמת לרוב בכמה שבועות בודדים של רוחות חזקות וים קר. מצד אחד, אי אפשר לעלות למים בסערה של 30 קשר עם קייט 10 מטר או חליפה דקה וקרועה – זה מסוכן ולא ישים. מצד שני, להשקיע אלפי שקלים בדגמים החדשים ביותר של השנה עבור כמה סשנים בלבד זה פשוט לא משתלם.",
+            "הפתרון של גולשים מנוסים הוא רכישה חכמה של ציוד חורף: קייטים במידות קטנות (7-8 מטר) וחליפות 4/3 ו-5/3 מ\"מ חדשות בניילון מעונות קודמות – אפס שחיקה, בטיחות מקסימלית ובחצי מחיר.",
+            "כשנכנס שקע ברומטרי אין זמן לחפש ציוד – מי שמחזיק סט חורף מוכן מראש ברכב פשוט נכנס למים וגולש בבטחה."
+          ],
+          "key_takeaways": [
+            "קייטים במידות קטנות (7-8 מטר): מעניקים שליטה בטוחה בגאסטים חזקים של סערה",
+            "חליפות 4/3 ו-5/3 מ\"מ מעונות קודמות: בידוד תרמי מלא באפס פשרות ובמחיר עודפים",
+            "מוכנות מראש: החורף קצר – ציוד זמין ברכב מבטיח שלא מפספסים אף יום רוח"
+          ],
+          "cta_label": "למלאי קייטים קטנים וחליפות במחירי עודפים",
+          "target_filter": "storm"
+        }
+      },
+      {
+        "id": "article-entry-gear",
+        "category": "מדריך רכישה ראשונה",
+        "card_title": "סיימתם קורס? איך להרכיב סט ראשון מלא בלי לקרוע את הכיס",
+        "image_url": "https://th.bing.com/th/id/OIP.Z1IGOmCQe766g3g2rwDa6AHaFj?w=226&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+        "summary_content": {
+          "subtitle": "אין שום סיבה לשלם הון על חומרי קצה בשלב הלמידה – כך תרכיבו סט בטוח, סלחני וזול שיטיס אתכם קדימה",
+          "paragraphs": [
+            "אחרי סיום הקורס, המטרה החשובה ביותר היא לצבור שעות במים, לשמור על הבטיחות וללמוד לחדד מול הרוח. בתקופה הזו הציוד סופג נפילות, חיכוך עם חול ומכות, ולכן השקעה בחומרי קצה יקרים (כמו בדי אלולה או קרבון) עלולה לעלות מחיר יקר במידה והציוד מתבלה.",
+            "הנוסחה לסט ראשון מנצח ומשתלם מתבססת על קייט אולראונד 3 בידונים מחומרים סטנדרטיים (דקרון) שמספק יציבות והרמה קלה מהמים, לצד גלשן טווין-טיפ גדול (138 ס\"מ ומעלה) שמאפשר ציפה גבוהה ועלייה מהירה לפלנינג.",
+            "את הסט משלימים עם בר 4 חוטים אמין ובדוק, טרפז מותניים רך או ישיבה תומך במחיר נגיש, וציוד מיגון הכרחי הכולל קסדה, וסט ציפה ומשאבה סטנדרטית."
+          ],
+          "key_takeaways": [
+            "קייט דקרון סלחני: עמידות גבוהה, שליטה רכה והרמה קלה מהמים ללא עלויות של חומרי קצה",
+            "גלשן גדול (138+ ס\"מ): מקל על חידוד מול הרוח וחוסך הליכות מיותרות ברגל בחוף",
+            "בטיחות מעל הכל: בר תקין עם שחרור מהיר, קסדה ווסט ציפה הם פריטי חובה לכל מתחיל"
+          ],
+          "cta_label": "לפריטים המשתלמים ביותר לסט ראשון בקטלוג",
+          "target_filter": "beginner"
+        }
+      },
+      {
+        "id": "article-advanced-materials",
+        "category": "טכנולוגיה וחדשנות",
+        "card_title": "מהפכת ה-Aluula: האם הבדים החדשים באמת שווה את המחיר?",
+        "image_url": "https://th.bing.com/th/id/OIP.3APGeVAW5Bm7A8bmsou5QQHaE7?w=266&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+        "summary_content": {
+          "subtitle": "חצי מהמשקל ופי שניים קשיחות – איך חומרים מרוכבים משנים את חוקי הפיזיקה באוויר ובמים",
+          "paragraphs": [
+            "במשך עשרות שנים התבסס עולם הגלישה על בדי דקרון מסורתיים. כניסתם של חומרים מרוכבים מתקדמים (דוגמת Aluula וחומרים דומים) יצרה קפיצת מדרגה הנדסית: הפחתה של כמעט 50% ממשקל השלדה לצד זינוק משמעותי בקשיחות המבנה תחת עומס.",
+            "המשמעות בפועל משנה לחלוטין את חוויית הגלישה: קייט אולטרה-קל נשאר באוויר גם כשמשבי הרוח נחלשים, אינו צונח למים (Drift מעולה בגלים), ומאפשר כניסה מוקדמת לגלישה בימים גבוליים.",
+            "בנוסף, הקשיחות הגבוהה מאפשרת פרופיל כנף דק שחותך את האוויר ביעילות, מעמיק את החלון ומספק חידוד חד במעלה הרוח לצד החזקה ארוכה ועוצמתית באוויר (Hangtime) בקפיצות."
+          ],
+          "key_takeaways": [
+            "חיסכון של כ-50% במשקל: הקייט עף ברוחות קלות במיוחד ויציב לחלוטין בגלים",
+            "פרופיל דק וקשיח: חיתוך אוויר מעולה, חידוד חד ושליטה מדויקת בגאסטים ללא עיוות כנף",
+            "ביצועי קצה: פתרון אידיאלי לגולשים מתקדמים שמחפשים גובה ב-Big Air או ביצועים ברוח חלשה"
+          ],
+          "cta_label": "לקייטים וכנפיים בטכנולוגיות חומרים מתקדמות",
+          "target_filter": "bigair"
+        }
+      },
+      {
+        "id": "article-official-importer",
+        "category": "צרכנות חכמה",
+        "card_title": "קנייה מיבואן: החבילה המלאה והיתרון הגדול על שוק היד שנייה",
+        "image_url": "https://th.bing.com/th/id/OIP.SRkKoxfTzm5rzLfx86awhAHaEK?w=322&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+        "summary_content": {
+          "subtitle": "למה לקחת סיכון כספי ובטיחותי? כל היתרונות של מעטפת מקצועית וגב רשמי",
+          "paragraphs": [
+            "שוק היד שנייה מפתה במחירים, אבל הוא מגיע עם סיכון משמעותי: שחיקה בבד ובפנימיות הקייט, בלאי מצטבר בחוטי הבר ושחיקת טרפז משומש עלולה לעלות גם בבטיחות וגם במחיר כספי. כשקונים מיבואן רשמי, אתם לא רק קונים כנף או גלשן – אתם מקבלים מעטפת ביטחון מלאה:",
+            "יודעים בדיוק מה מקבלים עם ציוד מקורי שנבדק, ללא עייפות חומר נסתרת או תיקונים מאולתרים, ומקבלים אחריות יצרן מלאה, זמינות מיידית של חלקי חילוף ומעבדת שירות מוסמכת.",
+            "בנוסף נהנים מפריסה נוחה לתשלומים, חשבונית מס, אפשרות למימוש כרטיסי מועדון/פייטר מילואים, אופציה להתנסות וטרייד-אין עתידי, ומשלוח מהיר ישירות לביתכם."
+          ],
+          "key_takeaways": [
+            "אפס הימורים: ציוד מקורי ותקין ללא בלאי נסתר בבדים, בפנימיות או בחוטים",
+            "שירות ואחריות: מעבדת שירות מקצועית וחלקי חילוף מקוריים זמינים מיידית בארץ",
+            "תנאים והטבות: תשלומים נוחים, חשבונית, הנחות מילואים/פייטר, טרייד-אין ומשלוח מהיר"
+          ],
+          "cta_label": "לציוד עם אחריות יבואן ותנאי תשלום נוחים",
+          "target_filter": "all"
+        }
+      }
+    ];
+
     let authenticatedImporter = null;
     let products = [];
     let brokenImagesCount = {};
@@ -1834,10 +2115,39 @@
       return s.toString().toLowerCase().replace(/["']/g, '').replace(/\s+/g, ' ').trim();
     }
 
-    function formatProductImageUrl(rawUrl) {
-      if (!rawUrl || typeof rawUrl !== 'string') return DEFAULT_IMAGE_PLACEHOLDER;
+    // מיפוי תמונות Fallback חכם
+    function getFallbackImageByModel(brand, model) {
+      const full = (brand + ' ' + model).toLowerCase();
+      if (full.includes('atmos pro carbon')) {
+        return "https://shop.kitelab.co.il/cdn/shop/files/ATMOS-PRO-CARBON.webp?v=1771539408&width=900";
+      }
+      if (full.includes('atmos')) {
+        return "https://shop.kitelab.co.il/cdn/shop/files/3atmos2525.webp?v=1771540386&width=900";
+      }
+      if (full.includes('focus hybrid')) {
+        return "https://shop.kitelab.co.il/cdn/shop/files/D7_A4_D7_95_D7_A7_D7_95_D7_A1.webp?v=1771541469&width=900";
+      }
+      if (full.includes('focus')) {
+        return "https://shop.kitelab.co.il/cdn/shop/files/FOCUS.webp?v=1771539427&width=900";
+      }
+      if (full.includes('slasher') || full.includes('vest')) {
+        return "https://yamitysb.co.il/wp-content/uploads/2023/08/4942EU_E75_F_High-Res-190x190.png";
+      }
+      if (full.includes('trust bar')) {
+        return "https://yamitysb.co.il/wp-content/uploads/2022/01/44250-3201_1-2048x2048.png";
+      }
+      return DEFAULT_IMAGE_PLACEHOLDER;
+    }
+
+    function formatProductImageUrl(rawUrl, brand = '', model = '') {
+      if (!rawUrl || typeof rawUrl !== 'string') return getFallbackImageByModel(brand, model);
       let url = rawUrl.trim().replace(/["']/g, '');
-      if (!url.startsWith('http')) return DEFAULT_IMAGE_PLACEHOLDER;
+      
+      if (url === 'https://static.wixstatic.com/media/' || url === 'https://static.wixstatic.com/media') {
+        return getFallbackImageByModel(brand, model);
+      }
+
+      if (!url.startsWith('http')) return getFallbackImageByModel(brand, model);
 
       if (url.includes('drive.google.com')) {
         let fileId = '';
@@ -1858,11 +2168,8 @@
     function handleImageError(img) {
       if (img.dataset.hasFailed) return;
       img.dataset.hasFailed = "true";
-      if (img.alt && img.alt.includes('Trust Bar')) {
-        img.src = "https://yamitysb.co.il/wp-content/uploads/2022/01/44250-3201_1-2048x2048.png";
-        return;
-      }
-      img.src = DEFAULT_IMAGE_PLACEHOLDER;
+      const altText = img.alt || '';
+      img.src = getFallbackImageByModel('', altText);
     }
 
     function cleanImporterName(raw) {
@@ -1984,7 +2291,7 @@
           const foundUrl = row.find(val => typeof val === 'string' && val.startsWith('http') && (val.includes('.jpg') || val.includes('.png') || val.includes('.webp') || val.includes('wixstatic') || val.includes('cdn/shop') || val.includes('uploads') || val.includes('drive.google')));
           if (foundUrl) rawImage = foundUrl;
         }
-        const formattedImage = formatProductImageUrl(rawImage);
+        const formattedImage = formatProductImageUrl(rawImage, brand, model);
 
         let origNum = 0, outletNum = 0, outletMaxNum = 0;
         let isPriceRange = false;
@@ -2072,6 +2379,7 @@
 
         renderFilters();
         renderFeaturedAndDrawers();
+        renderGuides();
         loadCommunityGallery();
         loadWindForecast();
       } catch (err) {
@@ -2115,7 +2423,7 @@
       if (p) openQuickView(p.id);
     }
 
-    /* משיכת תמונות הגלריה מגיליון 'תמונות לגלריה' מעמודה A בלבד (שורות 2 ומטה) */
+    /* משיכת תמונות הגלריה מעמודה A בלבד */
     async function loadCommunityGallery() {
       const galleryGrid = document.getElementById('communityGalleryGrid');
       let photos = [];
@@ -2393,6 +2701,74 @@
 
       if (activeDrawerKey) {
         renderDrawerContent(activeDrawerKey);
+      }
+    }
+
+    // רינדור סקשן מדריכים מקצועיים
+    function renderGuides() {
+      const container = document.getElementById('guidesGrid');
+      if (!container) return;
+
+      container.innerHTML = ARTICLES_DATA.map(art => `
+        <div class="guide-card" onclick="openArticleModal('${art.id}')">
+          <div class="guide-card-img-wrap">
+            <img src="${art.image_url}" alt="${art.card_title}" referrerpolicy="no-referrer" onerror="handleImageError(this)">
+          </div>
+          <div class="guide-card-body">
+            <span class="guide-badge">${art.category}</span>
+            <h3 class="guide-card-title">${art.card_title}</h3>
+            <p class="guide-card-snippet">${art.summary_content.subtitle}</p>
+            <span class="guide-read-more">קרא את המדריך המלא ←</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openArticleModal(articleId) {
+      const art = ARTICLES_DATA.find(a => a.id === articleId);
+      if (!art) return;
+
+      const content = document.getElementById('articleModalContent');
+      content.innerHTML = `
+        <div class="article-modal-img-wrap">
+          <img src="${art.image_url}" alt="${art.card_title}" referrerpolicy="no-referrer" onerror="handleImageError(this)">
+        </div>
+        <div class="article-header">
+          <span class="guide-badge">${art.category}</span>
+          <h2 class="article-title">${art.card_title}</h2>
+          <div class="article-subtitle">${art.summary_content.subtitle}</div>
+        </div>
+        <div class="article-body">
+          ${art.summary_content.paragraphs.map(p => `<p>${p}</p>`).join('')}
+        </div>
+        <div class="article-takeaways">
+          <h4>📌 נקודות מפתח ודגשים:</h4>
+          <ul>
+            ${art.summary_content.key_takeaways.map(t => `<li>${t}</li>`).join('')}
+          </ul>
+        </div>
+        <button class="article-cta-btn" onclick="applyArticleFilter('${art.summary_content.target_filter}')">
+          ${art.summary_content.cta_label} ←
+        </button>
+      `;
+
+      document.getElementById('articleModal').style.display = 'flex';
+    }
+
+    function closeArticleModal() {
+      document.getElementById('articleModal').style.display = 'none';
+    }
+
+    function applyArticleFilter(filterKey) {
+      closeArticleModal();
+      if (filterKey === 'storm' || filterKey === 'beginner' || filterKey === 'bigair') {
+        applyScenarioFilter(filterKey);
+      } else {
+        resetAllFilters();
+      }
+      const target = document.getElementById('featuredSection');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
       }
     }
 
@@ -2745,6 +3121,24 @@
 
     function closePortalModal() { document.getElementById('importerPortalModal').style.display = 'none'; }
 
+    async function openPortalDashboard(importerName) {
+      document.getElementById('portalSelectedImporterTitle').innerText = importerName;
+      document.getElementById('importerPortalModal').style.display = 'flex';
+      document.getElementById('portalSyncTime').innerText = 'מסנכרן נתונים מהגיליון...';
+
+      try {
+        const res = await sendToBackend({
+          action: 'getPortalData',
+          importer: importerName
+        }, 10);
+        if (res.success) {
+          populatePortalDashboard(res);
+        }
+      } catch (e) {
+        document.getElementById('portalSyncTime').innerText = 'שגיאת סנכרון רשת';
+      }
+    }
+
     function populatePortalDashboard(bundle) {
       const importerName = bundle.importer;
       document.getElementById('portalSelectedImporterTitle').innerText = importerName;
@@ -2875,7 +3269,7 @@
       const sizes = document.getElementById('addSizes').value.trim();
       const origPrice = document.getElementById('addOrigPrice').value.trim();
       const outletPrice = document.getElementById('addOutletPrice').value.trim();
-      const image = formatProductImageUrl(document.getElementById('addImageUrl').value.trim());
+      const image = formatProductImageUrl(document.getElementById('addImageUrl').value.trim(), brand, model);
       const itemUrl = document.getElementById('addItemUrl').value.trim();
       const features = document.getElementById('addFeatures').value.trim();
 
