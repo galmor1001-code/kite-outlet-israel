@@ -3046,31 +3046,25 @@
 
     function closeHotLeadModal() { document.getElementById('hotLeadModal').style.display = 'none'; }
 
-    async function sendToBackend(payload, timeoutSec = 10) {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), timeoutSec * 1000);
-
-      try {
-        const response = await fetch(LEADS_SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload),
-          redirect: 'follow',
-          signal: controller.signal
-        });
-        clearTimeout(timeoutId);
-
-        const json = await response.json();
-        return json;
-      } catch (err) {
-        clearTimeout(timeoutId);
-        if (err.name === 'AbortError') {
-          throw new Error('זמן ההמתנה לשרת הסתיים (Timeout). אנא נסה שוב.');
-        }
-        throw new Error('שגיאת תקשורת עם שרת האימות. אנא ודא חיבור לרשת ונסה שוב.');
-      }
-    }
-
+    async function sendToBackend(payload) {
+  try {
+    await fetch(LEADS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors', // זה מה שמונע מהדפדפן לחסום את השליחה לגוגל
+      headers: { 
+        'Content-Type': 'text/plain;charset=utf-8' 
+      },
+      body: JSON.stringify(payload)
+    });
+    
+    // ברגע שמשתמשים ב no-cors אי אפשר לקרוא את התשובה המדויקת מגוגל
+    // לכן אנחנו פשוט מניחים שהשליחה הצליחה ומחזירים success: true
+    return { success: true, importer: payload.importer };
+  } catch (err) {
+    console.error('שגיאה בשליחה לשרת:', err);
+    return { success: false, message: err.message };
+  }
+}
     async function submitHotLeadForm(e) {
       e.preventDefault();
       const generatedRef = "KO-" + Math.floor(1000 + Math.random() * 9000);
