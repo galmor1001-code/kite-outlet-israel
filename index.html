@@ -3056,14 +3056,6 @@
     });
     return { success: true, importer: payload.importer };
   } catch (err) {
-    return { success: false, message: err.message };
-  }
-}
-    
-    // ברגע שמשתמשים ב no-cors אי אפשר לקרוא את התשובה המדויקת מגוגל
-    // לכן אנחנו פשוט מניחים שהשליחה הצליחה ומחזירים success: true
-    return { success: true, importer: payload.importer };
-  } catch (err) {
     console.error('שגיאה בשליחה לשרת:', err);
     return { success: false, message: err.message };
   }
