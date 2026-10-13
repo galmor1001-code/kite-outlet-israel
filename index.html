@@ -1325,58 +1325,34 @@
 
 @media (max-width: 580px) {
   .top-nav {
-    padding: 6px 10px;
-    gap: 8px;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
   }
   .brand-group {
-    gap: 6px;
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-  .logo-svg-wrap {
-    width: 34px;
-    height: 34px;
-  }
-  .logo-svg-wrap svg {
-    width: 32px;
-    height: 32px;
-  }
-  .brand-name-main {
-    font-size: 0.95rem;
-    line-height: 1.1;
-  }
-  .brand-name-sub {
-    font-size: 0.58rem;
-  }
-  .nav-social-wrap {
-    padding-right: 6px;
-    gap: 4px;
-  }
-  .social-link-icon {
-    width: 24px;
-    height: 24px;
-  }
-  .social-link-icon svg {
-    width: 13px;
-    height: 13px;
-  }
-  .nav-tag-hashtag {
-    display: none !important; /* מוודא שהתגית הכחולה לא תוצג במסכים קטנים */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
   }
   .nav-actions {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    width: 100px;
+    width: 105px;
+    margin-right: auto; /* מצמיד את כל הבלוק חזק לשמאל הקיצוני של המסך */
     flex-shrink: 0;
   }
   .nav-btn {
     width: 100%;
     font-size: 0.72rem;
-    padding: 3px 6px;
+    padding: 4px 6px;
     height: 25px;
     justify-content: center;
-  };
+    text-align: center;
+  }
       }
       .img-container { height: 140px; }
       .product-title { font-size: 0.9rem; }
