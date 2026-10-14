@@ -3072,6 +3072,36 @@
 }
     async function submitHotLeadForm(e) {
       e.preventDefault();
+
+      const customerName = document.getElementById('hotLeadCustomerName').value.trim();
+      const customerPhone = document.getElementById('hotLeadCustomerPhone').value.trim();
+      const itemName = document.getElementById('hotLeadItemName').value.trim();
+      const spamConsent = document.getElementById('hotLeadSpamConsent').checked;
+
+      // 🛑 חסימת לידים ריקים: בדיקת חובה מקדימה
+      if (!customerName) {
+        alert('אנא הזן שם מלא.');
+        document.getElementById('hotLeadCustomerName').focus();
+        return;
+      }
+
+      const cleanPhone = customerPhone.replace(/[^\d]/g, '');
+      if (cleanPhone.length < 8) {
+        alert('אנא הזן מספר טלפון תקין (לפחות 8 ספרות).');
+        document.getElementById('hotLeadCustomerPhone').focus();
+        return;
+      }
+
+      if (!itemName) {
+        alert('שגיאה: לא נבחר פריט לבדיקה.');
+        return;
+      }
+
+      if (!spamConsent) {
+        alert('יש לאשר קבלת עדכונים לצורך קבלת מספר הפנייה.');
+        return;
+      }
+
       const generatedRef = "KO-" + Math.floor(1000 + Math.random() * 9000);
       const submitBtn = document.getElementById('hotLeadSubmitBtn');
       
@@ -3079,16 +3109,15 @@
       submitBtn.disabled = true;
 
       const payload = {
-        action: 'submitLead',
-        sheetName: 'בדיקת זמינות',
+        sheetName: 'ליד חם (בדיקת זמינות)',
         refId: generatedRef,
-        name: document.getElementById('hotLeadCustomerName').value,
-        phone: document.getElementById('hotLeadCustomerPhone').value,
-        email: document.getElementById('hotLeadCustomerEmail').value || 'ללא מייל',
-        product: document.getElementById('hotLeadItemName').value,
+        name: customerName,
+        phone: customerPhone,
+        email: document.getElementById('hotLeadCustomerEmail').value.trim() || 'ללא מייל',
+        product: itemName,
         importer: document.getElementById('hotLeadItemImporter').value,
         price: document.getElementById('hotLeadItemPriceVal').value,
-        size: document.getElementById('hotLeadRequestedSize').value || 'לא צוינה',
+        size: document.getElementById('hotLeadRequestedSize').value.trim() || 'לא צוינה',
         discountRate: document.getElementById('hotLeadDiscountRate').value,
         priceRange: document.getElementById('hotLeadPriceRange').value,
         isSpecialDeal: document.getElementById('hotLeadIsSpecial').value === 'כן'
@@ -3106,7 +3135,6 @@
 
       setTimeout(() => closeHotLeadModal(), 3500);
     }
-
     async function submitAlwaysOnLead(e) {
       e.preventDefault();
       const payload = {
