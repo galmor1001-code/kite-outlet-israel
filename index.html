@@ -3055,21 +3055,40 @@
     }
 
     function closeHotLeadModal() { document.getElementById('hotLeadModal').style.display = 'none'; }
+// פונקציית תקשורת חסינת CORS
+    async function sendToBackend(payload, timeoutSec = 10) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), timeoutSec * 1000);
 
-    async function sendToBackend(payload) {
-  try {
-    await fetch(LEADS_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
-    });
-    return { success: true, importer: payload.importer };
-  } catch (err) {
-    console.error('שגיאה בשליחה לשרת:', err);
-    return { success: false, message: err.message };
-  }
-}
+      try {
+        // עבור בדיקת קוד יבואן או שליפת נתונים - שימוש ב-GET עם פרמטרים ב-URL (עוקף חסימות דפדפן לחלוטין)
+        if (payload.action === 'verifyImporterCode' || payload.action === 'getPortalData') {
+          const queryParams = new URLSearchParams(payload).toString();
+          const response = await fetch(`${LEADS_SCRIPT_URL}?${queryParams}`, {
+            method: 'GET',
+            signal: controller.signal
+          });
+          clearTimeout(timeoutId);
+          return await response.json();
+        }
+
+        // עבור שמירת לידים - שימוש ב-POST
+        const response = await fetch(LEADS_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        return await response.json();
+      } catch (err) {
+        clearTimeout(timeoutId);
+        if (err.name === 'AbortError') {
+          throw new Error('זמן ההמתנה לשרת הסתיים (Timeout). אנא נסה שוב.');
+        }
+        throw new Error('שגיאת תקשורת עם שרת האימות. אנא ודא חיבור לרשת ונסה שוב.');
+      }
+    }
     async function submitHotLeadForm(e) {
       e.preventDefault();
 
