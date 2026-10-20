@@ -1638,45 +1638,350 @@
       </div>
     </section>
 
-    <!-- צייד הדילים המובנה בתחתית -->
-    <section class="always-on-lead-section" id="bottomLeadSection">
-      <div class="lead-strip-grid">
-        <div class="lead-strip-text">
-          <h3>🎯 לא מצאת את הדגם או המידה שלך?</h3>
-          <p>
-            מלאי העודפים אצל היבואנים מתעדכן מדי שבוע לקראת הדרופ הבא. השאר את המידה, הדגם והתקציב המבוקש – וצייד הדילים יתריע לך מיידית ברגע שהפריט נוחת במחסן!
-          </p>
-          <div class="lead-feature-list">
-            <span>✓ עדכון ראשוני לפני עליית הפריט לקטלוג הכללי</span>
-            <span>✓ מחיר שמור מראש ישירות מול היבואן</span>
-            <span>✓ ללא התחייבות רכישה מצדך</span>
-          </div>
-        </div>
+  <!-- ========================================================================= -->
+<!-- צייד הדילים הקהילתי - בלוק מאוחד (עיצוב + מבנה + לוגיקה) -->
+<!-- ========================================================================= -->
+<style>
+  .community-hunter-section {
+    max-width: 760px;
+    margin: 36px auto 26px;
+    padding: 0 14px;
+  }
+  .hunter-card-box {
+    background: #0b1324;
+    border: 1px solid #1e293b;
+    border-radius: 24px;
+    padding: 32px 24px;
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  }
+  .hunter-main-title {
+    font-size: 1.85rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .hunter-desc {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+  .hunter-input-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+  .hunter-field-container {
+    position: relative;
+    width: 100%;
+  }
+  .hunter-search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .hunter-text-input {
+    width: 100%;
+    background: #ffffff;
+    color: #0f172a;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 14px 44px 14px 16px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-align: right;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: border-color 0.2s;
+  }
+  .hunter-text-input:focus {
+    border-color: #ea580c;
+  }
+  .btn-hunter-submit {
+    width: 100%;
+    background: #ea580c;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    padding: 13px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 4px 14px rgba(234, 88, 12, 0.4);
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-hunter-submit:hover {
+    background: #c2410c;
+    transform: translateY(-1px);
+  }
+  .hunter-list-section {
+    text-align: right;
+  }
+  .hunter-list-title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .hunter-requests-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hunter-item-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .hunter-item-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  .hunter-item-info {
+    text-align: right;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .hunter-item-text {
+    font-size: 0.98rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 4px;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+  .hunter-item-sub {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 700;
+  }
+  .hunter-vote-btn-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .btn-hunter-vote {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 0.95rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    min-width: 52px;
+  }
+  .btn-hunter-vote:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: #38bdf8;
+  }
+  .btn-hunter-vote.voted {
+    background: rgba(234, 88, 12, 0.25);
+    border-color: #ea580c;
+    color: #fdba74;
+    cursor: default;
+  }
+  .hunter-vote-label {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    font-weight: 700;
+  }
 
-        <div class="lead-form-box">
-          <h4>הפעל התראה אישית בצייד הדילים</h4>
-          <form onsubmit="submitAlwaysOnLead(event)">
-            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:10px;">
-              <input type="text" id="alwaysLeadName" class="filter-input" placeholder="שם מלא *" required>
-              <input type="tel" id="alwaysLeadPhone" class="filter-input" placeholder="טלפון לחזרה *" required>
-              <input type="email" id="alwaysLeadEmail" class="filter-input" placeholder="כתובת אימייל *" required>
-              <input type="text" id="alwaysLeadDetails" class="filter-input" placeholder="איזה ציוד ומידה אתה מחפש? (למשל: דוטון איוו 9 / גלשן 138)" required>
-              
-              <label class="spam-checkbox-wrap">
-                <input type="checkbox" id="alwaysLeadConsent" required>
-                <span>מאשר קבלת עדכוני מלאי ודילים מ-Kite Outlet *</span>
-              </label>
-            </div>
-            <button type="submit" id="alwaysLeadSubmitBtn" class="inquire-btn" style="width:100%; background:var(--accent);">
-              🚀 הפעל התראת צייד הדילים
-            </button>
-            <div id="alwaysLeadSuccessMsg" style="display:none; color:#15803d; font-weight:800; font-size:0.86rem; text-align:center; margin-top:8px;">
-              🎉 הפרטים נשמרו! נעדכן אותך ברגע שהפריט יגיע למלאי היבואן.
-            </div>
-          </form>
-        </div>
+  @media (max-width: 580px) {
+    .hunter-card-box {
+      padding: 24px 16px;
+      border-radius: 18px;
+    }
+    .hunter-main-title {
+      font-size: 1.55rem;
+    }
+    .hunter-desc {
+      font-size: 0.86rem;
+    }
+    .hunter-item-text {
+      font-size: 0.88rem;
+    }
+  }
+</style>
+
+<section class="community-hunter-section" id="bottomLeadSection">
+  <div class="hunter-card-box">
+    <div class="hunter-header">
+      <h2 class="hunter-main-title">🎯 צייד הדילים הקהילתי</h2>
+      <p class="hunter-desc">
+        לא מצאתם את מה שחיפשתם? תגידו לנו מה חסר לכם!<br>
+        בלי טפסים ארוכים, פשוט תכתבו מה הציוד המבוקש ואנחנו ננסה לצוד אותו מהיבואנים.
+      </p>
+    </div>
+
+    <form class="hunter-input-wrap" onsubmit="submitCommunityRequest(event)">
+      <div class="hunter-field-container">
+        <span class="hunter-search-icon">🔍</span>
+        <input 
+          type="text" 
+          id="communityRequestInput" 
+          class="hunter-text-input" 
+          placeholder="מה אתם מחפשים? (למשל: קייט ביג אייר 12 מטר / גלשן גלים / טרפז קשיח עד 500 ש&quot;ח...)" 
+          required
+        >
       </div>
-    </section>
+      <button type="submit" class="btn-hunter-submit" id="btnHunterSubmit">
+        <span>+</span> שלח לבקשות
+      </button>
+    </form>
+
+    <div class="hunter-list-section">
+      <h3 class="hunter-list-title">בקשות חמות מהקהילה 🔥</h3>
+      <div class="hunter-requests-list" id="communityRequestsList">
+        <!-- פריטים ירונדרו דינמית ע״י הסקריפט שמתחת -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function initCommunityHunter() {
+    const DEFAULT_COMMUNITY_REQUESTS = [
+      { id: "req-1", text: "קייטים אלולה של אושן רודיאו", votes: 0 },
+      { id: "req-2", text: "מעילים או פונצ'ו לחורף", votes: 0 },
+      { id: "req-3", text: "קייטים גדולים 12+ בפחות מ5000", votes: 0 }
+    ];
+
+    function getCommunityRequests() {
+      const stored = localStorage.getItem('ko_community_requests');
+      if (stored) {
+        try { return JSON.parse(stored); } catch (e) {}
+      }
+      return DEFAULT_COMMUNITY_REQUESTS;
+    }
+
+    function saveCommunityRequests(requests) {
+      localStorage.setItem('ko_community_requests', JSON.stringify(requests));
+    }
+
+    function getUserVotedMap() {
+      const stored = localStorage.getItem('ko_user_voted_requests');
+      if (stored) {
+        try { return JSON.parse(stored); } catch (e) {}
+      }
+      return {};
+    }
+
+    function markUserVoted(requestId) {
+      const map = getUserVotedMap();
+      map[requestId] = true;
+      localStorage.setItem('ko_user_voted_requests', JSON.stringify(map));
+    }
+
+    window.renderCommunityRequests = function() {
+      const container = document.getElementById('communityRequestsList');
+      if (!container) return;
+
+      const requests = getCommunityRequests();
+      const votedMap = getUserVotedMap();
+
+      container.innerHTML = requests.map(item => {
+        const hasVoted = !!votedMap[item.id];
+        return `
+          <div class="hunter-item-card">
+            <div class="hunter-vote-btn-wrap">
+              <button 
+                type="button"
+                class="btn-hunter-vote ${hasVoted ? 'voted' : ''}" 
+                onclick="handleHunterVote('${item.id}')"
+                ${hasVoted ? 'disabled' : ''}
+                title="${hasVoted ? 'כבר הצבעת לבקשה זו' : 'הוסף קול לבקשה'}"
+              >
+                +1
+              </button>
+              <span class="hunter-vote-label">${hasVoted ? 'הצבעת' : 'גם אני רוצה'}</span>
+            </div>
+
+            <div class="hunter-item-info">
+              <div class="hunter-item-text">${item.text}</div>
+              <div class="hunter-item-sub">
+                <span>🔥</span>
+                <span>${item.votes} גולשים מחפשים</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    };
+
+    window.handleHunterVote = function(requestId) {
+      const votedMap = getUserVotedMap();
+      if (votedMap[requestId]) return;
+
+      const requests = getCommunityRequests();
+      const item = requests.find(r => r.id === requestId);
+      if (item) {
+        item.votes += 1;
+        markUserVoted(requestId);
+        saveCommunityRequests(requests);
+        window.renderCommunityRequests();
+      }
+    };
+
+    window.submitCommunityRequest = function(e) {
+      e.preventDefault();
+      const input = document.getElementById('communityRequestInput');
+      const text = (input.value || '').trim();
+      if (!text) return;
+
+      const newId = 'req-' + Date.now();
+      const requests = getCommunityRequests();
+
+      requests.unshift({
+        id: newId,
+        text: text,
+        votes: 1
+      });
+
+      markUserVoted(newId);
+      saveCommunityRequests(requests);
+      window.renderCommunityRequests();
+      input.value = '';
+    };
+
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      window.renderCommunityRequests();
+    } else {
+      document.addEventListener('DOMContentLoaded', window.renderCommunityRequests);
+    }
+  })();
+</script>
+<!-- ========================================================================= -->
 
     <!-- שאלות ותשובות -->
     <section class="faq-section">
