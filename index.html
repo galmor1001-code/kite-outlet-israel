@@ -1871,22 +1871,34 @@
 
 <script>
   (function initCommunityHunter() {
-    const DEFAULT_COMMUNITY_REQUESTS = [
+    // 3 בקשות העוגן הבסיסיות
+    const INITIAL_REQUESTS = [
       { id: "req-1", text: "קייטים אלולה של אושן רודיאו", votes: 0 },
       { id: "req-2", text: "מעילים או פונצ'ו לחורף", votes: 0 },
       { id: "req-3", text: "קייטים גדולים 12+ בפחות מ5000", votes: 0 }
     ];
 
-    function getCommunityRequests() {
+    // משיכת בקשות והצבעות מסונכרנות מהשרת
+    async function fetchServerRequests() {
+      try {
+        const res = await fetch(`${LEADS_SCRIPT_URL}?action=getCommunityRequests`, {
+          method: 'GET',
+          mode: 'cors',
+          redirect: 'follow'
+        });
+        const data = await res.json();
+        if (data && data.success && Array.isArray(data.requests) && data.requests.length > 0) {
+          localStorage.setItem('ko_community_requests', JSON.stringify(data.requests));
+          return data.requests;
+        }
+      } catch (e) {}
+
+      // גיבוי מקומי אם הרשת איטית
       const stored = localStorage.getItem('ko_community_requests');
       if (stored) {
         try { return JSON.parse(stored); } catch (e) {}
       }
-      return DEFAULT_COMMUNITY_REQUESTS;
-    }
-
-    function saveCommunityRequests(requests) {
-      localStorage.setItem('ko_community_requests', JSON.stringify(requests));
+      return INITIAL_REQUESTS;
     }
 
     function getUserVotedMap() {
@@ -1903,11 +1915,11 @@
       localStorage.setItem('ko_user_voted_requests', JSON.stringify(map));
     }
 
-    window.renderCommunityRequests = function() {
+    window.renderCommunityRequests = async function() {
       const container = document.getElementById('communityRequestsList');
       if (!container) return;
 
-      const requests = getCommunityRequests();
+      const requests = await fetchServerRequests();
       const votedMap = getUserVotedMap();
 
       container.innerHTML = requests.map(item => {
@@ -1939,20 +1951,37 @@
       }).join('');
     };
 
+    // לחיצה על +1: מעלה מיידית במסך ושולחת סנכרון לשרת
     window.handleHunterVote = function(requestId) {
       const votedMap = getUserVotedMap();
       if (votedMap[requestId]) return;
 
-      const requests = getCommunityRequests();
+      const stored = localStorage.getItem('ko_community_requests');
+      let requests = stored ? JSON.parse(stored) : INITIAL_REQUESTS;
       const item = requests.find(r => r.id === requestId);
       if (item) {
-        item.votes += 1;
+        item.votes = (Number(item.votes) || 0) + 1;
         markUserVoted(requestId);
-        saveCommunityRequests(requests);
+        localStorage.setItem('ko_community_requests', JSON.stringify(requests));
         window.renderCommunityRequests();
+
+        // סנכרון לשרת כדי שכולם יראו את העלייה
+        try {
+          fetch(LEADS_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              action: 'voteCommunityRequest',
+              id: requestId,
+              text: item.text
+            }),
+            mode: 'no-cors'
+          });
+        } catch (e) {}
       }
     };
 
+    // הוספת בקשה חופשית חדשה
     window.submitCommunityRequest = function(e) {
       e.preventDefault();
       const input = document.getElementById('communityRequestInput');
@@ -1960,7 +1989,8 @@
       if (!text) return;
 
       const newId = 'req-' + Date.now();
-      const requests = getCommunityRequests();
+      const stored = localStorage.getItem('ko_community_requests');
+      let requests = stored ? JSON.parse(stored) : INITIAL_REQUESTS;
 
       requests.unshift({
         id: newId,
@@ -1969,9 +1999,23 @@
       });
 
       markUserVoted(newId);
-      saveCommunityRequests(requests);
+      localStorage.setItem('ko_community_requests', JSON.stringify(requests));
       window.renderCommunityRequests();
       input.value = '';
+
+      // שמירה בשרת
+      try {
+        fetch(LEADS_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'addCommunityRequest',
+            id: newId,
+            text: text
+          }),
+          mode: 'no-cors'
+        });
+      } catch (err) {}
     };
 
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
@@ -3075,8 +3119,7 @@
         // 1 טרפז
         p => p.category.includes('טרפז') && (p.brand.includes('ION') && p.model.includes('AXXIS')),
         // 1 חליפת גלישה
-        p => p.category.includes('חליפ') && (p.brand.includes('ION') && p.model.includes('Element'))
-      ];
+       p => p.category.includes('חליפ') && (p.brand.includes('ION') && (p.model.includes('Seek') || p.model.includes('Element 3/2')))
 
       const selected = [];
       const usedIds = new Set();
